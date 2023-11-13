@@ -1,4 +1,5 @@
-import illustrationImage from '../../img/cover2.jpg';
+import illustrationImage1 from '../../img/cover2.jpg';
+import illustrationImage2 from '../../img/cover.png';
 
 import Navigate from '../Router/Navigate';
 
@@ -7,7 +8,7 @@ const HomePage = () => {
     <section id="homePage">
       <div class="row ">
         <div class="homePage-container col-lg-6">
-            <img src="${illustrationImage}" alt="homePage" >
+            <img id="bg" src="${illustrationImage1}" alt="homePage" >
             
           </div>
         <div id ="homePage-info" class="col-lg-6">
@@ -28,11 +29,23 @@ const HomePage = () => {
   const main = document.querySelector('main');
   main.innerHTML = homePage;
 
+  changeBg();
+
   const button = document.querySelector('button');
   button.addEventListener('click', () => {
     // console.log('On démarre le quizz!');
     Navigate('/quiz');
   });  
 };
+
+setInterval(changeBg, 3000);
+
+function changeBg(){
+  const images = [illustrationImage1, illustrationImage2];
+
+  const img = document.querySelector('#bg');
+  const bg = images[Math.floor(Math.random() * images.length)];
+  img.src = bg;
+}
 
 export default HomePage;
