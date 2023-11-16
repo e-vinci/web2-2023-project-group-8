@@ -8,9 +8,14 @@ const formatFrenchDate = (dateString) => {
 
     return `${formattedDate}`;
 };
-// const routineCounter = (userId) => {};
+
+const main = document.querySelector('main');
 
 const AdminPage = async () => {
+    listAllUser();
+};
+
+async function listAllUser() {
     const url = 'https://ylann-mommens.pockethost.io/'
     const imageUrl = `${url}api/files/utilisateurs`;
 
@@ -55,8 +60,8 @@ const AdminPage = async () => {
             </tbody>
         </table>`;
 
-    const main = document.querySelector('main');
+   
     main.innerHTML = adminPage;
-};
+}
 
 export default AdminPage;
