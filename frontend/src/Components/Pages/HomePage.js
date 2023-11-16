@@ -44,8 +44,10 @@ function changeBg(){
   const images = [illustrationImage1, illustrationImage2];
 
   const img = document.querySelector('#bg');
-  const bg = images[Math.floor(Math.random() * images.length)];
-  img.src = bg;
+  if (img) {
+    const bg = images[Math.floor(Math.random() * images.length)];
+    img.src = bg;
+  }
 }
 
 export default HomePage;
