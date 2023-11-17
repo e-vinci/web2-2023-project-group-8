@@ -23,7 +23,8 @@
     "escape-html": "^1.0.3",
     "express": "~4.16.1",
     "jsonwebtoken": "^8.5.1",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "pocketbase": "^0.19.0"
   },
   "devDependencies": {
     "eslint": "^8.19.0",
