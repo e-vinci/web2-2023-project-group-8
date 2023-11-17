@@ -104,3 +104,32 @@ tbody #image{
     margin-right: 2rem;
     border-radius: 6px;
 }
+
+/* Grid Container with 2 colums */
+.grid-container-homepage {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    grid-template-rows: 760px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Grid Item for Homepage */
+.grid-item-homepage {
+    width: 100%;
+    height: 100%;
+}
+
+/* Making images fit inside grids */
+.grid-item-homepage img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* White background */
+.white-background {
+    background-color: white;
+    color: black;
+    height: 100%;
+}
