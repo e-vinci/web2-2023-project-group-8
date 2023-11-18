@@ -19,7 +19,6 @@ function listAllUser() {
     fetch(`http://localhost:3000/users`)
     .then((response) => response.json())
     .then((data) => {
-        const users = getUsers(data);
         main.innerHTML  += `
         <table class="table">
           <thead>
@@ -41,7 +40,7 @@ function listAllUser() {
         
         const tbody = document.querySelector('#table-body');
         
-        users.forEach((user) => {
+        data.forEach((user) => {
             tbody.innerHTML += `
             <tr>
                 <td> <input type="checkbox" class="table-row"></td>
@@ -59,10 +58,6 @@ function listAllUser() {
             `;
         });
     });
-}
-
-function getUsers(data) {
-    return data.items;
 }
 
 export default AdminPage;
