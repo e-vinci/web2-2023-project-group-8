@@ -1,5 +1,5 @@
-import illustrationImage1 from '../../img/cover2.jpg';
-import illustrationImage2 from '../../img/cover.png';
+import image1 from '../../img/cover.png';
+import image2 from '../../img/cover3.jpg';
 
 import Navigate from '../Router/Navigate';
 
@@ -7,7 +7,7 @@ const HomePage = () => {
     const homePage = `
     <section class="grid-container-homepage"">
       <div class="grid-item-homepage">
-          <img id="bg" src="${illustrationImage1}" alt="homepage" class="homepage">
+          <img id="bg" src="${image1}" alt="homepage" class="homepage">
       </div>
       <div class="grid-item-homepage white-background">
           <div id ="homePage-info">
@@ -41,7 +41,7 @@ changeBg();
 setInterval(changeBg, 3000);
 
 function changeBg(){
-  const images = [illustrationImage1, illustrationImage2];
+  const images = [image1,image2];
 
   const img = document.querySelector('#bg');
   if (img) {
