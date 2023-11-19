@@ -1,5 +1,6 @@
 import image1 from '../../img/cover.png';
-import image2 from '../../img/cover3.jpg';
+import image2 from '../../img/cover2.jpg';
+import image3 from '../../img/cover3.jpg';
 
 import Navigate from '../Router/Navigate';
 
@@ -41,7 +42,7 @@ changeBg();
 setInterval(changeBg, 3000);
 
 function changeBg(){
-  const images = [image1,image2];
+  const images = [image1,image2, image3];
 
   const img = document.querySelector('#bg');
   if (img) {
