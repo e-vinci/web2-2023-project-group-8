@@ -19,20 +19,19 @@ async function getAllUser() {
   return updatedRecords;
 }
 
-// Renvoie tous les skinCares ainsi que les produits associés
+/**
+ * Retrieves all skin care records for a given user.
+ * @param {string} userId - The ID of the user.
+ * @returns {Promise<Array>} - A promise that resolves to an array of skin care records.
+ */
 async function getAllSkinCare(userId) {
-  try {
-    const records = await pb.collection('skinCares').getFullList({
-      expand: 'listes_produits(skinCare).produit',
-      filter: `utilisateur = "${userId}"`,
-    });
+  const records = await pb.collection('skinCares').getFullList({
+    expand: 'listes_produits(skinCare).produit',
+    filter: `utilisateur = "${userId}"`,
+  });
 
-    console.log(records);
-    return records;
-  } catch (error) {
-    console.error('Erreur lors de la récupération des skinCares :', error);
-    throw error;
-  }
+  // console.log(records);
+  return records;
 }
 
 module.exports = {
