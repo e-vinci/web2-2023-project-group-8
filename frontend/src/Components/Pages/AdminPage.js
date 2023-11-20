@@ -1,6 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-
-
 const formatFrenchDate = (dateString) => {
     const options = { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric' };
     const date = new Date(dateString);
@@ -16,8 +13,6 @@ const AdminPage = async () => {
 };
 
 function listAllUser() {
-    const url = 'https://ylann-mommens.pockethost.io/'
-     const imageUrl = `${url}api/files/utilisateurs`;
     fetch(`http://localhost:3000/users`)
     .then((response) => response.json())
     .then((data) => {
@@ -47,7 +42,7 @@ function listAllUser() {
             <tr>
                 <td> <input type="checkbox" class="table-row"></td>
                 <td>
-                    <img src="${imageUrl}/${user.id}/${user.photo_profil}" alt="user" class="avatar">
+                    <img src="${user.imageUrl}/${user.id}/${user.photo_profil}" alt="user" class="avatar">
                 </td>
                 <td id="user-info">@${user.username}</td>
                 <td>${user.nom}</td>
