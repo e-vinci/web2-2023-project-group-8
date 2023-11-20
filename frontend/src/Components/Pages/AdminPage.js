@@ -16,6 +16,8 @@ const AdminPage = async () => {
 };
 
 function listAllUser() {
+    const url = 'https://ylann-mommens.pockethost.io/'
+     const imageUrl = `${url}api/files/utilisateurs`;
     fetch(`http://localhost:3000/users`)
     .then((response) => response.json())
     .then((data) => {
@@ -23,7 +25,7 @@ function listAllUser() {
         <table class="table">
           <thead>
             <tr>
-              <th><input type="checkbox" class="table-row"></th>
+              <th></th>
               <th></th>
               <th>Username</th>
               <th>Nom</th>
@@ -45,9 +47,9 @@ function listAllUser() {
             <tr>
                 <td> <input type="checkbox" class="table-row"></td>
                 <td>
-                    <p></p>
+                    <img src="${imageUrl}/${user.id}/${user.photo_profil}" alt="user" class="avatar">
                 </td>
-                <td><a href="#">@${user.username}</a></td>
+                <td id="user-info">@${user.username}</td>
                 <td>${user.nom}</td>
                 <td>${user.prenom}</td>
                 <td>${formatFrenchDate(user.created)}</td>

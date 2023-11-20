@@ -132,6 +132,11 @@ tbody #image {
   margin-right: 2rem;
   border-radius: 6px;
 }
+.avatar{
+  width: 50px;
+  height: 50px;
+  border-radius: 4rem;
+}
 
 /*------PRODUCT PAGE SECTION------*/
 
