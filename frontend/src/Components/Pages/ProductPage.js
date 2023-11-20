@@ -10,6 +10,7 @@ const ProductPage = () => {
                 </div>
                 <div class="productPage__info">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <span id="similarSpan"><a href="/similar">See similar products</a></span>
                 </div>
         
         </section>

@@ -169,6 +169,12 @@ tbody #image {
     margin-top:146px;
 }
 
+#similarSpan{
+  font-size:30px;
+  position:relative;
+  top:60px;
+}
+
 #productPage .productPage__info p {
     display: flex;
     font-size: 30px;
