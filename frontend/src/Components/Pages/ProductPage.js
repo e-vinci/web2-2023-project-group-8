@@ -113,6 +113,8 @@ const ProductPage = () => {
     
     const main = document.querySelector('main');
     main.innerHTML = productPage;
+    const body = document.querySelector('body');
+    body.style.overflow = 'auto';
       
 };
 

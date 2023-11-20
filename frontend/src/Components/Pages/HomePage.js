@@ -28,6 +28,8 @@ const HomePage = () => {
 
   const main = document.querySelector('main');
   main.innerHTML = homePage;
+  const body = document.querySelector('body');
+  body.style.overflow = 'hidden';
 
   changeBg();
 
@@ -49,16 +51,6 @@ function changeBg(){
     const bg = images[Math.floor(Math.random() * images.length)];
     img.src = bg;
   }
-}
-
-const body = document.querySelector('body');
-// Ajouter un gestionnaire d'événements sur le body pour empêcher le défilement par défaut
-body.addEventListener('wheel', preventDefaultScroll, { passive: false });
-body.addEventListener('touchmove', preventDefaultScroll, { passive: false });
-
-// Empêcher le défilement par défaut
-function preventDefaultScroll(event) {
-  event.preventDefault();
 }
 
 export default HomePage;
