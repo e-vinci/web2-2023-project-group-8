@@ -1,3 +1,5 @@
+import Navigate from '../Router/Navigate';
+
 const formatFrenchDate = (dateString) => {
     const options = { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric' };
     const date = new Date(dateString);
@@ -54,6 +56,11 @@ function listAllUser() {
             </tr>
             `;
         });
+        const username = document.querySelector('#user-info');
+        username.addEventListener('click', () => {
+            
+            Navigate('/user/SkinCareList');
+        }); 
     });
 }
 
