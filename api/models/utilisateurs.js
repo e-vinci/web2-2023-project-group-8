@@ -15,10 +15,27 @@ async function getAllUser() {
     imageUrl: `${url}api/files/utilisateurs`,
   }));
 
-  console.log(updatedRecords);
+  // console.log(updatedRecords);
   return updatedRecords;
+}
+
+// Renvoie tous les skinCares ainsi que les produits associés
+async function getAllSkinCare(userId) {
+  try {
+    const records = await pb.collection('skinCares').getFullList({
+      expand: 'listes_produits(skinCare).produit',
+      filter: `utilisateur = "${userId}"`,
+    });
+
+    console.log(records);
+    return records;
+  } catch (error) {
+    console.error('Erreur lors de la récupération des skinCares :', error);
+    throw error;
+  }
 }
 
 module.exports = {
   getAllUser,
+  getAllSkinCare,
 };
