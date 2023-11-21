@@ -15,7 +15,7 @@ const AdminPage = async () => {
 };
 
 async function listAllUser() {
-    const response = await fetch(`http://localhost:3000/users`);
+    const response = await fetch(`http://localhost:3000/admin/users`);
     const data = await response.json();
 
     main.innerHTML  += `
@@ -44,7 +44,7 @@ async function listAllUser() {
         <tr>
             <td> <input type="checkbox" class="table-row"></td>
             <td>
-                <img src="${user.imageUrl}/${user.id}/${user.photo_profil}" alt="user" class="avatar">
+                <img src="${user.profileUrl}" alt="user" class="avatar">
             </td>
             <td id="user-info" data-user-id="${user.id}">@${user.username}</td>
             <td>${user.nom}</td>
