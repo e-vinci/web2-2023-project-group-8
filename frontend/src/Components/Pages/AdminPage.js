@@ -46,7 +46,7 @@ async function listAllUser() {
             <td>
                 <img src="${user.imageUrl}/${user.id}/${user.photo_profil}" alt="user" class="avatar">
             </td>
-            <td id="user-info">@${user.username}</td>
+            <td id="user-info" data-user-id="${user.id}">@${user.username}</td>
             <td>${user.nom}</td>
             <td>${user.prenom}</td>
             <td>${formatFrenchDate(user.created)}</td>
@@ -56,10 +56,11 @@ async function listAllUser() {
         </tr>
         `;
     });
+    
     const username = document.querySelector('#user-info');
-    username.addEventListener('click', () => {
-        
-        Navigate('/user/SkinCareList');
+    username.addEventListener('click', (event) => {
+        const {userId} = event.target.dataset;
+        Navigate(`/user/SkinCareList?userId=${userId}`);
     }); 
 }
 
