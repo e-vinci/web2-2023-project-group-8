@@ -12,7 +12,7 @@ async function getAllUser() {
   // Add a new field to each record
   const updatedRecords = records.map((record) => ({
     ...record,
-    imageUrl: `${url}api/files/utilisateurs`,
+    profileUrl: `${url}api/files/utilisateurs/${record.id}/${record.photo_profil}`,
   }));
 
   // console.log(updatedRecords);
