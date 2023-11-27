@@ -196,21 +196,45 @@ a.active, a:hover {
 }
 
 /*------ADMIN PAGE SECTION------*/
-tbody #image {
-  width: 50px;
-  height: 50px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.table {
-  margin-left: 3rem;
-  margin-right: 2rem;
-  border-radius: 6px;
-}
 .avatar{
-  width: 50px;
-  height: 50px;
-  border-radius: 4rem;
+  width: 100px;
+  height: 100px;
+  border-radius: 1rem;
+}
+
+.custom-table-responsive {
+  padding: 10px;
+  border-radius: 4px;
+
+  background: rgba(125, 107, 107, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.custom-table {
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+/*intitule de la table*/
+.custom-table thead tr th {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: .1rem;
+
+  text-align: center;
+}
+
+/*reponses de la table*/
+.table-response{
+  color: #777;
+  font-weight: 300;
+}
+
+.custom-table tbody tr td {
+  padding: 10px; /* Ajoute un peu de rembourrage pour l'espace autour du contenu de la cellule */
 }
 
 /*------PRODUCT PAGE SECTION------*/
