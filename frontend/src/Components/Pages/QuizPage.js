@@ -1,4 +1,4 @@
-// import arrowLeft from '../../img/arrow-left.svg';
+import arrowLeft from '../../img/arrow-left.svg';
 
 const QuizPage = () => {
   const quizPage = `
@@ -6,6 +6,10 @@ const QuizPage = () => {
       
       <div class="container">
         <div class="row">
+        <div class="col-2 back-section">
+            <img src="${arrowLeft}" id="arrow-left" alt="Left arrow">
+            Back
+          </div>
           
           <div class="col">
             <div class="quiz_question text-center">
@@ -32,13 +36,17 @@ const QuizPage = () => {
       
       <div class="container">
         <div class="row">
+          <div class="col-2 back-section">
+            <img src="${arrowLeft}" id="arrow-left" alt="Left arrow">
+            Back
+          </div>
           
           <div class="col">
             <div class="quiz_question text-center">
               <h3>Quel problème souhaitez-vous traiter en premier ?</h3>
             </div>
             <br>
-            <div class="d-flex justify-content-center quiz_responses selector">
+            <div class="d-flex justify-content-center quiz_responses selector2">
               <button type="button" class="btn btn-lg">boutons</button>
               <button type="button" class="btn btn-lg">points noirs</button>
               <button type="button" class="btn btn-lg">rougeurs</button>
@@ -54,7 +62,7 @@ const QuizPage = () => {
     </section>`;
   });
 
-  /*
+  
   const previousButton = document.querySelector('.back-section');
   const quizQuestion = document.querySelector('.quiz_question');
 
@@ -63,7 +71,7 @@ const QuizPage = () => {
     quizQuestion.style.transform = 'translateX(-1000%)';
   }); 
   
-  
+   /*
   const nextButton = document.querySelector('next-section');
   nextButton.addEventListener('click', () => {
     // On va a la question suivante
