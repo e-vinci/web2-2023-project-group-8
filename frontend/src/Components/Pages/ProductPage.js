@@ -1,15 +1,17 @@
-import illustrationImage2 from '../../img/cover2.jpg';
 
-const ProductPage = () => {
+const ProductPage = async () => {
+    const response = await fetch(`http://localhost:3000/products/95n2dlfylqrfp1g`);
+    const data = await response.json();
+
     const productPage = `
         <section id="productPage">
-            <h1>Product Name</h1>
+            <h1>${data.nom}</h1>
             <div class="grid-container-Productpage">
                 <div class="productPage__image">
-                    <img src="${illustrationImage2}" alt="Product Image">
+                    <img src="../../img/${data.photo}" alt="Product Image">
                 </div>
                 <div class="productPage__info">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <p>${data.description}</p>
                     <span id="similarSpan"><a href="/similar">See similar products</a></span>
                 </div>
         
