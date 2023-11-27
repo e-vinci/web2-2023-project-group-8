@@ -9,6 +9,7 @@ const corsOptions = {
 
 const adminsRouter = require('./routes/users');
 const authsRouter = require('./routes/auths');
+const productsRouter = require('./routes/products');
 
 const app = express();
 
@@ -21,5 +22,6 @@ app.use(cors(corsOptions));
 
 app.use('/admin', adminsRouter);
 app.use('/auths', authsRouter);
+app.use('/products', productsRouter);
 
 module.exports = app;
