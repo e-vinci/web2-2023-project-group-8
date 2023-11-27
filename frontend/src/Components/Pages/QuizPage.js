@@ -28,7 +28,7 @@ const QuizPage = () => {
 
   const button = document.querySelector('.selector1');
   button.addEventListener('click', () => {
-    main.innerHTML=`<section id="quiz">
+    main.innerHTML = `<section id="quiz">
       
       <div class="container">
         <div class="row">
@@ -51,15 +51,10 @@ const QuizPage = () => {
           </div>
         </div>
       </div>
-    </section>`
-    
-  
+    </section>`;
+  });
 
-
-  })
-  
-  
-/*
+  /*
   const previousButton = document.querySelector('.back-section');
   const quizQuestion = document.querySelector('.quiz_question');
 
