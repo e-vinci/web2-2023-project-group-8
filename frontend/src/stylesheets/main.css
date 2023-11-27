@@ -1,15 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
-body {
-  /*background-color: #f4c4c4;*/
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  width: 100%;
-  height: 100vh;
-}
-
 h1 {
   font-family: 'Poppins', sans-serif;
   font-size: 2.5rem;
@@ -33,21 +23,103 @@ h1 {
 .btn:hover {
   background-color: #d9d9d9;
 }
-/*------NAVBAR SECTION------*/
-.hamburger-icon {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 24px;
-  width: 30px;
-  cursor: pointer;
+
+* {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  box-sizing: border-box;
 }
 
-.hamburger-icon span {
-  width: 100%;
-  height: 3px;
-  background-color: black;
-  transition: all 0.3 ease-in-out;
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/*------NAVBAR SECTION------*/
+
+#homepage-logo img {
+  width: 180px;
+}
+
+#nav_titles li a {
+  --black : #000000;
+  --grey : #78667450;
+  --grey-blc : #230622dd;
+  --navColor : ;
+}
+
+#nav ul {
+  float: right;
+  margin-right: 80px;
+}
+#nav ul li {
+  display: inline-block;
+  line-height: 80px;
+}
+#nav ul li a {
+  color: var(--black);
+  font-size: 17px;
+  padding: 7px 13px;
+  border-radius: 13px;
+  text-transform: lowercase;
+  text-decoration: none;
+}
+a.active, a:hover {
+  background: var(--grey);
+  transition: .5s;
+}
+
+/* responsive code */
+@media (max-width: 952px) {
+  /* table mode */
+  nav ul li a {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 858px) {
+  /* mobile mode */
+   ul {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: var(--black);
+    top: 80px;
+    left: -100%;
+    padding-top: 80px;
+    text-align: center;
+    transition: .5s ease;
+  }
+
+  nav ul li a {
+    font-size: 20px;
+  }
+  a.active, a:hover {
+    background: none;
+    color: var(--grey);
+    text-shadow: 0 10px 15px var(--grey);
+  }
+
+  .hamburger-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 24px;
+    width: 30px;
+    cursor: pointer;
+    float: right;
+    right: 20px;
+    position: fixed;
+    top: 25px;
+
+  }
+  
+  .hamburger-icon span {
+    width: 100%;
+    height: 3px;
+    background-color: black;
+    transition: all 0.3 ease-in-out;
+  }
 }
 
 /*------HOME PAGE SECTION------*/

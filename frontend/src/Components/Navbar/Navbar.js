@@ -7,22 +7,26 @@ import logoImage from '../../img/icon.png';
 
 const Navbar = () => {
   const navbar = `
-    <div class="d-flex justify-content-between align-items-center mb-3 mb-md-0 px-4 py-3">
-      <a id="homepage-logo">
-        <img src="${logoImage}" width="180">
-      </a>
-      <div class="dropdown show">
+  <div class="dropdown show">
         <div class="hamburger-icon" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
           <span class="navbar-toggler-icon"></span>
           <span class="navbar-toggler-icon"></span>
         </div>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" id="dropdown-home">Accueil</a>
-          <a class="dropdown-item" id="dropdown-quiz">Quizz</a>
+          <a class="dropdown-item" id="dropdown-home">accueil</a>
+          <a class="dropdown-item" id="dropdown-quiz">diagnostic de peau</a>
         </div>
       </div>
-    </div>
+  </div>
+  <div class="d-flex justify-content-between align-items-center mb-3 mb-md-0 px-4 py-3" id="nav">
+    <a href="/" data-uri="/" id="homepage-logo">
+      <img src="${logoImage}">
+    </a>
+  <ul id="nav_titles">
+    <li><a href="/" data-uri="/">accueil</a></li>
+    <li><a href="/quiz" data-uri="/quiz">diagnostic de peau</a></li>
+  </ul>
   `;
 
   const navbarWrapper = document.querySelector('#navbarWrapper');
@@ -39,7 +43,6 @@ const Navbar = () => {
   document.querySelector('#dropdown-quiz').addEventListener('click', () => {
     Navigate('/quiz');
   });
-
 };
 
 export default Navbar;
