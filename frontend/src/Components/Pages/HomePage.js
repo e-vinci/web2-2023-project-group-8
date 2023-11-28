@@ -13,14 +13,13 @@ const HomePage = () => {
       <div class="grid-item-homepage white-background">
           <div id ="homePage-info">
             <h1 class="display-5 fw-bold lh-1 mb-3">
-              Build Your Personalized Skincare Routine
+              Établissez votre routine de peau personnalisée
             </h1>
             <p class="lead">
-              Acquire a uniquely designed daily plan by easily participating in a brief 2-minute survey. 
-              Our team of professionals will thoroughly evaluate your concerns and devise the perfect regimen specifically for you.              
-            </p>
+              Obtenez un plan quotidien conçu de manière unique en participant facilement à un questionnaire en 2 minutes.
+              Notre équipe évaluera minutieusement vos préoccupations et élaborera le régime parfait spécialement pour vous.</p>
             <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-              <button type="button" class="btn btn-lg">Start Quizz</button>
+              <button type="button" class="btn btn-lg">Commencer</button>
             </div>
           </div>
       </div>

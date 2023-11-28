@@ -414,3 +414,10 @@ a.active, a:hover {
 	font-size:15px;
 	margin-right:10px;
 }
+
+/* -------------------Basics-------------------- */
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Example: 3 columns with equal widths */
+  grid-gap: 10px; /* Gap between grid items */
+}
