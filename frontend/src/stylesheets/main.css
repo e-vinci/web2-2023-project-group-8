@@ -206,11 +206,12 @@ a.active, a:hover {
   padding: 10px;
   border-radius: 4px;
 
-  background: rgba(125, 107, 107, 0.2);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+background: rgba(255, 255, 255, 0.60);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .custom-table {
@@ -236,6 +237,15 @@ a.active, a:hover {
 .custom-table tbody tr td {
   padding: 10px; /* Ajoute un peu de rembourrage pour l'espace autour du contenu de la cellule */
 }
+/*------SKINCARE LIST PAGE SECTION------*/
+.container-skinCare{
+  margin: 1rem;
+  padding: 1rem;
+
+  border: solid 2px lightgray;
+  border-radius: 4px;
+}
+
 
 /*------PRODUCT PAGE SECTION------*/
 
