@@ -1,4 +1,5 @@
 import Navigate from '../Router/Navigate';
+import { clearPage } from '../../utils/render';
 
 const formatFrenchDate = (dateString) => {
     const options = { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric' };
@@ -11,6 +12,7 @@ const formatFrenchDate = (dateString) => {
 const main = document.querySelector('main');
 
 const AdminPage = async () => {
+    clearPage();
     listAllUser();
 };
 
