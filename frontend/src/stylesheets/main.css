@@ -237,6 +237,15 @@ border: 1px solid rgba(255, 255, 255, 0.3);
 .custom-table tbody tr td {
   padding: 10px; /* Ajoute un peu de rembourrage pour l'espace autour du contenu de la cellule */
 }
+/*------SKINCARE LIST PAGE SECTION------*/
+.container-skinCare{
+  margin: 1rem;
+  padding: 1rem;
+
+  border: solid 2px lightgray;
+  border-radius: 4px;
+}
+
 
 /*------PRODUCT PAGE SECTION------*/
 
