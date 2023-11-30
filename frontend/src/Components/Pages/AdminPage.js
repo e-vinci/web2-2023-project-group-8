@@ -21,6 +21,7 @@ async function listAllUser() {
     const data = await response.json();
 
     main.innerHTML  += `
+    <h1 class="text-center my-2 mb-5">Liste des utilisateurs</h1>
     <div class="content">
         <div class="container">
             <div class="table-responsive custom-table-responsive">
@@ -57,19 +58,25 @@ async function listAllUser() {
             <td class="td-spacing">${user.prenom}</td>
             <td class="td-spacing">
                 ${user.email}
-                <small class="d-block">Date de création ${formatFrenchDate(user.created)}</small>
             </td>
             <td class="td-spacing">${formatFrenchDate(user.derniere_connexion)}</td>
             <td class="td-spacing">${user.verified ? 'Administrateur' : 'Utilisateur'}</td>
             <td class="td-spacing">
-                <button type="button" class="btn btn-lg" data-user-id="${user.id}">voir</button>
+                <div class="dropdown">
+                    <button class="btn btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Voir Plus
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" id="btn-skincare" data-user-id="${user.id}">Skincares</a></li>
+                    </ul>
+                </div>
             </td>
             
         </tr>
         `;
     });
 
-    const buttons = document.querySelectorAll('.btn');
+    const buttons = document.querySelectorAll('#btn-skincare');
     buttons.forEach((button) => {
         button.addEventListener('click', (event) => {
             const userId = event.target.getAttribute('data-user-id');
