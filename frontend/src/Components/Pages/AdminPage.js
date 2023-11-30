@@ -27,12 +27,6 @@ async function listAllUser() {
                 <table class="custom-table">
                     <thead>
                         <tr>
-                            <th scope="col">
-                                <label class="control control--checkbox">
-                                <input type="checkbox"/>
-                                <div class="control__indicator"></div>
-                                </label>
-                            </th>
                             <th scope="col">photo de profil</th>
                             <th scope="col">Username</th>
                             <th scope="col">Nom</th>
@@ -55,9 +49,6 @@ async function listAllUser() {
     data.forEach((user) => {
         tbody.innerHTML += `
         <tr class="table-response test">
-            <td class="td-spacing" scope="row">
-                <input type="checkbox"/>
-            </td>
             <td class="td-spacing" style="text-align: center;">
                 <img src="${user.profileUrl}" alt="user" class="avatar">
             </td>
