@@ -2,6 +2,7 @@ const express = require('express');
 const {
   getAllUser,
   getAllSkinCare,
+  getUserInformations,
 } = require('../models/admins');
 
 const router = express.Router();
@@ -9,6 +10,10 @@ const router = express.Router();
 /* GET users listing. */
 router.get('/users', async (req, res) => {
   const allUsers = await getAllUser();
+  if (req.query.userId) {
+    const userInformations = await getUserInformations(req.query.userId);
+    return res.json(userInformations);
+  }
 
   return res.json(allUsers);
 });

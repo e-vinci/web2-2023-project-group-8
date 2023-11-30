@@ -19,6 +19,21 @@ async function getAllUser() {
   return updatedRecords;
 }
 
+async function getUserInformations(userId) {
+  const records = await pb.collection('utilisateurs').getFullList({
+    filter: `id = "${userId}"`,
+  });
+
+  // Add a new field to the record
+  const updatedRecords = records.map((record) => ({
+    ...record,
+    profileUrl: `${url}api/files/utilisateurs/${record.id}/${record.photo_profil}`,
+  }));
+
+  // console.log(records);
+  return updatedRecords;
+}
+
 /**
  * Retrieves all skin care records for a given user.
  * @param {string} userId - The ID of the user.
@@ -26,6 +41,7 @@ async function getAllUser() {
  */
 async function getAllSkinCare(userId) {
   const records = await pb.collection('skinCares').getFullList({
+    sort: '-created',
     expand: 'listes_produits(skinCare).produit',
     filter: `utilisateur = "${userId}"`,
   });
@@ -37,4 +53,5 @@ async function getAllSkinCare(userId) {
 module.exports = {
   getAllUser,
   getAllSkinCare,
+  getUserInformations,
 };
