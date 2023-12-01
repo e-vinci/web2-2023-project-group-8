@@ -35,23 +35,36 @@ async function getUserInformations(userId) {
 }
 
 /**
- * Retrieves all skin care records for a given user.
- * @param {string} userId - The ID of the user.
+ * Retrieves all skin care records.
  * @returns {Promise<Array>} - A promise that resolves to an array of skin care records.
  */
-async function getAllSkinCare(userId) {
+async function getAllSkinCares() {
   const records = await pb.collection('skinCares').getFullList({
     sort: '-created',
     expand: 'listes_produits(skinCare).produit',
-    filter: `utilisateur = "${userId}"`,
   });
 
   // console.log(records);
   return records;
 }
 
+/**
+ * Retrieves all the skin care of one specific user
+ * @param {*} userId  The id of the user
+ * @returns {Promise<Array>} - A promise that resolves to an array of skin care records.
+ */
+async function getSkinCares(userId) {
+  const records = await pb.collection('skinCares').getFullList({
+    sort: '-created',
+    expand: 'listes_produits(skinCare).produit',
+    filter: `utilisateur = "${userId}"`,
+  });
+  return records;
+}
+
 module.exports = {
   getAllUser,
-  getAllSkinCare,
+  getAllSkinCares,
   getUserInformations,
+  getSkinCares,
 };
