@@ -34,7 +34,7 @@ async function listSkinCare(){
                             ${product.expand.produit.description}
                         </p>
                         <h6 class="card-subtitle mb-2 text-muted">${product.expand.produit.prix} €</h6>
-                        <button type="button" class="btn btn-lg" id="btn-product" data-product-id="${product.expand.id}">voir le produit</button>
+                        <button type="button" class="btn btn-lg btn-product" data-product-id="${product.expand.produit.id}">voir le produit</button>
                     </div>
                 </div>
             </div>
@@ -45,8 +45,8 @@ async function listSkinCare(){
             <div class="accordion" id="accordionPanelsStayOpenExample${accordionCounter}">
                 <div class="accordion-item my-3">
                     <h2 class="accordion-header" id="panelsStayOpen-headingOne${accordionCounter}">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne${accordionCounter}" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne${accordionCounter}">
-                            <span class="me-auto">${skinCare.intitule}</span>
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne${accordionCounter}" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne${accordionCounter}"> 
+                            <h4><span class="badge text-bg-primary">${skinCare.intitule}</span></h4>
                             <span class="ms-auto">Date de création <span class="badge bg-secondary">${formatDate(skinCare.created)}</span></span>
                         </button>
                     </h2>
@@ -66,13 +66,15 @@ async function listSkinCare(){
        ++accordionCounter;
     });
 
-    const button = document.querySelector('#btn-product');
+    const buttons = document.querySelectorAll('.btn-product')
+    buttons.forEach((button) => {
         button.addEventListener('click', (event) => {
-        const productId = event.target.getAttribute('data-user-id');
+            const productId = event.target.getAttribute('data-product-id');
+            sessionStorage.setItem('productId', productId);
+            Navigate('/products');
+        });
+    });
 
-        sessionStorage.setItem('productId',productId);
-        Navigate('/products');
-    }); 
 }
 
 export default Userlist;
