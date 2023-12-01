@@ -1,7 +1,6 @@
 
-sessionStorage.setItem('idProduct', '95n2dlfylqrfp1g');
 const ProductPage = async () => {
-    const response = await fetch(`http://localhost:3000/products/${sessionStorage.getItem('idProduct')}`);
+    const response = await fetch(`http://localhost:3000/products/${sessionStorage.getItem('productId')}`);
     const data = await response.json();
 
     const productPage = `
