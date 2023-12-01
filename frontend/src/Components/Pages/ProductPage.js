@@ -9,7 +9,7 @@ const ProductPage = async () => {
             <h1>${data.nom}</h1>
             <div class="grid-container-Productpage">
                 <div class="productPage__image">
-                    <img src="../../img/${data.photo}" alt="Product Image">
+                    <img src="${data.photo}" alt="Product Image">
                 </div>
                 <div class="productPage__info">
                     <p>${data.description}</p>
