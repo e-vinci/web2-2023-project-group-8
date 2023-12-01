@@ -35,7 +35,6 @@ async function listAllUser() {
                             <th scope="col">email</th>
                             <th scope="col">Derniere connexion</th>
                             <th scope="col">Accès</th>
-                            <th scope="col">SkinCare</th>
                         </tr>
                     </thead>
                     <tbody id="table-body">
