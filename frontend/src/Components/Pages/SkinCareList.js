@@ -5,20 +5,17 @@ import Navigate from '../Router/Navigate';
 const main = document.querySelector('main');
 
 const Userlist = () => {
-    const url = new URL(window.location.href);
-    const userId = url.searchParams.get('userId');
-
     clearPage();
-    listSkinCare(userId);
+    listSkinCare();
 };
 
-async function listSkinCare(userId){
+async function listSkinCare(){
     let accordionCounter = 1; // Variable compteur pour générer des ID uniques
 
-    const listSkinCareResponse = await fetch(`http://localhost:3000/admin/skinCares?userId=${userId}`);
+    const listSkinCareResponse = await fetch(`http://localhost:3000/admin/skinCares?userId=${sessionStorage.getItem('userId')}`);
     const data = await listSkinCareResponse.json();
 
-    const userResponse = await fetch(`http://localhost:3000/admin/users?userId=${userId}`);
+    const userResponse = await fetch(`http://localhost:3000/admin/users?userId=${sessionStorage.getItem('userId')}`);
     const userData = await userResponse.json();
     const userFound = userData[0];
 
@@ -37,7 +34,7 @@ async function listSkinCare(userId){
                             ${product.expand.produit.description}
                         </p>
                         <h6 class="card-subtitle mb-2 text-muted">${product.expand.produit.prix} €</h6>
-                        <button type="button" class="btn btn-lg" id="btn-product">voir le produit</button>
+                        <button type="button" class="btn btn-lg" id="btn-product" data-product-id="${product.expand.id}">voir le produit</button>
                     </div>
                 </div>
             </div>
@@ -70,7 +67,10 @@ async function listSkinCare(userId){
     });
 
     const button = document.querySelector('#btn-product');
-        button.addEventListener('click', () => {
+        button.addEventListener('click', (event) => {
+        const productId = event.target.getAttribute('data-user-id');
+
+        sessionStorage.setItem('productId',productId);
         Navigate('/products');
     }); 
 }

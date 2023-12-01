@@ -80,7 +80,9 @@ async function listAllUser() {
     buttons.forEach((button) => {
         button.addEventListener('click', (event) => {
             const userId = event.target.getAttribute('data-user-id');
-            Navigate(`/user/SkinCareList?userId=${userId}`);
+            sessionStorage.setItem('userId',userId);
+
+            Navigate(`/user/SkinCareList`);
         });
     });
 }
