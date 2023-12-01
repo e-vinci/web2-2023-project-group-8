@@ -7,7 +7,7 @@ const corsOptions = {
   origin: ['http://localhost:8080', 'https://e-baron.github.io'],
 };
 
-const adminsRouter = require('./routes/users');
+const adminsRouter = require('./routes/admins');
 const authsRouter = require('./routes/auths');
 const productsRouter = require('./routes/products');
 
