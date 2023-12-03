@@ -3,7 +3,6 @@
 import anime from 'animejs';
 import arrowLeft from '../../img/arrow-left.svg';
 
-
 const QuizPage = () => {
   const quizPage = `
     <section id="quiz">
@@ -230,21 +229,18 @@ const QuizPage = () => {
   }); 
   */
 
-  const ESSAI =document.querySelector('.question');
+  const ESSAI = document.querySelector('.question');
   // eslint-disable-next-line spaced-comment
   //ESSAI.innerHTML = '';
-  
+
   anime({
-    targets:'.question ',
-    translateX:(400),
-    delay: anime.stagger(200, {from:'last'}),
+    targets: '.question ',
+    translateX: 400,
+    delay: anime.stagger(200, { from: 'last' }),
     easing: 'easeInOutExpo',
-    duration : 700,
-    direction : 'reverse'
-  })
-  
+    duration: 700,
+    direction: 'reverse',
+  });
 };
 
-
-
-export default QuizPage ;
+export default QuizPage;
