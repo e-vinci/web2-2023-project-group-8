@@ -1,8 +1,4 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable import/no-extraneous-dependencies */
-import anime from 'animejs';
 import arrowLeft from '../../img/arrow-left.svg';
-
 
 const QuizPage = () => {
   const quizPage = `
@@ -16,16 +12,15 @@ const QuizPage = () => {
           
           <div class="col-8">
             <div class="quiz_question text-center">
-              <h3 class="question">Quel est votre type de peau ?</h3>
-              <script src="/node_modules/animejs/lib/anime.min.js"></script>
-              <p class="question">Tips : si vous ne connaissez pas votre type de peau vous pouvez vous nettoyer le visage, attendre 30min et si votre peau tiraille: vous avez la peau séche, si votre peau devient luisante sur votre zone t et seche sur vos joues vous avez la peau mixte, si votre peau devient luisante sur l’ensemble vous avez la peau grasse et si votre peau reste douce c’est que vous avez une peau normal</p>
+              <h3>Quel est votre type de peau ?</h3>
+              <p>Tips : si vous ne connaissez pas votre type de peau vous pouvez vous nettoyer le visage, attendre 30min et si votre peau tiraille: vous avez la peau séche, si votre peau devient luisante sur votre zone t et seche sur vos joues vous avez la peau mixte, si votre peau devient luisante sur l’ensemble vous avez la peau grasse et si votre peau reste douce c’est que vous avez une peau normal</p>
             </div>
             <div class="d-flex justify-content-center quiz_responses selector1">
-              <button type="button" class="btn btn-lg question">peau sèche</button>
-              <button type="button" class="btn btn-lg question">peau normale</button>
-              <button type="button" class="btn btn-lg question">peau mixte</button>
-              <button type="button" class="btn btn-lg question">peau grasse</button>
-            </div>  
+              <button type="button" class="btn btn-lg">peau sèche</button>
+              <button type="button" class="btn btn-lg">peau normale</button>
+              <button type="button" class="btn btn-lg">peau mixte</button>
+              <button type="button" class="btn btn-lg">peau grasse</button>
+            </div>
           </div>
         </div>
       </div>
@@ -228,22 +223,6 @@ const QuizPage = () => {
     // On va a la question suivante
   }); 
   */
-
-  const ESSAI =document.querySelector('.question');
-  // eslint-disable-next-line spaced-comment
-  //ESSAI.innerHTML = '';
-  
-  anime({
-    targets:'.question ',
-    translateX:(400),
-    delay: anime.stagger(200, {from:'last'}),
-    easing: 'easeInOutExpo',
-    duration : 700,
-    direction : 'reverse'
-  })
-  
 };
 
-
-
-export default QuizPage ;
+export default QuizPage;
