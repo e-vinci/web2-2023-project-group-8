@@ -403,6 +403,20 @@ a.active, a:hover {
 	margin-right:10px;
 }
 
+#results {
+  position: relative;
+  padding: 60px;
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid #ffffff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  border-right: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 15px;
+  width: 500px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(15px);
+  z-index: 0;
+}
+
 /* -------------------Basics-------------------- */
 .grid-container {
   display: grid;
