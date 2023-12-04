@@ -13,7 +13,7 @@ const routes = {
   '/admin': adminPage,
   '/user/SkinCareList': skinCareList,
   '/products': ProductPage,
-  '/products/add': AddProductPage,
+  '/admin/products/add': AddProductPage,
   '/similar': SimilarProductsPage,
   '/results': ResultsPage
 };

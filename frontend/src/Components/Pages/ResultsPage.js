@@ -1,4 +1,5 @@
 const main = document.querySelector('main');
+
 const ResultsPage = () => {
     const resultsLayout = `
     <section id="results">
