@@ -4,9 +4,13 @@ const ResultsPage = () => {
     <section id="results">
     <h1>Voici vos résultats</h1>
     <p>Type de peau : "Peau sèche"</p>
-    <p></p>
+    <p>Routine de peau proposée</p>
+    <h2>AM</h2>
+
+    <h2>PM</h2>
+
     </section>
-    `
+    `;
 
     main.innerHTML = resultsLayout;
 }
