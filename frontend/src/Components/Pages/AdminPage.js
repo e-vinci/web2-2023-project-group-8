@@ -66,7 +66,7 @@ async function listAllUser() {
             const userId = event.target.getAttribute('data-user-id');
             sessionStorage.setItem('userId',userId);
 
-            Navigate(`/user/SkinCareList`);
+            Navigate(`/user/SkinCareList?userId=${userId}`);
         });
     });
 }

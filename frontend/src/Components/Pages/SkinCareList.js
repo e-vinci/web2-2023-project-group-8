@@ -70,8 +70,7 @@ async function listSkinCare(){
     buttons.forEach((button) => {
         button.addEventListener('click', (event) => {
             const productId = event.target.getAttribute('data-product-id');
-            sessionStorage.setItem('productId', productId);
-            Navigate('/products');
+            Navigate(`/products?productId=${productId}`);
         });
     });
 
