@@ -1,6 +1,9 @@
 
 const ProductPage = async () => {
-    const response = await fetch(`http://localhost:3000/products/${sessionStorage.getItem('productId')}`);
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('productId');
+
+    const response = await fetch(`http://localhost:3000/products/${productId}`);
     const data = await response.json();
 
     const productPage = `
