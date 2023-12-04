@@ -15,8 +15,8 @@ const QuizPage = () => {
           
           <div class="col-8">
             <div class="quiz_question text-center">
-              <h3 class="question">Quel est votre type de peau ?</h3>
-              <p class="question">Tips : si vous ne connaissez pas votre type de peau vous pouvez vous nettoyer le visage, attendre 30min et si votre peau tiraille: vous avez la peau séche, si votre peau devient luisante sur votre zone t et seche sur vos joues vous avez la peau mixte, si votre peau devient luisante sur l’ensemble vous avez la peau grasse et si votre peau reste douce c’est que vous avez une peau normal</p>
+              <h3 >Quel est votre type de peau ?</h3>
+              <p>Tips : si vous ne connaissez pas votre type de peau vous pouvez vous nettoyer le visage, attendre 30min et si votre peau tiraille: vous avez la peau séche, si votre peau devient luisante sur votre zone t et seche sur vos joues vous avez la peau mixte, si votre peau devient luisante sur l’ensemble vous avez la peau grasse et si votre peau reste douce c’est que vous avez une peau normal</p>
             </div>
             <div class="d-flex justify-content-center quiz_responses selector1">
               <button type="button" class="btn btn-lg question">peau sèche</button>
@@ -57,7 +57,7 @@ const QuizPage = () => {
               <button type="button" class="btn btn-lg question">teint terne</button>
               <button type="button" class="btn btn-lg question">peau irrégulière</button>
               <button type="button" class="btn btn-lg question">cernes</button>
-
+              <button type="button" class="btn btn-lg question">tâches</button>
             </div>
           </div>
         </div>
@@ -238,7 +238,7 @@ const QuizPage = () => {
     translateX: 400,
     delay: anime.stagger(200, { from: 'last' }),
     easing: 'easeInOutExpo',
-    duration: 700,
+    duration: 500,
     direction: 'reverse',
   });
 };
