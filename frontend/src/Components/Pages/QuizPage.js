@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable import/no-extraneous-dependencies */
 import anime from 'animejs';
 import arrowLeft from '../../img/arrow-left.svg';
@@ -228,10 +227,6 @@ const QuizPage = () => {
     // On va a la question suivante
   }); 
   */
-
-  const ESSAI = document.querySelector('.question');
-  // eslint-disable-next-line spaced-comment
-  //ESSAI.innerHTML = '';
 
   anime({
     targets: '.question ',
