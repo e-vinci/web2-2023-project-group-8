@@ -4,7 +4,7 @@ const {
   getAllSkinCares,
   getUserInformations,
   getSkinCares,
-} = require('../models/admins');
+} = require('../models/Admin');
 
 const router = express.Router();
 
