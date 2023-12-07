@@ -30,6 +30,18 @@ const ProductPage = async () => {
                             </div>
                         </div>
                     </div>
+                    <p>
+                        <button class="btn btn-lg" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExamples" aria-expanded="false" aria-controls="collapseWidthExample">
+                            Voir ingrédients
+                        </button>
+                    </p>
+                    <div style="min-height: 120px;">
+                        <div class="collapse collapse-horizontal" id="collapseWidthExamples">
+                            <div class="card card-body" style="width: 600px;">
+                                ${data.ingredients}
+                            </div>
+                        </div>
+                    </div>
                     <span id="similarSpan"><a href="/similar">See similar products</a></span>
                 </div>
         
