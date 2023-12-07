@@ -12,12 +12,28 @@ const QuizPage = () => {
 
 
 
+async function addTo(productIdentificaiton, skinCareIdentification){
+  // Envoie le productID au backend
+  fetch('http://localhost:3000/quizz/addProductToSkinCare', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      productId: productIdentificaiton,
+      skinCareId: skinCareIdentification
+    }),
+  })
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+};
+
+
 async function quizz() {
   let currentQuestionIndex = 0;
   const listSkinCareResponse = await fetch(`http://localhost:3000/quizz/questions`);
   const data = await listSkinCareResponse.json();
-
-  
   
   // Le rendu des question
   const renderQuestion = () => {
@@ -69,10 +85,15 @@ async function quizz() {
     // Ajoutez les écouteurs d'événements après avoir rendu la question
     const button = document.querySelectorAll('.reponse');
     button.forEach((btn) => {
-
       // On récupère le data-product-id et le stocke dans productID
       const productID = btn.dataset.productId; 
-      btn.addEventListener('click', navigateToNextQuestion);
+    
+      btn.addEventListener('click', () => {
+        navigateToNextQuestion();
+        // FIXME: si connecté on ajoute l'id de sa skinCare
+        //      : Si pas pas connecté on ajoute l'id de session dans le champ utilisateur de listes_produits
+        addTo(productID,"u72o9ng3iy3lby0");
+      });
     });
   };
 
