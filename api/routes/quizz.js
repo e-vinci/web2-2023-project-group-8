@@ -3,7 +3,8 @@ const {
   getQuestionAndResponse,
 } = require('../models/Quizz');
 const {
-  addProductIntoListesProduits,
+  addProductIntoListesProduitsWithSkinCare,
+  addProductIntoListesProduitsWithUtilisateur,
 } = require('../models/Product');
 
 const router = express.Router();
@@ -15,10 +16,14 @@ router.get('/questions', async (req, res) => {
 });
 
 router.post('/addProductToSkinCare', async (req, res) => {
-  const { skinCareId, productId } = req.body;
+  const { skinCareId, productId, sessionId } = req.body;
 
-  const record = await addProductIntoListesProduits(skinCareId, productId);
+  if (req.body.sessionId) {
+    const record = addProductIntoListesProduitsWithUtilisateur(sessionId, productId);
+    return res.json(record);
+  }
 
+  const record = await addProductIntoListesProduitsWithSkinCare(skinCareId, productId);
   return res.json(record);
 });
 

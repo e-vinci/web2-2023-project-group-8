@@ -7,12 +7,15 @@ const main = document.querySelector('main');
 
 const QuizPage = () => {
   clearPage();
-  quizz();
+  // Si l'utilisateur est connecté on lui demande le nom de sa routine
+  if (localStorage.getItem('connected') === 'true') {
+    AskUser();
+  }else{
+    quizz();
+  }
 };
 
-
-
-async function addTo(productIdentificaiton, skinCareIdentification){
+function addToConnected(productIdentificaiton, skinCareIdentification){
   // Envoie le productID au backend
   fetch('http://localhost:3000/quizz/addProductToSkinCare', {
     method: 'POST',
@@ -24,11 +27,73 @@ async function addTo(productIdentificaiton, skinCareIdentification){
       skinCareId: skinCareIdentification
     }),
   })
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error('Error:', error));
+  .then(response => response.json());
 };
 
+function addToNotConnected(productIdentification,userSession){
+  // Envoie le productID au backend
+  fetch('http://localhost:3000/quizz/addProductToSkinCare', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      productId: productIdentification,
+      sessionId: userSession
+    }),
+  })
+  .then(response => response.json());
+};
+
+function addSkinCare(skinCareName, userId){
+  fetch('http://localhost:3000/user/skinCare/add', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      intitule: skinCareName,
+      idUtilisateur: userId
+    }),
+  })
+  .then(response => response.json());
+};
+
+async function getLastSkinCareId(userId){
+  const listSkinCareResponse = await fetch(`http://localhost:3000/user/skinCares/last?userId=${userId}`);
+  const data = await listSkinCareResponse.json();
+
+  return data.id;
+}
+
+function AskUser() {
+  main.innerHTML = `
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-8 offset-2">
+          <div class="quiz_question text-center">
+            <h3>Quel est le nom de votre routine ?</h3>
+          </div>
+          <div class="d-flex justify-content-center quiz_responses selector1">
+            <input type="text" class="form-control" id="skinCareName" placeholder="Nom de votre routine">
+            <button type="button" class="btn btn-lg reponse" id="submitSkinCareName">Valider</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>`;
+
+  const submitButton = document.getElementById('submitSkinCareName');
+  submitButton.addEventListener('click', () =>{
+    const skinCareName = document.getElementById('skinCareName').value;
+    localStorage.setItem('skinCareName', skinCareName);
+
+    addSkinCare(skinCareName, localStorage.getItem('userId'));
+
+    quizz();
+  });
+}
 
 async function quizz() {
   let currentQuestionIndex = 0;
@@ -76,6 +141,7 @@ async function quizz() {
       
       // Si on est à la fin du quizz, on redirige vers la page XXX
       if(currentQuestionIndex >= data.length){
+        // TODO: Rediriger vers la page adéquate
         Navigate('/');
       } else {
         renderQuestion();
@@ -88,11 +154,19 @@ async function quizz() {
       // On récupère le data-product-id et le stocke dans productID
       const productID = btn.dataset.productId; 
     
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', async () => { 
+        if (localStorage.getItem('connected') === 'true') {
+
+          const userId = localStorage.getItem('userId');
+          const lastSkinCareId =  await getLastSkinCareId(userId);
+          
+          addToConnected(productID, lastSkinCareId);
+        }
+        else{
+          addToNotConnected(productID,localStorage.getItem('userId'));
+        }
         navigateToNextQuestion();
-        // FIXME: si connecté on ajoute l'id de sa skinCare
-        //      : Si pas pas connecté on ajoute l'id de session dans le champ utilisateur de listes_produits
-        addTo(productID,"u72o9ng3iy3lby0");
+
       });
     });
   };

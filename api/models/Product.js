@@ -16,7 +16,7 @@ async function getProductById(productId) {
  * @param {*} productId The id of the product
  * @returns {Promise<Object>} - A promise that resolves to the created record.
 */
-async function addProductIntoListesProduits(skinCareId, productId) {
+async function addProductIntoListesProduitsWithSkinCare(skinCareId, productId) {
   const record = await pb.collection('listes_produits').create({
     skinCare: skinCareId,
     produit: productId,
@@ -25,7 +25,17 @@ async function addProductIntoListesProduits(skinCareId, productId) {
   return record;
 }
 
+async function addProductIntoListesProduitsWithUtilisateur(user, productId) {
+  const record = await pb.collection('listes_produits').create({
+    utilisateur: user,
+    produit: productId,
+  });
+
+  return record;
+}
+
 module.exports = {
   getProductById,
-  addProductIntoListesProduits,
+  addProductIntoListesProduitsWithSkinCare,
+  addProductIntoListesProduitsWithUtilisateur,
 };
