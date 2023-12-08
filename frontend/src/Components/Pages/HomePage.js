@@ -4,19 +4,6 @@ import image3 from '../../img/cover3.jpg';
 
 import Navigate from '../Router/Navigate';
 
-
-// TODO: A SUPPRIMER QUAND ON AURA LE LOGIN
-// Variable qu'on set à true si l'utilisateur est connecté  (pour le moment on le set à true pour tester)
-// Mais c'est a faire dasns le login
-localStorage.setItem('connected', false);
-// Enlever le commentaire pour tester le quizz en étant connecté
-// localStorage.setItem('userId', '6nxn1fcl4r3wus2');
-
-if (localStorage.getItem('connected') === 'false' || localStorage.getItem('connected') === null || localStorage.getItem('connected') === undefined) {
-  const userId = Math.random().toString(36).substring(2) + Date.now().toString(36);
-  localStorage.setItem('userId', userId);
-}
-
 const HomePage = () => {
     const homePage = `
     <section class="grid-container-homepage"">
