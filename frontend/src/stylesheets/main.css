@@ -262,7 +262,7 @@ a.active, a:hover {
   top:60px;
 }
 
-#productPage .productPage__info p {
+.carac {
     display: flex;
     font-size: 30px;
     text-align: left;

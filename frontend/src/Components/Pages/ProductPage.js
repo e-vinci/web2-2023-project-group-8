@@ -14,7 +14,34 @@ const ProductPage = async () => {
                     <img src="${data.photo}" alt="Product Image">
                 </div>
                 <div class="productPage__info">
-                    <p>${data.description}</p>
+                    <span> <p class="carac"> Contenance : ${data.contenance} ${data.unite_contenance}</p></span>
+                    <br>
+                    <span> <p class="carac"> Prix : ${data.prix} €</p></span>
+                    <br>
+                    <p>
+                        <button class="btn btn-lg" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+                            Voir description
+                        </button>
+                    </p>
+                    <div style="min-height: 120px;">
+                        <div class="collapse collapse-horizontal" id="collapseWidthExample">
+                            <div class="card card-body" style="width: 600px;">
+                                ${data.description}
+                            </div>
+                        </div>
+                    </div>
+                    <p>
+                        <button class="btn btn-lg" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExamples" aria-expanded="false" aria-controls="collapseWidthExample">
+                            Voir ingrédients
+                        </button>
+                    </p>
+                    <div style="min-height: 120px;">
+                        <div class="collapse collapse-horizontal" id="collapseWidthExamples">
+                            <div class="card card-body" style="width: 600px;">
+                                ${data.ingredients}
+                            </div>
+                        </div>
+                    </div>
                     <span id="similarSpan"><a href="/similar">See similar products</a></span>
                 </div>
         
