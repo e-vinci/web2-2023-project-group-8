@@ -409,3 +409,14 @@ a.active, a:hover {
   grid-template-columns: 1fr 1fr 1fr; /* Example: 3 columns with equal widths */
   grid-gap: 10px; /* Gap between grid items */
 }
+
+/*------LOGIN PAGE SECTION------*/
+.loginhalf {
+  background-color: #ffcccc;
+}
+.login-container {
+  button{
+    background-color: #ffcccc;
+  }
+  }
+
