@@ -12,12 +12,12 @@ localStorage.setItem('connected', false);
 // Enlever le commentaire pour tester le quizz en étant connecté
 // localStorage.setItem('userId', '6nxn1fcl4r3wus2');
 
-// Générer un nouveau userId à chaque fois que la page est rechargée
-const userUniqueID = Math.random().toString(36).substring(2) + Date.now().toString(36);
-localStorage.setItem('userId', userUniqueID);
-
 if (localStorage.getItem('connected') === 'false' || localStorage.getItem('connected') === null || localStorage.getItem('connected') === undefined) {
+  // Générer un nouveau userId à chaque fois que la page est rechargée
+  const userUniqueID = Math.random().toString(36).substring(2) + Date.now().toString(36);
+  localStorage.setItem('userId', userUniqueID);
   // Si l'utilisateur n'est pas connecté, utiliser le userId généré
+
   localStorage.setItem('userId', userUniqueID);
 }
 
