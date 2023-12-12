@@ -10,6 +10,14 @@ async function getProductById(productId) {
   return record;
 }
 
+async function getCommentsByProductId(productId) {
+  const records = await pb.collection('commentaires').getFullList({
+    filter: `field = "${productId}"`,
+  });
+  return records;
+}
+
 module.exports = {
   getProductById,
+  getCommentsByProductId,
 };
