@@ -113,9 +113,6 @@ function AskUser() {
   submitButton.addEventListener('click', () => {
     const skinCareName = document.getElementById('skinCareName').value;
     sessionStorage.setItem('skinCareName', skinCareName);
-
-    addSkinCare(skinCareName, sessionStorage.getItem('userId'));
-
     quizz();
   });
 }
@@ -177,6 +174,7 @@ async function quizz() {
       // Si on est à la fin du quizz, on redirige vers la page adéquate sinon on affiche la question suivante
       if (currentQuestionIndex === data.length) {
         if (sessionStorage.getItem('connected')) {
+          addSkinCare(sessionStorage.getItem('skinCareName'), sessionStorage.getItem('userId'));
           const lastSkinCareId = await getLastSkinCareId(userIdentification);
           getProductsList().forEach((product) => {
             productSet.add(product);
