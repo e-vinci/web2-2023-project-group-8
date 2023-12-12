@@ -5,6 +5,7 @@ import skinCareList from '../Pages/SkinCareList';
 import ProductPage from '../Pages/ProductPage';
 import AddProductPage from '../Pages/AddProductPage';
 import SimilarProductsPage from '../Pages/SimilarProductsPage';
+import LoginPage from '../Pages/LoginPage';
 
 
 const routes = {
@@ -14,7 +15,8 @@ const routes = {
   '/user/SkinCareList': skinCareList,
   '/products': ProductPage,
   '/products/add': AddProductPage,
-  '/similar': SimilarProductsPage
+  '/similar': SimilarProductsPage,
+  '/login': LoginPage,
 };
 
 export default routes;

@@ -16,6 +16,7 @@ const Navbar = () => {
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" id="dropdown-home">accueil</a>
           <a class="dropdown-item" id="dropdown-quiz">diagnostic de peau</a>
+          <a class="dropdown-item" id="dropdown-login">connexion</a>
         </div>
       </div>
   </div>
@@ -26,6 +27,7 @@ const Navbar = () => {
   <ul id="nav_titles">
     <li><a href="/" data-uri="/">accueil</a></li>
     <li><a href="/quiz" data-uri="/quiz">diagnostic de peau</a></li>
+    <li><a href="/login" data-uri="/login">connexion</a></li>
   </ul>
   `;
 
