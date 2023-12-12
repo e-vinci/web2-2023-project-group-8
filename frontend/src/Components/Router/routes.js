@@ -7,6 +7,7 @@ import AddProductPage from '../Pages/AddProductPage';
 import SimilarProductsPage from '../Pages/SimilarProductsPage';
 import ResultsPage from '../Pages/ResultsPage';
 import LoginPage from '../Pages/LoginPage';
+import RegisterPage from '../Pages/RegisterPage';
 
 
 const routes = {
@@ -20,6 +21,7 @@ const routes = {
   '/results': ResultsPage,
   '/products/add': AddProductPage,
   '/login': LoginPage,
+  '/register': RegisterPage,
 };
 
 export default routes;
