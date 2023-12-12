@@ -1,16 +1,23 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import anime from 'animejs';
 import { clearPage } from '../../utils/render';
+import {
+  pushProduct,
+  popProduct,
+  getProductsList,
+  cleanProductsList } from  '../../models/quizzData';
+
 import Navigate from '../Router/Navigate';
+import arrowLeft from '../../img/arrow-left.svg';
 
 const main = document.querySelector('main');
 
 // TODO: A SUPPRIMER QUAND ON AURA LE LOGIN
 // Variable qu'on set à true si l'utilisateur est connecté  (pour le moment on le set à true pour tester)
 // Mais c'est a faire dasns le login
-localStorage.setItem('connected', false);
+localStorage.setItem('connected', true);
 // Enlever le commentaire pour tester le quizz en étant connecté
-// localStorage.setItem('userId', '6nxn1fcl4r3wus2');
+localStorage.setItem('userId', '6nxn1fcl4r3wus2');
 
 if (localStorage.getItem('connected') === 'false' || localStorage.getItem('connected') === null || localStorage.getItem('connected') === undefined) {
   // Générer un nouveau userId à chaque fois que la page est rechargée
@@ -21,17 +28,25 @@ if (localStorage.getItem('connected') === 'false' || localStorage.getItem('conne
   localStorage.setItem('userId', userUniqueID);
 }
 
+
+const userIdentification = localStorage.getItem('userId');
+const lastSkinCareId =  await getLastSkinCareId(userIdentification);
+// Elimine les doublons dans la liste des produits
+const productSet = new Set();
+
+cleanProductsList();
+
 const QuizPage = () => {
   clearPage();
   // Si l'utilisateur est connecté on lui demande le nom de sa routine
-  if (localStorage.getItem('connected') === 'true') {
+  if (localStorage.getItem('connected')) {
     AskUser();
   }else{
     quizz();
   }
 };
 
-function addToConnected(productIdentificaiton, skinCareIdentification){
+async function addToConnected(productIdentificaiton, skinCareIdentification){
   // Envoie le productID au backend
   fetch('http://localhost:3000/quizz/addProductToSkinCare', {
     method: 'POST',
@@ -41,21 +56,6 @@ function addToConnected(productIdentificaiton, skinCareIdentification){
     body: JSON.stringify({
       productId: productIdentificaiton,
       skinCareId: skinCareIdentification
-    }),
-  })
-  .then(response => response.json());
-};
-
-function addToNotConnected(productIdentification,userSession){
-  // Envoie le productID au backend
-  fetch('http://localhost:3000/quizz/addProductToSkinCare', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      productId: productIdentification,
-      sessionId: userSession
     }),
   })
   .then(response => response.json());
@@ -74,7 +74,6 @@ function addSkinCare(skinCareName, userId){
   })
   .then(response => response.json());
 };
-
 async function getLastSkinCareId(userId){
   const listSkinCareResponse = await fetch(`http://localhost:3000/user/skinCares/last?userId=${userId}`);
   const data = await listSkinCareResponse.json();
@@ -113,8 +112,8 @@ function AskUser() {
 
 async function quizz() {
   let currentQuestionIndex = 0;
-  const listSkinCareResponse = await fetch(`http://localhost:3000/quizz/questions`);
-  const data = await listSkinCareResponse.json();
+  const getAllQuestions = await fetch(`http://localhost:3000/quizz/questions`);
+  const data = await getAllQuestions.json();
   
   // Le rendu des question
   const renderQuestion = () => {
@@ -126,14 +125,20 @@ async function quizz() {
     // On affiche la question
     main.innerHTML = `
       <section id="quiz">
-        <div class="container">
-          <div class="row">
-            <div class="col-8 offset-2">
-              <div class="quiz_question text-center">
-                <h3>${question.question}</h3>
-                <p>${question.tips}</p>
+      <div class="row">
+          <div class="col-2 back-section">
+            <img src="${arrowLeft}" id="arrow-left" alt="Left arrow">
+            Back
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-8 offset-2">
+                <div class="quiz_question text-center">
+                  <h3>${question.question}</h3>
+                  <p>${question.tips}</p>
+                </div>
+                <div class="d-flex justify-content-center quiz_responses selector1">${response}</div>
               </div>
-              <div class="d-flex justify-content-center quiz_responses selector1">${response}</div>
             </div>
           </div>
         </div>
@@ -150,41 +155,45 @@ async function quizz() {
     });
 
     // Navigation entre les questions
-    const navigateToNextQuestion = () => {
-
-      // eslint-disable-next-line no-plusplus
-      currentQuestionIndex++;
-      
-      // Si on est à la fin du quizz, on redirige vers la page XXX
-      if(currentQuestionIndex >= data.length){
-        // TODO: Rediriger vers la page adéquate
-        Navigate('/');
-      } else {
-        renderQuestion();
+  const navigateToNextQuestion = () => {
+    // eslint-disable-next-line no-plusplus
+    currentQuestionIndex++;
+    
+    // Si on est à la fin du quizz, on redirige vers la page XXX
+    if(currentQuestionIndex === data.length){
+      if(localStorage.getItem('connected')){
+        getProductsList().forEach((product) => {
+          productSet.add(product);
+        });
+        productSet.forEach(async (product) => {
+          await addToConnected(product, lastSkinCareId);
+        });
       }
-    };
+      // TODO: Rediriger vers la page adéquate
+      Navigate('/');
+    } else {
+      renderQuestion();
+    }
+  };
 
     // Ajoutez les écouteurs d'événements après avoir rendu la question
-    const button = document.querySelectorAll('.reponse');
-    button.forEach((btn) => {
-      // On récupère le data-product-id et le stocke dans productID
-      const productID = btn.dataset.productId; 
-    
-      btn.addEventListener('click', async () => { 
-        if (localStorage.getItem('connected') === 'true') {
+   const button = document.querySelectorAll('.reponse');
+   button.forEach((btn) => {
+     // On récupère le data-product-id et le stocke dans productID
+     const productID = btn.dataset.productId; 
+   
+    btn.addEventListener('click', async () => { 
+      pushProduct(productID);
+      navigateToNextQuestion();
+     });
+   });
 
-          const userId = localStorage.getItem('userId');
-          const lastSkinCareId =  await getLastSkinCareId(userId);
-          
-          addToConnected(productID, lastSkinCareId);
-        }
-        else{
-          addToNotConnected(productID,localStorage.getItem('userId'));
-        }
-        navigateToNextQuestion();
-
-      });
-    });
+   const backButton = document.querySelector('.back-section');
+   backButton.addEventListener('click', () => {
+     currentQuestionIndex -=1;
+     popProduct();
+     renderQuestion();
+   });
   };
 
   // Lancement du quizz
@@ -192,3 +201,4 @@ async function quizz() {
 };
 
 export default QuizPage;
+
