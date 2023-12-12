@@ -4,6 +4,9 @@ const PocketBase = require('pocketbase/cjs');
 const url = 'https://ylann-mommens.pockethost.io/';
 const pb = new PocketBase(url);
 
+// globally disable auto cancellation
+pb.autoCancellation(false);
+
 async function getProductById(productId) {
   const record = await pb.collection('produits').getOne(productId);
   record.photo = `${url}api/files/produits/${productId}/${record.photo}`;
@@ -25,15 +28,6 @@ async function addProductIntoListesProduitsWithSkinCare(skinCareId, productId) {
   return record;
 }
 
-async function addProductIntoListesProduitsWithUtilisateur(user, productId) {
-  const record = await pb.collection('listes_produits').create({
-    utilisateur: user,
-    produit: productId,
-  });
-
-  return record;
-}
-
 async function getCommentsByProductId(productId) {
   const records = await pb.collection('commentaires').getFullList({
     filter: `field = "${productId}"`,
@@ -45,5 +39,4 @@ module.exports = {
   getProductById,
   getCommentsByProductId,
   addProductIntoListesProduitsWithSkinCare,
-  addProductIntoListesProduitsWithUtilisateur,
 };
