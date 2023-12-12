@@ -34,8 +34,7 @@ const LoginPage = () => {
                 </div>
 
                 <input class="form-control form-control-lg" id="formFileLg" type="file" />
-                <div class="small text-muted mt-2">Choisissez une photo de profil. Cette option
-                 est optionnelle.</div>
+                <div class="small text-muted mt-2">Choisissez une photo de profil. Ce champ est optionnel.</div>
 
                 <div class="form-outline mb-4">
                   <input type="password" id="form3Example4cg" class="form-control form-control-lg" />
