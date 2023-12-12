@@ -5,72 +5,67 @@ import {
   pushProduct,
   popProduct,
   getProductsList,
-  cleanProductsList } from  '../../models/quizzData';
+  cleanProductsList,
+} from '../../models/quizzData';
 
 import Navigate from '../Router/Navigate';
 import arrowLeft from '../../img/arrow-left.svg';
 
-const main = document.querySelector('main');
-
 // TODO: A SUPPRIMER QUAND ON AURA LE LOGIN
-// Variable qu'on set à true si l'utilisateur est connecté  (pour le moment on le set à true pour tester)
-// Mais c'est a faire dasns le login
+// Variable qu'on set à true si l'utilisateur est connecté  (pour le moment on le set à true pour tester). Mais c'est a faire dans le login
 localStorage.setItem('connected', true);
 // Enlever le commentaire pour tester le quizz en étant connecté
 localStorage.setItem('userId', '6nxn1fcl4r3wus2');
 
-if (localStorage.getItem('connected') === 'false' || localStorage.getItem('connected') === null || localStorage.getItem('connected') === undefined) {
-  // Générer un nouveau userId à chaque fois que la page est rechargée
-  const userUniqueID = Math.random().toString(36).substring(2) + Date.now().toString(36);
-  localStorage.setItem('userId', userUniqueID);
-  // Si l'utilisateur n'est pas connecté, utiliser le userId généré
-
-  localStorage.setItem('userId', userUniqueID);
-}
-
-
 const userIdentification = localStorage.getItem('userId');
-const lastSkinCareId =  await getLastSkinCareId(userIdentification);
-// Elimine les doublons dans la liste des produits
+const lastSkinCareId = await getLastSkinCareId(userIdentification);
+
+// On crée un set pour éviter les doublons
 const productSet = new Set();
+const main = document.querySelector('main');
 
 cleanProductsList();
 
+/**
+ * Page du quizz
+ */
 const QuizPage = () => {
   clearPage();
   // Si l'utilisateur est connecté on lui demande le nom de sa routine
   if (localStorage.getItem('connected')) {
     AskUser();
-  }else{
+  } else {
     quizz();
   }
 };
 
-async function addToConnected(productIdentificaiton, skinCareIdentification){
-  try {
-    const response = await fetch('http://localhost:3000/quizz/addProductToSkinCare', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        productId: productIdentificaiton,
-        skinCareId: skinCareIdentification
-      }),
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    throw new Error('Error during POST request:', error);
-  }
+/**
+ *  Adds a product to the routine of the connected user
+ * @param {*} productIdentificaiton Product ID
+ * @param {*} skinCareIdentification SkinCare ID
+ * @throws {Error} - Error if the request fails
+ */
+function addToConnected(productIdentificaiton, skinCareIdentification){
+  // Envoie le productID au backend
+  fetch('http://localhost:3000/quizz/addProductToSkinCare', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      productId: productIdentificaiton,
+      skinCareId: skinCareIdentification
+    }),
+  })
+  .then(response => response.json());
 };
 
-function addSkinCare(skinCareName, userId){
+/**
+ *  Adds a skincare routine to the connected user
+ * @param { } skinCareName  Name of the skincare routine
+ * @param {*} userId  User ID
+ */
+function addSkinCare(skinCareName, userId) {
   fetch('http://localhost:3000/user/skinCare/add', {
     method: 'POST',
     headers: {
@@ -78,13 +73,20 @@ function addSkinCare(skinCareName, userId){
     },
     body: JSON.stringify({
       intitule: skinCareName,
-      idUtilisateur: userId
+      idUtilisateur: userId,
     }),
-  })
-  .then(response => response.json());
-};
-async function getLastSkinCareId(userId){
-  const listSkinCareResponse = await fetch(`http://localhost:3000/user/skinCares/last?userId=${userId}`);
+  }).then((response) => response.json());
+}
+
+/**
+ * Gets the last skincare routine ID of the connected user
+ * @param {*} userId User ID
+ * @returns {Promise} Promise object represents the last skincare routine ID
+ */
+async function getLastSkinCareId(userId) {
+  const listSkinCareResponse = await fetch(
+    `http://localhost:3000/user/skinCares/last?userId=${userId}`,
+  );
   const data = await listSkinCareResponse.json();
 
   return data.id;
@@ -109,7 +111,7 @@ function AskUser() {
   </section>`;
 
   const submitButton = document.getElementById('submitSkinCareName');
-  submitButton.addEventListener('click', () =>{
+  submitButton.addEventListener('click', () => {
     const skinCareName = document.getElementById('skinCareName').value;
     localStorage.setItem('skinCareName', skinCareName);
 
@@ -123,13 +125,19 @@ async function quizz() {
   let currentQuestionIndex = 0;
   const getAllQuestions = await fetch(`http://localhost:3000/quizz/questions`);
   const data = await getAllQuestions.json();
-  
+
   // Le rendu des question
   const renderQuestion = () => {
     const question = data[currentQuestionIndex];
-    const response = question.expand && question.expand['reponses(question)'].map((resp) => `
+    const response =
+      question.expand &&
+      question.expand['reponses(question)']
+        .map(
+          (resp) => `
       <button type="button" class="btn btn-lg reponse" data-product-id="${resp.produit}">${resp.reponse}</button>
-    `).join('');
+    `,
+        )
+        .join('');
 
     // On affiche la question
     main.innerHTML = `
@@ -164,50 +172,49 @@ async function quizz() {
     });
 
     // Navigation entre les questions
-  const navigateToNextQuestion = () => {
-    // eslint-disable-next-line no-plusplus
-    currentQuestionIndex++;
-    
-    // Si on est à la fin du quizz, on redirige vers la page XXX
-    if(currentQuestionIndex === data.length){
-      if(localStorage.getItem('connected')){
-        getProductsList().forEach((product) => {
-          productSet.add(product);
-        });
-        productSet.forEach(async (product) => {
-          await addToConnected(product, lastSkinCareId);
-        });
+    const navigateToNextQuestion = () => {
+      currentQuestionIndex += 1;
+
+      // Si on est à la fin du quizz, on redirige vers la page adéquate sinon on affiche la question suivante
+      if (currentQuestionIndex === data.length) {
+        if (localStorage.getItem('connected')) {
+          getProductsList().forEach((product) => {
+            productSet.add(product);
+          });
+          productSet.forEach(async (product) => {
+            await addToConnected(product, lastSkinCareId);
+          });
+        }
+        // TODO: Rediriger vers la page adéquate
+        Navigate('/');
+      } else {
+        renderQuestion();
       }
-      // TODO: Rediriger vers la page adéquate
-      Navigate('/');
-    } else {
-      renderQuestion();
-    }
-  };
+    };
 
     // Ajoutez les écouteurs d'événements après avoir rendu la question
-   const button = document.querySelectorAll('.reponse');
-   button.forEach((btn) => {
-     // On récupère le data-product-id et le stocke dans productID
-     const productID = btn.dataset.productId; 
-   
-    btn.addEventListener('click', async () => { 
-      pushProduct(productID);
-      navigateToNextQuestion();
-     });
-   });
+    const button = document.querySelectorAll('.reponse');
+    button.forEach((btn) => {
+      // On récupère le data-product-id et le stocke dans productID
+      const productID = btn.dataset.productId;
 
-   const backButton = document.querySelector('.back-section');
-   backButton.addEventListener('click', () => {
-     currentQuestionIndex -=1;
-     popProduct();
-     renderQuestion();
-   });
+      btn.addEventListener('click', () => {
+        pushProduct(productID);
+        navigateToNextQuestion();
+      });
+    });
+
+    // On ajoute un écouteur d'événement sur le bouton de retour qui permet de revenir à la question précédente
+    const backButton = document.querySelector('.back-section');
+    backButton.addEventListener('click', () => {
+      currentQuestionIndex -= 1;
+      popProduct();
+      renderQuestion();
+    });
   };
 
   // Lancement du quizz
   renderQuestion();
-};
+}
 
 export default QuizPage;
-

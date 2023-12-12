@@ -4,7 +4,6 @@ const {
 } = require('../models/Quizz');
 const {
   addProductIntoListesProduitsWithSkinCare,
-  addProductIntoListesProduitsWithUtilisateur,
 } = require('../models/Product');
 
 const router = express.Router();
@@ -16,12 +15,7 @@ router.get('/questions', async (req, res) => {
 });
 
 router.post('/addProductToSkinCare', async (req, res) => {
-  const { skinCareId, productId, sessionId } = req.body;
-
-  if (req.body.sessionId) {
-    const record = addProductIntoListesProduitsWithUtilisateur(sessionId, productId);
-    return res.json(record);
-  }
+  const { skinCareId, productId } = req.body;
 
   const record = await addProductIntoListesProduitsWithSkinCare(skinCareId, productId);
   return res.json(record);
