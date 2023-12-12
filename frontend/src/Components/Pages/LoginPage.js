@@ -1,7 +1,5 @@
 import logoImage from '../../img/icon.png';
 
-const body = document.querySelector('body');
-body.style.overflow = 'auto';
 
 const main = document.querySelector('main');
 
@@ -71,5 +69,8 @@ const LoginPage = () => {
   </div>
 </section>
         `;
+
+  const body = document.querySelector('body');
+  body.style.overflow = 'auto';
 };
 export default LoginPage;
