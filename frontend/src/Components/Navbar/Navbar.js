@@ -45,6 +45,10 @@ const Navbar = () => {
   document.querySelector('#dropdown-quiz').addEventListener('click', () => {
     Navigate('/quiz');
   });
+
+  document.querySelector('#dropdown-login').addEventListener('click', () => {
+    Navigate('/login');
+  });
 };
 
 export default Navbar;
