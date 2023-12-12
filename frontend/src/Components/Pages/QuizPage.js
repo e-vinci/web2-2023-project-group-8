@@ -13,12 +13,11 @@ import arrowLeft from '../../img/arrow-left.svg';
 
 // TODO: A SUPPRIMER QUAND ON AURA LE LOGIN
 // Variable qu'on set à true si l'utilisateur est connecté  (pour le moment on le set à true pour tester). Mais c'est a faire dans le login
-localStorage.setItem('connected', true);
+sessionStorage.setItem('connected', true);
 // Enlever le commentaire pour tester le quizz en étant connecté
-localStorage.setItem('userId', '6nxn1fcl4r3wus2');
+sessionStorage.setItem('userId', 'f51ddnvv6ts033w');
 
-const userIdentification = localStorage.getItem('userId');
-const lastSkinCareId = await getLastSkinCareId(userIdentification);
+const userIdentification = sessionStorage.getItem('userId');
 
 // On crée un set pour éviter les doublons
 const productSet = new Set();
@@ -32,7 +31,7 @@ cleanProductsList();
 const QuizPage = () => {
   clearPage();
   // Si l'utilisateur est connecté on lui demande le nom de sa routine
-  if (localStorage.getItem('connected')) {
+  if (sessionStorage.getItem('connected')) {
     AskUser();
   } else {
     quizz();
@@ -113,9 +112,9 @@ function AskUser() {
   const submitButton = document.getElementById('submitSkinCareName');
   submitButton.addEventListener('click', () => {
     const skinCareName = document.getElementById('skinCareName').value;
-    localStorage.setItem('skinCareName', skinCareName);
+    sessionStorage.setItem('skinCareName', skinCareName);
 
-    addSkinCare(skinCareName, localStorage.getItem('userId'));
+    addSkinCare(skinCareName, sessionStorage.getItem('userId'));
 
     quizz();
   });
@@ -172,12 +171,13 @@ async function quizz() {
     });
 
     // Navigation entre les questions
-    const navigateToNextQuestion = () => {
+    const navigateToNextQuestion = async () => {
       currentQuestionIndex += 1;
 
       // Si on est à la fin du quizz, on redirige vers la page adéquate sinon on affiche la question suivante
       if (currentQuestionIndex === data.length) {
-        if (localStorage.getItem('connected')) {
+        if (sessionStorage.getItem('connected')) {
+          const lastSkinCareId = await getLastSkinCareId(userIdentification);
           getProductsList().forEach((product) => {
             productSet.add(product);
           });
