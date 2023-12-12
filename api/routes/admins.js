@@ -1,10 +1,12 @@
 const express = require('express');
 const {
   getAllUser,
-  getAllSkinCares,
   getUserInformations,
-  getSkinCares,
 } = require('../models/Admin');
+const {
+  getAllSkinCares,
+  getSkinCares,
+} = require('../models/Skincare');
 
 const router = express.Router();
 

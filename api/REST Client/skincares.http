@@ -1,0 +1,13 @@
+@baseUrl = http://localhost:3000
+
+###POST
+POST {{baseUrl}}/user/skinCare/add
+Content-Type: application/json
+
+{
+    "intitule": "testing",
+    "idUtilisateur": "6nxn1fcl4r3wus2"
+}
+
+###GET
+GET {{baseUrl}}/user/skinCares/last?userId=dn0opa0tt6ba3v9

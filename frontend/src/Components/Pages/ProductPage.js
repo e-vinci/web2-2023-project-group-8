@@ -46,108 +46,54 @@ const ProductPage = async () => {
                 </div>
         
         </section>
-        <section class="content-item" id="comments">
-    <div class="container">   
-    	<div class="row">
-            <div class="col-sm-8">   
-                <form>
-                	<h3 class="pull-left">New Comment</h3>
-                	<button type="submit" class="btn btn-normal pull-right">Submit</button>
-                    <fieldset>
-                        <div class="row">
-                            <div class="col-sm-3 col-lg-2 hidden-xs">
-                            	<img class="img-responsive" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-                            </div>
-                            <div class="form-group col-xs-12 col-sm-9 col-lg-10">
-                                <textarea class="form-control" id="message" placeholder="Your message" required=""></textarea>
-                            </div>
-                        </div>  	
-                    </fieldset>
-                </form>
-                
-                <h3>4 Comments</h3>
-                
-                <!-- COMMENT 1 - START -->
-                <div class="media">
-                    <a class="pull-left" href="#"><img class="media-object" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""></a>
-                    <div class="media-body">
-                        <h4 class="media-heading">John Doe</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <ul class="list-unstyled list-inline media-detail pull-left">
-                            <li><i class="fa fa-calendar"></i>27/02/2014</li>
-                            <li><i class="fa fa-thumbs-up"></i>13</li>
-                        </ul>
-                        <ul class="list-unstyled list-inline media-detail pull-right">
-                            <li class=""><a href="">Like</a></li>
-                            <li class=""><a href="">Reply</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- COMMENT 1 - END -->
-                
-                <!-- COMMENT 2 - START -->
-                <div class="media">
-                    <a class="pull-left" href="#"><img class="media-object" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt=""></a>
-                    <div class="media-body">
-                        <h4 class="media-heading">John Doe</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <ul class="list-unstyled list-inline media-detail pull-left">
-                            <li><i class="fa fa-calendar"></i>27/02/2014</li>
-                            <li><i class="fa fa-thumbs-up"></i>13</li>
-                        </ul>
-                        <ul class="list-unstyled list-inline media-detail pull-right">
-                            <li class=""><a href="">Like</a></li>
-                            <li class=""><a href="">Reply</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- COMMENT 2 - END -->
-                
-                <!-- COMMENT 3 - START -->
-                <div class="media">
-                    <a class="pull-left" href="#"><img class="media-object" src="https://bootdey.com/img/Content/avatar/avatar3.png" alt=""></a>
-                    <div class="media-body">
-                        <h4 class="media-heading">John Doe</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <ul class="list-unstyled list-inline media-detail pull-left">
-                            <li><i class="fa fa-calendar"></i>27/02/2014</li>
-                            <li><i class="fa fa-thumbs-up"></i>13</li>
-                        </ul>
-                        <ul class="list-unstyled list-inline media-detail pull-right">
-                            <li class=""><a href="">Like</a></li>
-                            <li class=""><a href="">Reply</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- COMMENT 3 - END -->
-                
-                <!-- COMMENT 4 - START -->
-                <div class="media">
-                    <a class="pull-left" href="#"><img class="media-object" src="https://bootdey.com/img/Content/avatar/avatar4.png" alt=""></a>
-                    <div class="media-body">
-                        <h4 class="media-heading">John Doe</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <ul class="list-unstyled list-inline media-detail pull-left">
-                            <li><i class="fa fa-calendar"></i>27/02/2014</li>
-                            <li><i class="fa fa-thumbs-up"></i>13</li>
-                        </ul>
-                        <ul class="list-unstyled list-inline media-detail pull-right">
-                            <li class=""><a href="">Like</a></li>
-                            <li class=""><a href="">Reply</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- COMMENT 4 - END -->
-            
-            </div>
-        </div>
-    </div>
+        <section class="comments-section">
+        <h3>Add a Comment</h3>
+        <form id="comment-form">
+        <div class="star-rating">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+       </div>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name"><br><br>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email"><br><br>
+          <label for="message">Message:</label>
+          <textarea id="message" name="message"></textarea><br><br>
+          <button type="submit">Submit</button>
+        </form>
+        <ul class="comments-list">
+          <!-- Display previous comments here -->
+        </ul>
+      </section>
 </section>`;
     
     const main = document.querySelector('main');
     main.innerHTML = productPage;
     const body = document.querySelector('body');
     body.style.overflow = 'auto';
+
+    let selectedStars = 0;
+
+const starRating = document.querySelector('.star-rating');
+
+starRating.addEventListener('click', (e) => {
+ if (e.target.tagName === 'SPAN') {
+        const index = [...e.target.parentElement.children].indexOf(e.target);
+        selectedStars = index + 1;
+
+        const stars = starRating.querySelectorAll('span');
+        stars.forEach((star, i) => {
+            if (i < selectedStars) {
+                star.classList.add('active');
+            } else {
+                star.classList.remove('active');
+            }
+        });
+ }
+});
       
 };
 

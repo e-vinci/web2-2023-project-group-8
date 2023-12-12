@@ -6,6 +6,8 @@ import ProductPage from '../Pages/ProductPage';
 import AddProductPage from '../Pages/AddProductPage';
 import SimilarProductsPage from '../Pages/SimilarProductsPage';
 import ResultsPage from '../Pages/ResultsPage';
+import LoginPage from '../Pages/LoginPage';
+
 
 const routes = {
   '/': HomePage,
@@ -15,7 +17,9 @@ const routes = {
   '/products': ProductPage,
   '/admin/products/add': AddProductPage,
   '/similar': SimilarProductsPage,
-  '/results': ResultsPage
+  '/results': ResultsPage,
+  '/products/add': AddProductPage,
+  '/login': LoginPage,
 };
 
 export default routes;
