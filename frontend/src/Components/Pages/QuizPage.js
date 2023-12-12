@@ -47,18 +47,27 @@ const QuizPage = () => {
 };
 
 async function addToConnected(productIdentificaiton, skinCareIdentification){
-  // Envoie le productID au backend
-  fetch('http://localhost:3000/quizz/addProductToSkinCare', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      productId: productIdentificaiton,
-      skinCareId: skinCareIdentification
-    }),
-  })
-  .then(response => response.json());
+  try {
+    const response = await fetch('http://localhost:3000/quizz/addProductToSkinCare', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        productId: productIdentificaiton,
+        skinCareId: skinCareIdentification
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error('Error during POST request:', error);
+  }
 };
 
 function addSkinCare(skinCareName, userId){
