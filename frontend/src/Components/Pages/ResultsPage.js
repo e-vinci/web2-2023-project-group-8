@@ -1,7 +1,9 @@
 import { clearPage } from '../../utils/render';
-// import Navigate from '../Router/Navigate';
 
 const main = document.querySelector('main');
+const body = document.querySelector('body');
+body.style.overflow = 'auto';
+
 const ResultsPage = () => {
     clearPage();
     results();
@@ -9,32 +11,18 @@ const ResultsPage = () => {
 
 async function results() {
 
-    const listSkinCareResponse = await fetch(`http://localhost:3000/admin/skinCares`);
+    const listSkinCareResponse = await fetch(`http://localhost:3000/admin/skinCares?userId=${sessionStorage.getItem('userId')}`);
     const data = await listSkinCareResponse.json();
 
-    const userResponse = await fetch(`http://localhost:3000/admin/users`);
+    const morningRoutine = data.filter((skinCare) => skinCare.type === "matin");
+    const nightRoutine = data.filter((skinCare) => skinCare.type === "soir"); 
+    const morningRoutineLayout = generateRoutineLayout(morningRoutine);
+    const nightRoutineLayout = generateRoutineLayout(nightRoutine);
+
+    const userResponse = await fetch(`http://localhost:3000/admin/users?userId=${sessionStorage.getItem('userId')}`);
     const userData = await userResponse.json();
-
-    const userFound = userData[3];
+    const userFound = userData[0];
     const prenom = (userFound.prenom).charAt(0).toUpperCase() + (userFound.prenom).slice(1);
-
-    data.forEach((skinCare) => {
-        const test = skinCare.expand && skinCare.expand['listes_produits(skinCare)'].map((product) => `
-            <div class="col-sm d-flex">
-                <div class="card flex-grow-1 d-flex flex-column">
-                    <div class="card-body">
-                        <h5 class="card-title">${product.expand.produit.nom}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">${product.expand.produit.contenance} ${product.expand.produit.unite_contenance}</h6>
-                        <strong>Description: </strong>
-                        <p class="card-text">
-                            ${product.expand.produit.description}
-                        </p>
-                        <h6 class="card-subtitle mb-2 text-muted">${product.expand.produit.prix} €</h6>
-                        <button type="button" class="btn btn-lg btn-product" data-product-id="${product.expand.produit.id}">voir le produit</button>
-                    </div>
-                </div>
-            </div>
-        `).join('');
 
     const resultsLayout = `
     <section>
@@ -52,20 +40,48 @@ async function results() {
         <div class="routine">
             <h3>Routine AM</h3>
             <div class="row">
-                ${test}
+                ${morningRoutineLayout}
             </div>
         </div>
         <div class="routine">
             <h3>Routine PM</h3>
             <div class="row">
-                ${test}
+                ${nightRoutineLayout}
             </div>
         </div>
     </div>
     </section>
     `;
-    
-        main.innerHTML = resultsLayout;
-    });
+    main.innerHTML = resultsLayout;
 };
+
+function generateRoutineLayout(routine) {
+    
+    return routine.map((skinCare) => {
+        const routineLayout = skinCare.expand && skinCare.expand['listes_produits(skinCare)'].map((product) => {
+            // const imageUrl = product.expand.produit.photo; // Add background picture
+            const routineItem = `
+                <div class="col-sm d-flex">
+                    <div class="card flex-grow-1 d-flex flex-column">
+                        <div class="card-body">
+                            <h5 class="card-title">${product.expand.produit.nom}</h5>
+                            <h5 class="card-title">${product.expand.produit.marque.nom}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">${product.expand.produit.contenance} ${product.expand.produit.unite_contenance}</h6>
+                            <strong>Description: </strong>
+                            <p class="card-text">
+                                ${product.expand.produit.description}
+                            </p>
+                            <h6 class="card-subtitle mb-2 text-muted">${product.expand.produit.prix} €</h6>
+                            
+                            <button type="button" class="btn btn-lg btn-product" data-product-id="${product.expand.produit.id}">voir le produit</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            return routineItem;
+        }).join('');
+        return routineLayout || 'Aucune routine'; 
+    }).join('');
+}
+
 export default ResultsPage;
