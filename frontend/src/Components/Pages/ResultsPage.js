@@ -1,35 +1,46 @@
-import { clearPage } from '../../utils/render';
+// import { clearPage } from '../../utils/render';
+import { getProductsList } from '../../models/quizzData';
 
 const main = document.querySelector('main');
-const body = document.querySelector('body');
-body.style.overflow = 'auto';
 
 const ResultsPage = () => {
-    clearPage();
-    results();
+    if (sessionStorage.getItem('connected')) {
+        results();
+    }
 };
 
-async function results() {
+function results() {
+    main.innerHTML = `<h1>Results</h1>`;
 
-    const listSkinCareResponse = await fetch(`http://localhost:3000/admin/skinCares?userId=${sessionStorage.getItem('userId')}`);
-    const data = await listSkinCareResponse.json();
+    const products = getProductsList();
+    const savedProducts = products;
 
-    const morningRoutine = data.filter((skinCare) => skinCare.type === "matin");
-    const nightRoutine = data.filter((skinCare) => skinCare.type === "soir"); 
-    const morningRoutineLayout = generateRoutineLayout(morningRoutine);
-    const nightRoutineLayout = generateRoutineLayout(nightRoutine);
+    // Build HTML content for all products
+    const productsHTML = savedProducts.map((product) => `
+        <div class="col-sm d-flex">
+            <div class="card flex-grow-1 d-flex flex-column">
+                <div class="card-body">
+                    <h5 class="card-title">${product.nom}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">${product.contenance} ${product.unite_contenance}</h6>
+                    <strong>Description: </strong>
+                    <p class="card-text">
+                        ${product.description}
+                    </p>
+                    <h6 class="card-subtitle mb-2 text-muted">${product.prix} €</h6>
+                    <strong>${product.id}</strong>
+                    <button type="button" class="btn btn-lg btn-product">voir le produit</button>
+                </div>
+            </div>
+        </div>`
+    ).join('');
 
-    const userResponse = await fetch(`http://localhost:3000/admin/users?userId=${sessionStorage.getItem('userId')}`);
-    const userData = await userResponse.json();
-    const userFound = userData[0];
-    const prenom = (userFound.prenom).charAt(0).toUpperCase() + (userFound.prenom).slice(1);
-
-    const resultsLayout = `
-    <section>
-    <div id="results">
-    <span class="ms-auto"><span class="badge bg-secondary">Date</span></span>
-    <h2>Voici vos résultats, ${prenom}</h2>
-        <div class="skin-info">
+    // Update main.innerHTML with the entire HTML content
+    main.innerHTML += `
+        <section>
+            <div id="results">
+            <span class="ms-auto"><span class="badge bg-secondary">Date</span></span>
+            <h2>Voici vos résultats, </h2>
+                <div class="skin-info">
             <p><strong>Type de peau :</strong> grasse</p>
             <p><strong>Problèmes ciblés :</strong></p>
             <ul class="skin-issues">
@@ -37,51 +48,14 @@ async function results() {
                 <li>Problème 2</li>
             </ul>
         </div>
-        <div class="routine">
-            <h3>Routine AM</h3>
-            <div class="row">
-                ${morningRoutineLayout}
-            </div>
-        </div>
-        <div class="routine">
-            <h3>Routine PM</h3>
-            <div class="row">
-                ${nightRoutineLayout}
-            </div>
-        </div>
-    </div>
-    </section>
-    `;
-    main.innerHTML = resultsLayout;
-};
 
-function generateRoutineLayout(routine) {
-    
-    return routine.map((skinCare) => {
-        const routineLayout = skinCare.expand && skinCare.expand['listes_produits(skinCare)'].map((product) => {
-            // const imageUrl = product.expand.produit.photo; // Add background picture
-            const routineItem = `
-                <div class="col-sm d-flex">
-                    <div class="card flex-grow-1 d-flex flex-column">
-                        <div class="card-body">
-                            <h5 class="card-title">${product.expand.produit.nom}</h5>
-                            <h5 class="card-title">${product.expand.produit.marque.nom}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">${product.expand.produit.contenance} ${product.expand.produit.unite_contenance}</h6>
-                            <strong>Description: </strong>
-                            <p class="card-text">
-                                ${product.expand.produit.description}
-                            </p>
-                            <h6 class="card-subtitle mb-2 text-muted">${product.expand.produit.prix} €</h6>
-                            
-                            <button type="button" class="btn btn-lg btn-product" data-product-id="${product.expand.produit.id}">voir le produit</button>
-                        </div>
+                <div class="routine">
+                    <div class="row">
+                        ${productsHTML}
                     </div>
                 </div>
-            `;
-            return routineItem;
-        }).join('');
-        return routineLayout || 'Aucune routine'; 
-    }).join('');
-}
+            </div>
+        </section>`;
+};
 
 export default ResultsPage;
