@@ -177,23 +177,17 @@ a.active, a:hover {
 
 /*------QUIZ PAGE SECTION------*/
 #quiz {
-  height: 100vh;
+  position: relative;
+  min-height: 100vh;
+}
+
+.progress {
+  position: absolute;
+  bottom: 0;
   width: 100%;
-
-  /*border: 3px solid green;*/
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-
-  flex-direction: column;
 }
 
 .back-section {
-  color: grey;
-}
-.next-section {
-  text-align: right;
   color: grey;
 }
 
