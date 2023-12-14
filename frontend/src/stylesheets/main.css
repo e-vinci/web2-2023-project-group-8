@@ -346,33 +346,65 @@ button[type="submit"]:hover {
 .comments-list li:last-child {
   border-bottom: none;
 }
-
-.star-rating {
-  display: inline-block;
-  margin-right: 10px;
+.comments-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.star-rating span {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  background-image: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/webfonts/fa-solid-900.woff');
-  background-size: cover;
-  margin-left: 2px;
+.comment {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.comments-section .comments-list .comments-container{
+  margin-left:0px;
+ }
+
+.comment .author {
+  font-weight: bold;
+  color: #333;
+}
+
+.comment .timestamp {
+  font-size: 0.8em;
+  color: #777;
+}
+
+.comment .content {
+  margin-top: 10px;
+  color: #555;
+}
+
+.comment-form {
+  margin-top: 20px;
+}
+
+.comment-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  resize: none;
+}
+
+.comment-form button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-.star-rating span::before {
-  content: '\f005';
-}
-
-.star-rating span.active {
-  background-image: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/webfonts/fa-solid-900.woff');
-  background-position: -16px -16px;
-}
-
-.star-rating span.active::before {
-  content: '\f006';
+.comment-form button:hover {
+  background-color: #0056b3;
 }
 
 /* -------------------Basics-------------------- */

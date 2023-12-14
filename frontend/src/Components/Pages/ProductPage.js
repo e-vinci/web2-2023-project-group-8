@@ -42,30 +42,23 @@ const ProductPage = async () => {
                             </div>
                         </div>
                     </div>
-                    <span id="similarSpan"><a href="/similar">See similar products</a></span>
+                    <span id="similarSpan"><a href="/similar">Voir produits similaires</a></span>
                 </div>
         
         </section>
         <section class="comments-section">
-        <h3>Add a Comment</h3>
-        <form id="comment-form">
-        <div class="star-rating">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-       </div>
-          <label for="name">Name:</label>
-          <input type="text" id="name" name="name"><br><br>
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email"><br><br>
-          <label for="message">Message:</label>
-          <textarea id="message" name="message"></textarea><br><br>
-          <button type="submit">Submit</button>
-        </form>
         <ul class="comments-list">
-          <!-- Display previous comments here -->
+        <div class="comments-container">
+        
+      </div>
+      </div>
+    
+      <div class="comment-form">
+        <h2>Add a Comment</h2>
+        <form>
+          <textarea rows="4" placeholder="Your comment..."></textarea>
+          <button type="submit">Post Comment</button>
+        </form>
         </ul>
       </section>
 </section>`;
@@ -75,25 +68,21 @@ const ProductPage = async () => {
     const body = document.querySelector('body');
     body.style.overflow = 'auto';
 
-    let selectedStars = 0;
-
-const starRating = document.querySelector('.star-rating');
-
-starRating.addEventListener('click', (e) => {
- if (e.target.tagName === 'SPAN') {
-        const index = [...e.target.parentElement.children].indexOf(e.target);
-        selectedStars = index + 1;
-
-        const stars = starRating.querySelectorAll('span');
-        stars.forEach((star, i) => {
-            if (i < selectedStars) {
-                star.classList.add('active');
-            } else {
-                star.classList.remove('active');
-            }
+    const commentsContainer = document.querySelector('.comments-container');
+    const getComments = await fetch(`http://localhost:3000/products/comments/${productId}`);
+    const allComments = await getComments.json();
+    allComments.forEach((comment) => {
+        
+        const commentDiv = document.createElement('div');
+        commentDiv.classList.add('comment');
+        commentDiv.innerHTML = `
+        <div class="author">${comment.expand.user.username}</div>
+        <div class="timestamp">${comment.created.split(' ')[0]}</div>
+        <div class="content">${comment.comment}</div>
+        `;
+        commentsContainer.appendChild(commentDiv);
         });
- }
-});
+
       
 };
 

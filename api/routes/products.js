@@ -12,9 +12,9 @@ router.get('/:productId', async (req, res) => {
 
 /* GET comments by product ID. */
 router.get('/comments/:productId', async (req, res) => {
-  const product = await getCommentsByProductId(req.params.productId);
+  const comments = await getCommentsByProductId(req.params.productId);
 
-  return res.json(product);
+  return res.json(comments);
 });
 
 module.exports = router;

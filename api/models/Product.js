@@ -28,9 +28,15 @@ async function addProductIntoListesProduitsWithSkinCare(skinCareId, productId) {
   return record;
 }
 
+/**
+ * Get the comments of a product
+ * @param {*} productId The id of the product
+ * @returns {Promise<Object>} - A promise that resolves to the created record.
+ */
 async function getCommentsByProductId(productId) {
   const records = await pb.collection('commentaires').getFullList({
-    filter: `field = "${productId}"`,
+    filter: `produit = "${productId}"`,
+    expand: 'user',
   });
   return records;
 }
