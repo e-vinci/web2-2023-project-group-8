@@ -6,6 +6,7 @@ import ProductPage from '../Pages/ProductPage';
 import AddProductPage from '../Pages/AddProductPage';
 import SimilarProductsPage from '../Pages/SimilarProductsPage';
 import ResultsPage from '../Pages/ResultsPage';
+import DiagnosisPage from '../Pages/DiagnosisPage';
 import LoginPage from '../Pages/LoginPage';
 import RegisterPage from '../Pages/RegisterPage';
 
@@ -19,6 +20,7 @@ const routes = {
   '/admin/products/add': AddProductPage,
   '/similar': SimilarProductsPage,
   '/results': ResultsPage,
+  '/diagnosis': DiagnosisPage,
   '/products/add': AddProductPage,
   '/login': LoginPage,
   '/register': RegisterPage,
