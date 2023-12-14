@@ -145,7 +145,7 @@ async function quizz() {
           }
 
           localStorage.setItem('savdProducts', JSON.stringify(getProductsList())); // Stocker savedProducts dans localStorage
-          Navigate('/results');
+          Navigate('/diagnosis');
         } else {
           renderQuestion();
         }

@@ -18,7 +18,7 @@ const routes = {
   '/products': ProductPage,
   '/admin/products/add': AddProductPage,
   '/similar': SimilarProductsPage,
-  '/results': DiagnosisPage,
+  '/diagnosis': DiagnosisPage,
   '/products/add': AddProductPage,
   '/login': LoginPage,
   '/register': RegisterPage,
