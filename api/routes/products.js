@@ -1,5 +1,5 @@
 const express = require('express');
-const { getProductById, getCommentsByProductId } = require('../models/Product');
+const { getProductById, getCommentsByProductId, addCommentToProduct } = require('../models/Product');
 
 const router = express.Router();
 
@@ -15,6 +15,16 @@ router.get('/comments/:productId', async (req, res) => {
   const comments = await getCommentsByProductId(req.params.productId);
 
   return res.json(comments);
+});
+
+/* POST add comment to product. */
+router.post('/addComment', async (req, res) => {
+  const {
+    productId, userId, comment, numStars,
+  } = req.body;
+
+  const record = await addCommentToProduct(productId, userId, comment, numStars);
+  return res.json(record);
 });
 
 module.exports = router;

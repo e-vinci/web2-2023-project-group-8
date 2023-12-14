@@ -41,8 +41,21 @@ async function getCommentsByProductId(productId) {
   return records;
 }
 
+/* POST add comment to product. */
+async function addCommentToProduct(productId, userId, comment, numStars) {
+  const record = await pb.collection('commentaires').create({
+    produit: productId,
+    user: userId,
+    comment,
+    stars: numStars,
+  });
+
+  return record;
+}
+
 module.exports = {
   getProductById,
   getCommentsByProductId,
   addProductIntoListesProduitsWithSkinCare,
+  addCommentToProduct,
 };

@@ -57,7 +57,7 @@ const ProductPage = async () => {
         <h2>Add a Comment</h2>
         <form>
           <textarea rows="4" placeholder="Your comment..."></textarea>
-          <button type="submit">Post Comment</button>
+          <button id="addComment" type="submit">Post Comment</button>
         </form>
         </ul>
       </section>
@@ -83,7 +83,31 @@ const ProductPage = async () => {
         commentsContainer.appendChild(commentDiv);
         });
 
-      
+    const addCommentButton = document.getElementById('addComment');
+    addCommentButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        const comment = document.querySelector('textarea').value;
+        const userId = localStorage.getItem('userId');
+        const numStars = 5;
+        addCommentToProduct(productId, userId, comment, numStars);
+        window.location.reload();
+    });
+        
 };
+
+function addCommentToProduct(productId, userId, comment, numStars) {
+    fetch('http://localhost:3000/products/addComment', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+        productId,
+        userId,
+        comment,
+        numStars,
+        }),
+    }).then((response) => response.json());
+}
 
 export default ProductPage;
