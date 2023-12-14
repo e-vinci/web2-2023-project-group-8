@@ -392,6 +392,11 @@ button[type="submit"]:hover {
   }
   }
 
+/*------Diagnosis SECTION------*/
+.product-image {
+  max-width: 70%; /* Ajustez cette valeur en fonction de vos besoins */
+  max-height: 70%; /* Ajustez cette valeur en fonction de vos besoins */
+}
 /* ------RESULTS PAGE------ */
 #results {
   position: absolute;
