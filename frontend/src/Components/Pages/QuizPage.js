@@ -139,10 +139,11 @@ async function quizz() {
     main.innerHTML = `
       <section id="quiz">
       <div class="row">
+          ${currentQuestionIndex > 0 ? `
           <div class="col-2 back-section">
             <img src="${arrowLeft}" id="arrow-left" alt="Left arrow">
             Back
-          </div>
+          </div>` : ''}
           <div class="container">
             <div class="row">
               <div class="col-8 offset-2">
@@ -180,7 +181,7 @@ async function quizz() {
             productSet.add(product);
           });
           productSet.forEach(async (product) => {
-            await addToConnected(product, lastSkinCareId);
+            addToConnected(product, lastSkinCareId);
           });
         }
         // TODO: Rediriger vers la page adéquate
@@ -203,12 +204,14 @@ async function quizz() {
     });
 
     // On ajoute un écouteur d'événement sur le bouton de retour qui permet de revenir à la question précédente
-    const backButton = document.querySelector('.back-section');
+    if (currentQuestionIndex > 0) {
+      const backButton = document.querySelector('.back-section');
     backButton.addEventListener('click', () => {
       currentQuestionIndex -= 1;
       popProduct();
       renderQuestion();
     });
+    }
   };
 
   // Lancement du quizz
