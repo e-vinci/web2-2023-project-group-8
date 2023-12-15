@@ -239,8 +239,6 @@ a.active, a:hover {
 #productPage .productPage__image img{
     width:534px;
     border-width:0px;
-    border-top-left-radius:50px;
-    border-top-right-radius:50px;
     position:relative;
     left:137px;
     height:448px;
