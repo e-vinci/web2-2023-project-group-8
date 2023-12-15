@@ -83,7 +83,7 @@ const ProductPage = async () => {
     const addCommentButton = document.getElementById('addComment');
     addCommentButton.addEventListener('click', (e) => {
         e.preventDefault();
-        const comment = document.querySelector('textarea').value;
+        const comment = document.getElementById('textarea').value;
         const userId = localStorage.getItem('userId');
         const numStars = 5;
         addCommentToProduct(productId, userId, comment, numStars);
