@@ -4,7 +4,7 @@ const { register, login } = require('../models/User');
 const router = express.Router();
 
 /* Register a user */
-router.post('/register', async (req, res) => {
+router.post('/registerfunc', async (req, res) => {
   const username = req?.body?.username?.length !== 0 ? req.body.username : undefined;
   const password = req?.body?.password?.length !== 0 ? req.body.password : undefined;
 
@@ -18,7 +18,7 @@ router.post('/register', async (req, res) => {
 });
 
 /* Login a user */
-router.post('/login', async (req, res) => {
+router.post('/loginfunc', async (req, res) => {
   const username = req?.body?.username?.length !== 0 ? req.body.username : undefined;
   const password = req?.body?.password?.length !== 0 ? req.body.password : undefined;
 

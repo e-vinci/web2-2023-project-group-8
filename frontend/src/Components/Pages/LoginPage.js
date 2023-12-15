@@ -1,7 +1,8 @@
 import logoImage from '../../img/icon.png';
-
+import Navigate from '../Router/Navigate';
 
 const main = document.querySelector('main');
+const body = document.querySelector('body');
 
 const LoginPage = () => {
   main.innerHTML = `
@@ -24,13 +25,13 @@ const LoginPage = () => {
                     <br>
                 </div>
 
-                <form>
+                <form id="loginForm">
                   <p>Connectez-vous</p>
                   <br>
 
                   <div class="form-outline mb-4">
-                    <input type="email" id="form2Example11" class="form-control"
-                      placeholder="Adresse mail" />
+                    <input type="username" id="form2Example11" class="form-control"
+                      placeholder="Nom d'utilisateur" />
                     <label class="form-label" for="form2Example11">Nom d'utilisateur</label>
                   </div>
 
@@ -40,7 +41,7 @@ const LoginPage = () => {
                   </div>
 
                   <div class="text-center pt-1 mb-5 pb-1">
-                    <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button">Se connecter
+                    <button id="loginBtn" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button">Se connecter
                       </button>
                   </div>
 
@@ -69,8 +70,46 @@ const LoginPage = () => {
   </div>
 </section>
         `;
-
-  const body = document.querySelector('body');
   body.style.overflow = 'auto';
+
+async function handleLogin() {
+  const username = document.querySelector('#form2Example11').value;
+  const password = document.querySelector('#form2Example22').value;
+
+  await fetch('http://localhost:3000/loginfunc', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ username, password }),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.error) {
+        alert(data.error);
+      } else {
+        localStorage.setItem('token', data.token);
+        Navigate('/frontend/src/Components/Pages/HomePage.js');
+      }
+    })
+    .catch((error) => {
+      console.error('Erreur lors de la requête fetch :', error);
+    });
+}
+function addEventListenerOnLoginBtn() {
+  const loginBtn = document.querySelector('#loginBtn');
+  if (loginBtn) {
+    loginBtn.addEventListener('click', (event) => {
+      event.preventDefault();
+      handleLogin();
+    });
+  } else {
+    console.error("L'élément avec l'ID loginBtn n'a pas été trouvé.");
+  }
+}
+
+addEventListenerOnLoginBtn();
+
 };
+
 export default LoginPage;

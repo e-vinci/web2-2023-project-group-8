@@ -1,24 +1,32 @@
-const jwt = require('jsonwebtoken');
+// eslint-disable-next-line import/no-unresolved
+const Pocketbase = require('pocketbase/cjs');
+/* const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const path = require('node:path');
-const { parse, serialize } = require('../utils/json');
+*/
+// const { parse, serialize } = require('../utils/json');
 
+const url = 'https://ylann-mommens.pockethost.io/';
+const pb = new Pocketbase(url);
+
+const data
+/*
 const jwtSecret = 'ilovemypizza!';
 const lifetimeJwt = 24 * 60 * 60 * 1000; // in ms : 24 * 60 * 60 * 1000 = 24h
 
 const saltRounds = 10;
 
 const jsonDbPath = path.join(__dirname, '/../data/users.json');
-
-const defaultUsers = [
+*/
+/* const defaultUsers = [
   {
     id: 1,
     username: 'admin',
     password: bcrypt.hashSync('admin', saltRounds),
   },
 ];
-
-async function login(username, password) {
+*/
+/* async function login(username, password) {
   const userFound = readOneUserFromUsername(username);
   if (!userFound) return undefined;
 
@@ -38,8 +46,9 @@ async function login(username, password) {
 
   return authenticatedUser;
 }
+*/
 
-async function register(username, password) {
+/* async function register(username, password) {
   const userFound = readOneUserFromUsername(username);
   if (userFound) return undefined;
 
@@ -58,16 +67,18 @@ async function register(username, password) {
 
   return authenticatedUser;
 }
+*/
 
-function readOneUserFromUsername(username) {
+/* function readOneUserFromUsername(username) {
   const users = parse(jsonDbPath, defaultUsers);
   const indexOfUserFound = users.findIndex((user) => user.username === username);
   if (indexOfUserFound < 0) return undefined;
 
   return users[indexOfUserFound];
 }
+*/
 
-async function createOneUser(username, password) {
+/* async function createOneUser(username, password) {
   const users = parse(jsonDbPath, defaultUsers);
 
   const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -84,8 +95,9 @@ async function createOneUser(username, password) {
 
   return createdUser;
 }
+*/
 
-function getNextId() {
+/* function getNextId() {
   const users = parse(jsonDbPath, defaultUsers);
   const lastItemIndex = users?.length !== 0 ? users.length - 1 : undefined;
   if (lastItemIndex === undefined) return 1;
@@ -93,9 +105,9 @@ function getNextId() {
   const nextId = lastId + 1;
   return nextId;
 }
-
+*/
 module.exports = {
-  login,
-  register,
-  readOneUserFromUsername,
+  // login,
+  // register,
+  // readOneUserFromUsername,
 };
