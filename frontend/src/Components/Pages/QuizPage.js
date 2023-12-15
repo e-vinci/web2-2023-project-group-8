@@ -160,12 +160,15 @@ async function quizz() {
       // Ajoutez les écouteurs d'événements après avoir rendu la question
       const buttons = document.querySelectorAll('.reponse');
       buttons.forEach((btn) => {
-        const productID = btn.dataset.productId;
+        const productID = btn.dataset.productId.split(',');
 
         btn.addEventListener('click', async () => {
           try {
-            const productDetails = await getProducts(productID);
-            pushProduct(productDetails);
+            productID.forEach(async (id) => {
+              const productDetails = await getProducts(id);
+              pushProduct(productDetails);
+            });
+            
             navigateToNextQuestion();
           } catch (error) {
             throw new Error('Error in button click event:');
