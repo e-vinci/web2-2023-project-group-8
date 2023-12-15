@@ -9,6 +9,7 @@ import ResultsPage from '../Pages/ResultsPage';
 import DiagnosisPage from '../Pages/DiagnosisPage';
 import LoginPage from '../Pages/LoginPage';
 import RegisterPage from '../Pages/RegisterPage';
+import TermsAndConditionsPage from '../Pages/TermsAndConditionsPage';
 
 
 const routes = {
@@ -24,6 +25,7 @@ const routes = {
   '/products/add': AddProductPage,
   '/login': LoginPage,
   '/register': RegisterPage,
+  '/t-and-c': TermsAndConditionsPage
 };
 
 export default routes;
