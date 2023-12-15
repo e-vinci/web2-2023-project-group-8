@@ -33,7 +33,7 @@ function diagnosis() {
                             ${product.description}
                         </div>
                         <h6 class="card-subtitle mb-2 text-muted">${product.prix} €</h6>
-                        <button type="button" class="btn btn-lg mt-3 btn-product">voir le produit</button>
+                        <button type="button" class="btn btn-lg mt-3 btn-product" data-product-id="${product.id}">voir le produit</button>
                     </div>
                 </div>
             </div>
@@ -49,6 +49,13 @@ function diagnosis() {
         </section>
     `;
 
+    const buttons = document.querySelectorAll('.btn-product')
+    buttons.forEach((button) => {
+        button.addEventListener('click', (event) => {
+            const productId = event.target.getAttribute('data-product-id');
+            Navigate(`/products?productId=${productId}`);
+        });
+    });
 };
 
 export default ResultsPage;
