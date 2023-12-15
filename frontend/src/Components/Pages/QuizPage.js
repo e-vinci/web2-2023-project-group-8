@@ -161,11 +161,14 @@ async function quizz() {
       const buttons = document.querySelectorAll('.reponse');
       buttons.forEach((btn) => {
         const productID = btn.dataset.productId;
+        console.log(productID);
 
         btn.addEventListener('click', async () => {
           try {
-            const productDetails = await getProducts(productID);
+            productID.split(",").forEach(async (id) => {
+            const productDetails = await getProducts(id);
             pushProduct(productDetails);
+            });
             navigateToNextQuestion();
           } catch (error) {
             throw new Error('Error in button click event:');

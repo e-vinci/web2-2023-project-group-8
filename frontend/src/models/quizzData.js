@@ -9,7 +9,9 @@ function popProduct() {
 }
 
 function getProductsList() {
-    return productsList;
+  const set = new Set(productsList);
+  productsList = [...set];
+  return productsList;
 }
 
 function cleanProductsList() {
