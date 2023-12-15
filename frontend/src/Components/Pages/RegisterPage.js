@@ -49,7 +49,7 @@ const LoginPage = () => {
                 <div class="form-check d-flex justify-content-center mb-5">
                   <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
                   <label class="form-check-label" for="form2Example3g">
-                    J'accepte les <a href="#!" class="text-body"><u>conditions d'utilisation</u></a>
+                    J'accepte les <a href="/t-and-c" data-uri="/t-and-c" class="text-body"><u>conditions d'utilisation</u></a>
                   </label>
                 </div>
 

@@ -58,7 +58,7 @@ const LoginPage = () => {
             <div class="col-lg-6 d-flex align-items-center gradient-custom-2 loginhalf">
               <div class="text-white px-3 py-4 p-md-5 mx-md-4">
                 <h4 class="mb-4 align-middle">Le saviez-vous ?</h4>
-                <p class="small mb-0">En créant un compte utilisateur sur Izyskin, vous aurez désormais accès a tous
+                <p class="small mb-0">En créant un compte utilisateur sur Izyskin, vous aurez désormais accès à tous
                  vos diagnostiques et vos recommandations de produits passés.</p>
               </div>
             </div>
