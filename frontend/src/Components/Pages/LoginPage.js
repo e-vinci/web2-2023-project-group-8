@@ -72,44 +72,45 @@ const LoginPage = () => {
         `;
   body.style.overflow = 'auto';
 
-async function handleLogin() {
-  const username = document.querySelector('#form2Example11').value;
-  const password = document.querySelector('#form2Example22').value;
+  const handleLogin = async () => {
+    const username = document.getElementById('form2Example11').value;
+    const password = document.getElementById('form2Example22').value;
 
-  await fetch('http://localhost:3000/loginfunc', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ username, password }),
-  })
-    .then((res) => res.json())
-    .then((data) => {
+    try {
+      const response = await fetch('http://localhost:3000/login:username', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await response.json();
+
       if (data.error) {
         alert(data.error);
       } else {
         localStorage.setItem('token', data.token);
         Navigate('/frontend/src/Components/Pages/HomePage.js');
       }
-    })
-    .catch((error) => {
+    } catch (error) {
       console.error('Erreur lors de la requête fetch :', error);
-    });
-}
-function addEventListenerOnLoginBtn() {
-  const loginBtn = document.querySelector('#loginBtn');
-  if (loginBtn) {
-    loginBtn.addEventListener('click', (event) => {
-      event.preventDefault();
-      handleLogin();
-    });
-  } else {
-    console.error("L'élément avec l'ID loginBtn n'a pas été trouvé.");
-  }
-}
+    }
+  };
 
-addEventListenerOnLoginBtn();
+  const addEventListenerOnLoginBtn = () => {
+    const loginBtn = document.getElementById('loginBtn');
+    if (loginBtn) {
+      loginBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        handleLogin();
+      });
+    } else {
+      console.error("L'élément avec l'ID loginBtn n'a pas été trouvé.");
+    }
+  };
 
+  addEventListenerOnLoginBtn();
 };
 
 export default LoginPage;

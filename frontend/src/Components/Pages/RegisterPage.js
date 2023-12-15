@@ -3,7 +3,7 @@ import Navigate from "../Router/Navigate";
 const main = document.querySelector('main');
 const body = document.querySelector('body');
 
-const LoginPage = () => {
+const RegisterPage = () => {
     main.innerHTML = `
     <section class="h-100 gradient-form" style="background-color: #eee;">
     <div class="mask d-flex align-items-center h-100 gradient-custom-3">
@@ -17,36 +17,31 @@ const LoginPage = () => {
               <form id="registerForm">
 
                 <div class="form-outline mb-4">
-                  <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
-                  <label class="form-label formNom" for="form3Example1cg">Nom</label>
+                  <input type="text" id="formNom" class="form-control form-control-lg" />
+                  <label class="form-label" for="form3Example1cg">Nom</label>
                 </div>
 
                 <div class="form-outline mb-4">
-                  <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
-                  <label class="form-label formPrenom" for="form3Example1cg">Prénom</label>
+                  <input type="text" id="formPrenom" class="form-control form-control-lg" />
+                  <label class="form-label" for="form3Example1cg">Prénom</label>
                 </div>
 
                 <div class="form-outline mb-4">
-                  <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
-                  <label class="form-label formUsername" for="form3Example1cg">Nom d'utilisateur</label>
+                  <input type="text" id="formUsername" class="form-control form-control-lg" />
+                  <label class="form-label" for="form3Example1cg">Nom d'utilisateur</label>
                 </div>
 
                 <div class="form-outline mb-4">
-                  <input type="email" id="form3Example3cg" class="form-control form-control-lg" />
-                  <label class="form-label formEmail" for="form3Example3cg">Adresse mail</label>
+                  <input type="email" id="formEmail" class="form-control form-control-lg" />
+                  <label class="form-label" for="form3Example3cg">Adresse mail</label>
                 </div>
 
-                <input class="form-control form-control-lg" id="formFileLg" type="file" />
-                <div class="small text-muted mt-2 formPicture">Choisissez une photo de profil. Ce champ est optionnel.</div>
+                <input class="form-control form-control-lg" id="formPicture" type="file" />
+                <div class="small text-muted mt-2">Choisissez une photo de profil. Ce champ est optionnel.</div>
 
                 <div class="form-outline mb-4">
-                  <input type="password" id="form3Example4cg" class="form-control form-control-lg" />
-                  <label class="form-label formPassword" for="form3Example4cg">Mot de passe</label>
-                </div>
-
-                <div class="form-outline mb-4">
-                  <input type="password" id="form3Example4cdg" class="form-control form-control-lg" />
-                  <label class="form-label formPasswordConfirm" for="form3Example4cdg">Confirmer votre mot de passe</label>
+                  <input type="password" id="formPassword" class="form-control form-control-lg" />
+                  <label class="form-label" for="form3Example4cg">Mot de passe</label>
                 </div>
 
                 <div class="d-flex justify-content-center">
@@ -67,31 +62,29 @@ const LoginPage = () => {
 </section>
 `;
 body.style.overflow = 'auto';
+const username = document.getElementById('formUsername');
+const password = document.getElementById('formPassword');
+const email = document.getElementById('formEmail');
+const nom = document.getElementById('formNom');
+const prenom = document.getElementById('formPrenom');
+const photo = document.getElementById('formPicture');
+const registerBtn = document.getElementById('registerBtn');
+registerBtn.addEventListener('click', () => {
+  registerUser(username.value, password.value, email.value, nom.value, prenom.value, photo.value);
+  Navigate('/login');
+});
+};
 
-const handleRegister = () => {
-  const username = document.getElementById('form3Example1cg').value;
-  const password = document.getElementById('form3Example4cg').value;
-
-  fetch('http://localhost:3000/api/registerfunc', {
+function registerUser(username, password, email, nom, prenom, photo) {
+  fetch('http://localhost:3000/register', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ username, password }),
-  })
-    .then((res) => res.json())
-    .then((res) => {
-      if (res.error) {
-        console.log('Error:', res.error);
-      } else {
-        console.log('Registration successful. Redirecting to login page...');
-        Navigate('/frontend/src/Components/Pages/LoginPage.js')
-      }
-    });
-  };
-
-const registerBtn = document.getElementById('registerBtn');
-registerBtn.addEventListener('click', handleRegister);
+    body: JSON.stringify({
+      username, password, email, nom, prenom, photo,
+    }),
+  }).then((res) => res.json());
 }
 
-export default LoginPage;
+export default RegisterPage;
