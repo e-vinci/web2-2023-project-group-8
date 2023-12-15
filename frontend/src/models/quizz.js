@@ -78,7 +78,6 @@ async function getLastSkinCareId(userId) {
 }
   
 async function getProducts(productID) {
-    console.log(productID);
     try {
         const getProduct = await fetch(`http://localhost:3000/products/${productID}`);
         if (!getProduct.ok) {

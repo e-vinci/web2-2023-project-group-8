@@ -26,8 +26,6 @@ localStorage.setItem('userId', 'f51ddnvv6ts033w');
 
 const userIdentification = localStorage.getItem('userId');
 
-// On crée un set pour éviter les doublons
-const productSet = new Set();
 const main = document.querySelector('main');
 document.querySelector('body').style.overflow = 'auto';
 
@@ -132,19 +130,14 @@ async function quizz() {
         progressBar.style.width = `${((currentQuestionIndex + 1) / data.length) * 100}%`;
         progressBar.setAttribute('aria-valuenow', currentQuestionIndex + 1);
 
-
         // Si on est à la fin du quizz, on redirige vers la page adéquate sinon on affiche la question suivante
         if (currentQuestionIndex === data.length) {
-          getProductsList().forEach((product) => { 
-            productSet.add(product); 
-          });
-
           if (localStorage.getItem('connected') === 'true') {
             await addSkinCare(localStorage.getItem('skinCareName'), localStorage.getItem('userId'));
 
             const lastSkinCareId = await getLastSkinCareId(userIdentification);
             
-            productSet.forEach(async (product) => {
+            getProductsList().forEach(async (product) => {
               const productId = product.id;
               await addToConnected(productId, lastSkinCareId);
             });
@@ -160,14 +153,13 @@ async function quizz() {
       // Ajoutez les écouteurs d'événements après avoir rendu la question
       const buttons = document.querySelectorAll('.reponse');
       buttons.forEach((btn) => {
-        const productID = btn.dataset.productId;
-        console.log(productID);
+        const productID = btn.dataset.productId.split(",");
 
         btn.addEventListener('click', async () => {
           try {
-            productID.split(",").forEach(async (id) => {
-            const productDetails = await getProducts(id);
-            pushProduct(productDetails);
+            productID.forEach(async (id) => {
+              const productDetails = await getProducts(id);
+              pushProduct(productDetails);
             });
             navigateToNextQuestion();
           } catch (error) {
