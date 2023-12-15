@@ -12,7 +12,7 @@ const pb = new Pocketbase(url);
 async function loginUser(username, password) {
   const record = await pb.collection('utilisateurs').getOne(username);
   if (!record) return undefined;
-  if (record.password !== password) return undefined;
+  if (record.mot_de_passe !== password) return undefined;
   return record;
 }
 
@@ -28,11 +28,11 @@ async function loginUser(username, password) {
 async function registerUser(username, password, email, nom, prenom, photo) {
   const record = await pb.collection('utilisateurs').create({
     username,
-    password,
     email,
     nom,
     prenom,
-    photo,
+    photo_profil: photo,
+    mot_de_passe: password,
   });
   return record;
 }
