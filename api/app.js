@@ -11,7 +11,8 @@ const adminsRouter = require('./routes/admins');
 const authsRouter = require('./routes/auths');
 const productsRouter = require('./routes/products');
 const quizzRouter = require('./routes/quizz');
-const userRouter = require('./routes/users');
+const usersRouter = require('./routes/users');
+const brandsRouter = require('./routes/brands');
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use('/admin', adminsRouter);
 app.use('/auths', authsRouter);
 app.use('/products', productsRouter);
 app.use('/quizz', quizzRouter);
-app.use('/user', userRouter);
+app.use('/user', usersRouter);
+app.use('/brands', brandsRouter);
 
 module.exports = app;
