@@ -1,3 +1,5 @@
+const main = document.querySelector('main');
+document.querySelector('body').style.overflow = 'auto';
 
 const ProductPage = async () => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -44,55 +46,49 @@ const ProductPage = async () => {
                     </div>
                     <span id="similarSpan"><a href="/similar">Voir produits similaires</a></span>
                 </div>
-        
+            </div>
         </section>
-        <section class="comments-section">
-        <ul class="comments-list">
-        <div class="comments-container">
-        
-      </div>
-      </div>
+        <section class="comments-section px-5 py-5">
+            <div class="text-center"><h2>Espaces commentaires</h2></div>
+            <div class="comments-container px-2 py-2">
+            </div>
+            <div class="comment-form mt-1 mb-3">
+                <form class="d-flex justify-content-between">
+                    <div class="input-group input-group-lg mb-3">
+                        <input type="text" class="form-control" id="textarea" placeholder="Your comment..." required>
+                        <button class="btn btn-outline-secondary ms-2" type="button" id="addComment" type="submit">Post Comment</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+        `;
     
-      <div class="comment-form">
-        <h2>Add a Comment</h2>
-        <form>
-          <textarea rows="4" placeholder="Your comment..."></textarea>
-          <button id="addComment" type="submit">Post Comment</button>
-        </form>
-        </ul>
-      </section>
-</section>`;
-    
-    const main = document.querySelector('main');
     main.innerHTML = productPage;
-    const body = document.querySelector('body');
-    body.style.overflow = 'auto';
 
     const commentsContainer = document.querySelector('.comments-container');
+
     const getComments = await fetch(`http://localhost:3000/products/comments/${productId}`);
     const allComments = await getComments.json();
+
     allComments.forEach((comment) => {
-        
-        const commentDiv = document.createElement('div');
-        commentDiv.classList.add('comment');
-        commentDiv.innerHTML = `
-        <div class="author">${comment.expand.user.username}</div>
-        <div class="timestamp">${comment.created.split(' ')[0]}</div>
-        <div class="content">${comment.comment}</div>
+        commentsContainer.innerHTML += `
+            <div class="comment rounded mb-3 px-2 py-2" id="floatingInputValue">
+                <label class="author text-primary-emphasis fw-bold" for="floatingInputValue">${comment.expand.user.username}</label>
+                <label class="timestamp text-body-tertiary fs-6" for="floatingInputValue">${comment.created.split(' ')[0]}</label>
+                <div class="content text-secondary mt-2">${comment.comment}</div>
+            </div>
         `;
-        commentsContainer.appendChild(commentDiv);
-        });
+    });
 
     const addCommentButton = document.getElementById('addComment');
     addCommentButton.addEventListener('click', (e) => {
         e.preventDefault();
-        const comment = document.querySelector('textarea').value;
+        const comment = document.getElementById('textarea').value;
         const userId = localStorage.getItem('userId');
         const numStars = 5;
         addCommentToProduct(productId, userId, comment, numStars);
         window.location.reload();
-    });
-        
+    });   
 };
 
 function addCommentToProduct(productId, userId, comment, numStars) {

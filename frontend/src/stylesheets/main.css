@@ -277,34 +277,13 @@ a.active, a:hover {
     margin-top:146px;
 }
 
-
 .comments-section {
   margin: 50px auto;
-  padding: 20px;
-  width: 80%;
+  width: 90%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-#comment-form {
-  margin-bottom: 20px;
-}
-
-label {
-  display: block;
-  margin-bottom: 10px;
-}
-
-input[type="text"],
-input[type="email"] {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-textarea {
+input[type="text"]{
   width: 100%;
   padding: 10px;
   font-size: 16px;
@@ -322,62 +301,11 @@ button[type="submit"] {
   cursor: pointer;
 }
 
-button[type="submit"]:hover {
-  background-color: #45a049;
-}
-
-.comments-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.comments-list li {
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
-}
-
-.comments-list li:last-child {
-  border-bottom: none;
-}
-.comments-container {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
 .comment {
-  margin-bottom: 20px;
-  padding: 15px;
   background-color: #f9f9f9;
-  border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
-.comments-section .comments-list .comments-container{
-  margin-left:0px;
- }
-
-.comment .author {
-  font-weight: bold;
-  color: #333;
-}
-
-.comment .timestamp {
-  font-size: 0.8em;
-  color: #777;
-}
-
-.comment .content {
-  margin-top: 10px;
-  color: #555;
-}
-
-.comment-form {
-  margin-top: 20px;
-}
 
 .comment-form textarea {
   width: 100%;
@@ -391,8 +319,6 @@ button[type="submit"]:hover {
 .comment-form button {
   background-color: #007bff;
   color: #fff;
-  padding: 10px 15px;
-  border: none;
   border-radius: 5px;
   cursor: pointer;
 }
