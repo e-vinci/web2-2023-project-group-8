@@ -5,6 +5,9 @@ import Navigate from '../Router/Navigate';
 
 import logoImage from '../../img/icon.png';
 
+// eslint-disable-next-line no-unused-vars
+const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
 const Navbar = () => {
   const navbar = `
   <div class="dropdown show">

@@ -13,11 +13,16 @@ const router = express.Router();
  * @returns {Promise<Object>} - A promise that resolves to the created record.
  */
 router.post('/register', async (req, res) => {
-  const {
-    username, password, email, nom, prenom, photo,
-  } = req.body;
-  const user = await registerUser(username, password, email, nom, prenom, photo);
-  return res.json(user);
+  try {
+    const {
+      username, password, email, nom, prenom, photo,
+    } = req.body;
+    const user = await registerUser(username, password, email, nom, prenom, photo);
+    return res.json(user);
+  } catch (error) {
+    // eslint-disable-next-line no-template-curly-in-string
+    throw new Error('Erreur lors de la requête fetch : ${error}');
+  }
 });
 
 /**
@@ -25,8 +30,13 @@ router.post('/register', async (req, res) => {
  * @returns {Promise<Object>} - A promise that resolves to the created record.
  */
 router.post('/login:username', async (req, res) => {
-  const log = await loginUser(req.body.username, req.body.password);
-  return res.json(log);
+  try {
+    const log = await loginUser(req.body.username, req.body.password);
+    return res.json(log);
+  } catch (error) {
+    // eslint-disable-next-line no-template-curly-in-string
+    throw new Error('Erreur lors de la requête fetch : ${error}');
+  }
 });
 
 module.exports = router;

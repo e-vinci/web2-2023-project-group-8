@@ -103,7 +103,6 @@ function registerUser(userName, passwd, userEmail, lastname, firstname, photo) {
     // eslint-disable-next-line no-template-curly-in-string
     throw new Error('Error in registerUser: ${error}');
   }
-
 }
 
 export default RegisterPage;

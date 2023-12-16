@@ -31,7 +31,7 @@ const LoginPage = () => {
                   <br>
 
                   <div class="form-outline mb-4">
-                  <input type="text" class="form-control" id="formUser" placeholder="Nom d'utilisateur" />
+                  <input type="text" class="form-control" id="formUsername" placeholder="Nom d'utilisateur" />
                   </div>
 
                   <div class="form-outline mb-4">
@@ -91,10 +91,11 @@ function loginUser(userName, passwd) {
     },
     body: JSON.stringify({
       username: userName,
-      password: passwd, 
+      password: passwd,
     }),
   }).then((res) => res.json());
   successLogin = true;
+  localStorage.setItem('isLoggedIn', 'true');
   } catch (error) {
     // eslint-disable-next-line no-template-curly-in-string
     throw new Error('Erreur lors de la requête fetch : ${error}');
