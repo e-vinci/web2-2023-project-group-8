@@ -237,23 +237,18 @@ a.active, a:hover {
 
 /* Image */
 #productPage .productPage__image img{
-    width:534px;
-    border-width:0px;
-    border-top-left-radius:50px;
-    border-top-right-radius:50px;
-    position:relative;
-    left:137px;
-    height:448px;
-    border-bottom-left-radius:50px;
-    border-bottom-right-radius:50px;
+  max-width: 450px;
+  max-height: 100%;
+  border: 0;
+  border-radius: 50px;
 }
 
 #productPage .productPage__image{
-    position:relative;
-    top:0px;
-    height:100%;
-    display:inline-block;
-    margin-top:146px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
 #similarSpan{
