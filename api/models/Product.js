@@ -53,6 +53,32 @@ async function addCommentToProduct(productId, userId, comment, numStars) {
   return record;
 }
 
+/** TODO
+ * POST add product into the website (admin)
+ * @param {*} n The name of the product
+ * @param {*} m The brand of the product
+ * @param {*} caract The caracteristics of the product
+ * @param {*} ingr The ingredients of the product
+ * @param {*} cont The contenance of the product
+ * @param {*} uniteCont The contenance unit of the product
+ * @param {*} description The description of the product
+ * @returns {Promise<Object>} - A promise that resolves to the created record.
+*/
+async function addNewProduct(n, m, p, caract, ingr, cont, uniteCont, description) {
+  const record = await pb.collection('produits').create({
+    nom: n,
+    marque: m,
+    prix: p,
+    caracteristique: caract,
+    ingredients: ingr,
+    contenance: cont,
+    unite_contenance: uniteCont,
+    description,
+  });
+
+  return record;
+}
+
 async function getAllProductsByTypes(productId) {
   const records = await pb.collection('produits').getFullList({
     filter: `id != "${productId}"`,
@@ -79,5 +105,6 @@ module.exports = {
   getCommentsByProductId,
   addProductIntoListesProduitsWithSkinCare,
   addCommentToProduct,
+  addNewProduct,
   getAllProductsByTypes,
 };

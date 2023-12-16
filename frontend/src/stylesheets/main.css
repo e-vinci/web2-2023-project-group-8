@@ -399,3 +399,8 @@ h2 {
 .routine h3 {
   margin-bottom: 10px;
 }
+
+/* ------ADD PRODUCT PAGE------ */
+.textarea {
+  height: 200px;
+}
