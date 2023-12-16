@@ -1,7 +1,10 @@
+import { clearPage } from '../../utils/render';
+
 const main = document.querySelector('main');
 document.querySelector('body').style.overflow = 'auto';
 
 const ProductPage = async () => {
+    clearPage();
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get('productId');
 
@@ -44,12 +47,12 @@ const ProductPage = async () => {
                             </div>
                         </div>
                     </div>
-                    <span id="similarSpan"><a href="/similar">Voir produits similaires</a></span>
+                    <span id="similarSpan"><a href="/similar?productId=${productId}">Voir produits similaires</a></span>
                 </div>
             </div>
         </section>
         <section class="comments-section px-5 py-5">
-            <div class="text-center"><h2>Espaces commentaires</h2></div>
+            <div class="text-center"><h2>Espace commentaires</h2></div>
             <div class="comments-container px-2 py-2">
             </div>
             <div class="comment-form mt-1 mb-3">

@@ -76,6 +76,7 @@ registerBtn.addEventListener('click', () => {
     Navigate('/login');
   }
   else{
+    // eslint-disable-next-line no-alert
     alert('Erreur lors de l\'inscription');
   }
 });

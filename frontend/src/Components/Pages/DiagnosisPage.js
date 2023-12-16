@@ -1,5 +1,6 @@
 // import { clearPage } from '../../utils/render';
 import Navigate from '../Router/Navigate';
+import { getProductsList } from '../../models/quizzData';
 
 const main = document.querySelector('main');
 
@@ -16,7 +17,7 @@ const ResultsPage = () => {
 function diagnosis() {
     main.innerHTML = `<h1>Voici votre diagnostique</h1>`;
     // Build HTML content for all products
-    const productsHTML = JSON.parse(localStorage.getItem('savdProducts')).map((product) => `
+    const productsHTML = getProductsList().map((product) => `
         <div class="card mb-3">
             <div class="row no-gutters">
                 <div class="col-md-3 d-flex align-items-center">

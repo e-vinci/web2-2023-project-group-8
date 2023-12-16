@@ -1,53 +1,43 @@
+import Navigate from '../Router/Navigate';
+import { clearPage } from '../../utils/render';
 
-const SimilarProductsPage = () => {
-    const similarPage = `
-        <section class="similar-products">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <h2>Similar Products</h2>
+
+const SimilarProductsPage = async () => {
+    clearPage();
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('productId');
+
+    const data = await (await fetch(`http://localhost:3000/products/similar/${productId}`)).json();
+
+    const productsHtml = data.map((product) => `
+            <div class="col-sm d-flex">
+                <div class="card flex-grow-1 d-flex flex-column">
+                    <div class="card-body">
+                        <h5 class="card-title">${product.nom}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">${product.contenance} ${product.unite_contenance}</h6>
+                        <strong>Description: </strong>
+                        <p class="card-text">
+                            ${product.description}
+                        </p>
+                        <h6 class="card-subtitle mb-2 text-muted">${product.prix} €</h6>
+                        <button type="button" class="btn btn-lg btn-product" data-product-id="${product.id}">voir le produit</button>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <div class="product-image-wrapper">
-                            <div class="single-products">
-                                <div class="productinfo text-center">
-                                    <img src="../../img/product-details/similar1.jpg" alt="" />
-                                    <h2>$56</h2>
-                                    <p>Product Name</p>
-                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-heart"></i>Add to wishlist</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="product-image-wrapper">
-                            <div class="single-products">
-                                <div class="productinfo text-center">
-                                    <img src="../../img/product-details/similar2.jpg" alt="" />
-                                    <h2>$56</h2>
-                                    <p>Product Name</p>
-                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-heart"></i>Add to wishlist</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="product-image-wrapper">
-                            <div class="single-products">
-                                <div class="productinfo text-center">
-                                    <img src="../../img/product-details/similar3.jpg" alt="" />
-                                    <h2>$56</h2>
-                                    <p>Product Name</p
-        </section>
-        `
+            </div>
+        `).join('');
+
     const main = document.querySelector('main');
-    main.innerHTML = similarPage;
+    main.innerHTML = productsHtml;
     const body = document.querySelector('body');
     body.style.overflow = 'auto';
-};
+
+    const buttons = document.querySelectorAll('.btn-product')
+    buttons.forEach((button) => {
+        button.addEventListener('click', (event) => {
+            const id = event.target.getAttribute('data-product-id');
+            Navigate(`/products?productId=${id}`);
+        });
+    });
+    };
 
 export default SimilarProductsPage;

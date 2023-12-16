@@ -5,3 +5,6 @@ GET {{baseUrl}}/products/comments/95n2dlfylqrfp1g
 
 ###GET product by id
 GET {{baseUrl}}/products/95n2dlfylqrfp1g
+
+###GET all products by category
+GET {{baseUrl}}/products/similar/1w0qdlxrpruyiel  

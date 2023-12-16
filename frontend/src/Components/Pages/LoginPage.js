@@ -32,12 +32,10 @@ const LoginPage = () => {
 
                   <div class="form-outline mb-4">
                   <input type="text" class="form-control" id="formUser" placeholder="Nom d'utilisateur" />
-                  <label class="form-label" id="formUsername" for="formUser">Nom d'utilisateur</label>
                   </div>
 
                   <div class="form-outline mb-4">
                   <input type="password" class="form-control" id="formPassword" placeholder="Mot de passe" />
-                  <label class="form-label" for="formPassword">Mot de passe</label>
                   </div>
 
                   <div class="text-center pt-1 mb-5 pb-1">
@@ -79,6 +77,7 @@ const LoginPage = () => {
     if (successLogin) {
       Navigate('/');
     } else {
+      // eslint-disable-next-line no-alert
       alert('Erreur lors de la connexion');
     }
   });

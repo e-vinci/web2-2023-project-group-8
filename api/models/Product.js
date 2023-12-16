@@ -53,9 +53,31 @@ async function addCommentToProduct(productId, userId, comment, numStars) {
   return record;
 }
 
+async function getAllProductsByTypes(productId) {
+  const records = await pb.collection('produits').getFullList({
+    filter: `id != "${productId}"`,
+  });
+  const productTarget = await getProductById(productId);
+  const productTypes = productTarget.caracteristique;
+  const products = [];
+  records.forEach((product) => {
+    let isSameType = true;
+    productTypes.forEach((type) => {
+      if (!product.caracteristique.includes(type)) {
+        isSameType = false;
+      }
+    });
+    if (isSameType) {
+      products.push(product);
+    }
+  });
+  return products;
+}
+
 module.exports = {
   getProductById,
   getCommentsByProductId,
   addProductIntoListesProduitsWithSkinCare,
   addCommentToProduct,
+  getAllProductsByTypes,
 };

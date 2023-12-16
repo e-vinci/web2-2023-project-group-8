@@ -1,5 +1,7 @@
 const express = require('express');
-const { getProductById, getCommentsByProductId, addCommentToProduct } = require('../models/Product');
+const {
+  getProductById, getCommentsByProductId, addCommentToProduct, getAllProductsByTypes,
+} = require('../models/Product');
 
 const router = express.Router();
 
@@ -25,6 +27,13 @@ router.post('/addComment', async (req, res) => {
 
   const record = await addCommentToProduct(productId, userId, comment, numStars);
   return res.json(record);
+});
+
+/* GET products by type. */
+router.get('/similar/:productId', async (req, res) => {
+  const products = await getAllProductsByTypes(req.params.productId);
+
+  return res.json(products);
 });
 
 module.exports = router;

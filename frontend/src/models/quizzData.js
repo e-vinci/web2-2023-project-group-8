@@ -5,7 +5,7 @@ function pushProduct(product) {
 }
 
 function popProduct() {
-    productsList.pop();
+  productsList.pop();
 }
 
 function getProductsList() {
