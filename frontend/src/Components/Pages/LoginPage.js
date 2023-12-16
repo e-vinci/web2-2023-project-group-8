@@ -3,6 +3,7 @@ import Navigate from '../Router/Navigate';
 
 const main = document.querySelector('main');
 const body = document.querySelector('body');
+let successLogin = false;
 
 const LoginPage = () => {
   main.innerHTML = `
@@ -30,18 +31,17 @@ const LoginPage = () => {
                   <br>
 
                   <div class="form-outline mb-4">
-                    <input type="username" id="form2Example11" class="form-control"
-                      placeholder="Nom d'utilisateur" />
-                    <label class="form-label" for="form2Example11">Nom d'utilisateur</label>
+                  <input type="text" class="form-control" id="formUser" placeholder="Nom d'utilisateur" />
+                  <label class="form-label" id="formUsername" for="formUser">Nom d'utilisateur</label>
                   </div>
 
                   <div class="form-outline mb-4">
-                    <input type="password" id="form2Example22" class="form-control" />
-                    <label class="form-label" for="form2Example22">Mot de passe</label>
+                  <input type="password" class="form-control" id="formPassword" placeholder="Mot de passe" />
+                  <label class="form-label" for="formPassword">Mot de passe</label>
                   </div>
 
                   <div class="text-center pt-1 mb-5 pb-1">
-                    <button id="loginBtn" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button">Se connecter
+                    <button type="button" id="loginBtn" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">Se connecter
                       </button>
                   </div>
 
@@ -71,46 +71,35 @@ const LoginPage = () => {
 </section>
         `;
   body.style.overflow = 'auto';
-
-  const handleLogin = async () => {
-    const username = document.getElementById('form2Example11').value;
-    const password = document.getElementById('form2Example22').value;
-
-    try {
-      const response = await fetch('http://localhost:3000/login:username', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      });
-
-      const data = await response.json();
-
-      if (data.error) {
-        alert(data.error);
-      } else {
-        localStorage.setItem('token', data.token);
-        Navigate('/frontend/src/Components/Pages/HomePage.js');
-      }
-    } catch (error) {
-      console.error('Erreur lors de la requête fetch :', error);
-    }
-  };
-
-  const addEventListenerOnLoginBtn = () => {
-    const loginBtn = document.getElementById('loginBtn');
-    if (loginBtn) {
-      loginBtn.addEventListener('click', (event) => {
-        event.preventDefault();
-        handleLogin();
-      });
+  const username = document.getElementById('formUsername');
+  const password = document.getElementById('formPassword');
+  const loginBtn = document.getElementById('loginBtn');
+  loginBtn.addEventListener('click', () => {
+    loginUser(username.value, password.value);
+    if (successLogin) {
+      Navigate('/');
     } else {
-      console.error("L'élément avec l'ID loginBtn n'a pas été trouvé.");
+      alert('Erreur lors de la connexion');
     }
-  };
-
-  addEventListenerOnLoginBtn();
+  });
 };
+function loginUser(userName, passwd) {
+  try{
+    fetch('http://localhost:3000/auths/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      username: userName,
+      password: passwd, 
+    }),
+  }).then((res) => res.json());
+  successLogin = true;
+  } catch (error) {
+    // eslint-disable-next-line no-template-curly-in-string
+    throw new Error('Erreur lors de la requête fetch : ${error}');
+  }
+}
 
 export default LoginPage;

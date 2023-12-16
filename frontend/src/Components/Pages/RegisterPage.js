@@ -2,6 +2,7 @@ import Navigate from "../Router/Navigate";
 
 const main = document.querySelector('main');
 const body = document.querySelector('body');
+let successRegister = false;
 
 const RegisterPage = () => {
     main.innerHTML = `
@@ -71,20 +72,37 @@ const photo = document.getElementById('formPicture');
 const registerBtn = document.getElementById('registerBtn');
 registerBtn.addEventListener('click', () => {
   registerUser(username.value, password.value, email.value, nom.value, prenom.value, photo.value);
-  Navigate('/login');
+  if(successRegister){
+    Navigate('/login');
+  }
+  else{
+    alert('Erreur lors de l\'inscription');
+  }
 });
 };
 
-function registerUser(username, password, email, nom, prenom, photo) {
-  fetch('http://localhost:3000/register', {
+function registerUser(userName, passwd, userEmail, lastname, firstname, photo) {
+  try{
+    fetch('http://localhost:3000/auths/register', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      username, password, email, nom, prenom, photo,
+      username: userName,
+      password: passwd, 
+      email: userEmail, 
+      nom: lastname, 
+      prenom: firstname,
+      photo,
     }),
   }).then((res) => res.json());
+  successRegister = true;
+  } catch (error) {
+    // eslint-disable-next-line no-template-curly-in-string
+    throw new Error('Error in registerUser: ${error}');
+  }
+
 }
 
 export default RegisterPage;

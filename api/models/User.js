@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 // eslint-disable-next-line import/no-unresolved
 const Pocketbase = require('pocketbase/cjs');
 
@@ -9,10 +10,10 @@ const pb = new Pocketbase(url);
  * @param {*} password the password of the user
  * @returns {Promise<Object>} - A promise that resolves to the created record.
  */
-async function loginUser(username, password) {
+async function loginUser(username, mot_de_passe) {
   const record = await pb.collection('utilisateurs').getOne(username);
   if (!record) return undefined;
-  if (record.mot_de_passe !== password) return undefined;
+  if (record.mot_de_passe !== mot_de_passe) return undefined;
   return record;
 }
 
@@ -25,14 +26,16 @@ async function loginUser(username, password) {
  * @param {*} photo the photo of the user
  * @returns {Promise<Object>} - A promise that resolves to the created record.
  */
-async function registerUser(username, password, email, nom, prenom, photo) {
+async function registerUser(user, passwd, mail, firstname, lastname) {
   const record = await pb.collection('utilisateurs').create({
-    username,
-    email,
-    nom,
-    prenom,
-    photo_profil: photo,
-    mot_de_passe: password,
+    username: user,
+    email: mail,
+    emailVisibility: true,
+    prenom: firstname,
+    nom: lastname,
+    mot_de_passe: passwd,
+    password: passwd,
+    passwordConfirm: passwd,
   });
   return record;
 }
