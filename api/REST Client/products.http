@@ -1,7 +1,7 @@
 @baseUrl = http://localhost:3000
 
-###GET all comments for a pruduct
+### GET all comments for a product
 GET {{baseUrl}}/products/comments/95n2dlfylqrfp1g
 
-###GET product by id
+### GET product by id
 GET {{baseUrl}}/products/95n2dlfylqrfp1g

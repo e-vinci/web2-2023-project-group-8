@@ -1,18 +1,19 @@
+/* eslint-disable max-len */
 const express = require('express');
-const { getProductById, getCommentsByProductId, addCommentToProduct } = require('../models/Product');
+const Product = require('../models/Product');
 
 const router = express.Router();
 
 /* GET product by ID. */
 router.get('/:productId', async (req, res) => {
-  const product = await getProductById(req.params.productId);
+  const product = await Product.getProductById(req.params.productId);
 
   return res.json(product);
 });
 
 /* GET comments by product ID. */
 router.get('/comments/:productId', async (req, res) => {
-  const comments = await getCommentsByProductId(req.params.productId);
+  const comments = await Product.getCommentsByProductId(req.params.productId);
 
   return res.json(comments);
 });
@@ -23,8 +24,24 @@ router.post('/addComment', async (req, res) => {
     productId, userId, comment, numStars,
   } = req.body;
 
-  const record = await addCommentToProduct(productId, userId, comment, numStars);
+  const record = await Product.addCommentToProduct(productId, userId, comment, numStars);
   return res.json(record);
+});
+
+// TODO
+router.post('/addProduct', async (req, res) => {
+  const {
+    name,
+    brand,
+    price,
+    attributes,
+    ingredients,
+    contenance,
+    contenanceUnit,
+    description,
+  } = req.body;
+  const record = await Product.addNewProduct(name, brand, price, attributes, ingredients, contenance, contenanceUnit, description);
+  return res.json(record); // changer en redirect vers le new product
 });
 
 module.exports = router;
