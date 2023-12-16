@@ -18,6 +18,12 @@ async function getBrandsList() {
   return records;
 }
 
+async function getBrandNameById(brandId) {
+  const record = await pb.collection('marques').getOne(brandId);
+  return record;
+}
+
 module.exports = {
   getBrandsList,
+  getBrandNameById,
 };

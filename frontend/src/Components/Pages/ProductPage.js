@@ -11,6 +11,9 @@ const ProductPage = async () => {
     const response = await fetch(`http://localhost:3000/products/${productId}`);
     const data = await response.json();
 
+    const brands = await fetch(`http://localhost:3000/brands/${data.marque}`);
+    const brandData = await brands.json();
+
     const productPage = `
         <section id="productPage">
             <h1>${data.nom}</h1>
@@ -19,6 +22,7 @@ const ProductPage = async () => {
                     <img src="${data.photo}" alt="Product Image">
                 </div>
                 <div class="productPage__info">
+                <p class="">${brandData.nom}</p>
                     <span> <p class="carac"> Contenance : ${data.contenance} ${data.unite_contenance}</p></span>
                     <br>
                     <span> <p class="carac"> Prix : ${data.prix} €</p></span>
