@@ -1,7 +1,9 @@
 import logoImage from '../../img/icon.png';
-
+import Navigate from '../Router/Navigate';
 
 const main = document.querySelector('main');
+const body = document.querySelector('body');
+let successLogin = false;
 
 const LoginPage = () => {
   main.innerHTML = `
@@ -24,23 +26,22 @@ const LoginPage = () => {
                     <br>
                 </div>
 
-                <form>
+                <form id="loginForm">
                   <p>Connectez-vous</p>
                   <br>
 
                   <div class="form-outline mb-4">
-                    <input type="email" id="form2Example11" class="form-control"
-                      placeholder="Adresse mail" />
-                    <label class="form-label" for="form2Example11">Nom d'utilisateur</label>
+                  <input type="text" class="form-control" id="formUser" placeholder="Nom d'utilisateur" />
+                  <label class="form-label" id="formUsername" for="formUser">Nom d'utilisateur</label>
                   </div>
 
                   <div class="form-outline mb-4">
-                    <input type="password" id="form2Example22" class="form-control" />
-                    <label class="form-label" for="form2Example22">Mot de passe</label>
+                  <input type="password" class="form-control" id="formPassword" placeholder="Mot de passe" />
+                  <label class="form-label" for="formPassword">Mot de passe</label>
                   </div>
 
                   <div class="text-center pt-1 mb-5 pb-1">
-                    <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button">Se connecter
+                    <button type="button" id="loginBtn" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">Se connecter
                       </button>
                   </div>
 
@@ -69,8 +70,36 @@ const LoginPage = () => {
   </div>
 </section>
         `;
-
-  const body = document.querySelector('body');
   body.style.overflow = 'auto';
+  const username = document.getElementById('formUsername');
+  const password = document.getElementById('formPassword');
+  const loginBtn = document.getElementById('loginBtn');
+  loginBtn.addEventListener('click', () => {
+    loginUser(username.value, password.value);
+    if (successLogin) {
+      Navigate('/');
+    } else {
+      alert('Erreur lors de la connexion');
+    }
+  });
 };
+function loginUser(userName, passwd) {
+  try{
+    fetch('http://localhost:3000/auths/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      username: userName,
+      password: passwd, 
+    }),
+  }).then((res) => res.json());
+  successLogin = true;
+  } catch (error) {
+    // eslint-disable-next-line no-template-curly-in-string
+    throw new Error('Erreur lors de la requête fetch : ${error}');
+  }
+}
+
 export default LoginPage;
