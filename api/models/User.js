@@ -11,10 +11,13 @@ const pb = new Pocketbase(url);
  * @returns {Promise<Object>} - A promise that resolves to the created record.
  */
 async function loginUser(username, mot_de_passe) {
-  const record = await pb.collection('utilisateurs').getOne(username);
-  if (!record) return undefined;
-  if (record.mot_de_passe !== mot_de_passe) return undefined;
-  return record;
+  try {
+    const record = await pb.collection('utilisateurs').authWithPassword(username, mot_de_passe);
+    return record;
+  } catch (error) {
+    // eslint-disable-next-line no-template-curly-in-string
+    throw new Error('Erreur lors de la requête fetch : ${error}');
+  }
 }
 
 /**
@@ -27,17 +30,22 @@ async function loginUser(username, mot_de_passe) {
  * @returns {Promise<Object>} - A promise that resolves to the created record.
  */
 async function registerUser(user, passwd, mail, firstname, lastname) {
-  const record = await pb.collection('utilisateurs').create({
-    username: user,
-    email: mail,
-    emailVisibility: true,
-    prenom: firstname,
-    nom: lastname,
-    mot_de_passe: passwd,
-    password: passwd,
-    passwordConfirm: passwd,
-  });
-  return record;
+  try {
+    const record = await pb.collection('utilisateurs').create({
+      username: user,
+      email: mail,
+      emailVisibility: true,
+      prenom: firstname,
+      nom: lastname,
+      mot_de_passe: passwd,
+      password: passwd,
+      passwordConfirm: passwd,
+    });
+    return record;
+  } catch (error) {
+    // eslint-disable-next-line no-template-curly-in-string
+    throw new Error('Erreur lors de la requête fetch : ${error}');
+  }
 }
 
 module.exports = {
