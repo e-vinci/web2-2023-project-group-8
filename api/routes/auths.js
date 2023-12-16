@@ -25,7 +25,7 @@ router.post('/register', async (req, res) => {
  * @returns {Promise<Object>} - A promise that resolves to the created record.
  */
 router.post('/login:username', async (req, res) => {
-  const log = await loginUser(req.params.username);
+  const log = await loginUser(req.body.username, req.body.password);
   return res.json(log);
 });
 
