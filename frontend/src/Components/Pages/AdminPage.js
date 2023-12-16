@@ -45,7 +45,7 @@ async function listAllUser() {
                 <div class="col">${user.nom}</div>
                 <div class="col">${user.prenom}</div>
                 <div class="col-2">${user.email}</div>
-                <div class="col">${formatDate(user.derniere_connexion)}</div>
+                <div class="col">${formatDate(user.updated)}</div>
                 <div class="col">${user.verified ? 'Administrateur' : 'Utilisateur'}</div>
                 <div class="col dropdown">
                     <button class="btn btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">

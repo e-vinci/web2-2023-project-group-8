@@ -105,7 +105,7 @@ async function quizz() {
                 ${currentQuestionIndex > 0 ? '<div class="back-section text-center">Previous question</div>' : ''}  
               </div>
             </div>
-            <div class="progress">
+            <div class="progress" style="width: 100%;">
               <div class="progress-bar bg-secondary" role="progressbar" style="width: ${((currentQuestionIndex + 1) / data.length) * 100}%" aria-valuenow="${currentQuestionIndex + 1}" aria-valuemin="0" aria-valuemax="${data.length}"></div>
             </div>
           </div>
