@@ -1,4 +1,8 @@
-const AddProductPage = () => {
+const AddProductPage = async () => {
+    const brands = await fetch(`http://localhost:3000/brands`);
+    const brandsNames = await brands.json();
+    const brandsSelectOptions = selectBrands();
+
     const addProductPage = `
     <div class="container px-5 my-5">
     <h1>Ajouter un nouveau produit</h1>
@@ -10,16 +14,12 @@ const AddProductPage = () => {
         </div>
         <div class="form-floating mb-3">
             <select class="form-select" id="brand" aria-label="Brand">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
+                ${brandsSelectOptions}
             </select>
             <label for="brand">Marque</label>
         </div>
         <div class="form-floating mb-3">
-            <textarea class="form-control" id="description" type="text" placeholder="Description" data-sb-validations="required"></textarea>
+            <textarea class="form-control h-25" id="description" type="text" placeholder="Description" data-sb-validations="required"></textarea>
             <label for="description">Description</label>
             <div class="invalid-feedback" data-sb-feedback="description:required">Description is required.</div>
         </div>
@@ -41,7 +41,7 @@ const AddProductPage = () => {
                 <option value="g">g</option>
                 <option value="mL">mL</option>
             </select>
-            <label for="brand">Marque</label>
+            <label for="brand">Unité</label>
         </div>
         </section>
         
@@ -81,7 +81,7 @@ const AddProductPage = () => {
             </div>
         </div>
         <div class="form-floating mb-3">
-            <textarea class="form-control" id="ingredients" type="text" placeholder="Ingrédients" data-sb-validations="required"></textarea>
+            <textarea class="form-control h-auto" id="ingredients" type="text" placeholder="Ingrédients" data-sb-validations="required"></textarea>
             <label for="description">Ingrédients</label>
             <div class="invalid-feedback" data-sb-feedback="description:required">Les ingrédients sont requis.</div>
         </div>
@@ -95,6 +95,16 @@ const AddProductPage = () => {
     </form>
     </div>
     `;
+
+    function selectBrands() {
+        let options = [];
+        brandsNames.forEach(brand => {
+            options += `
+        <option value="${brand.nom}">${brand.nom}</option>
+        `
+        });
+        return options;
+    }
 
     const main = document.querySelector('main');
     main.innerHTML = addProductPage;
