@@ -75,7 +75,7 @@ const LoginPage = () => {
   loginBtn.addEventListener('click', () => {
     loginUser(username.value, password.value);
     if (successLogin) {
-      Navigate('/');
+      Navigate('/quiz');
     } else {
       // eslint-disable-next-line no-alert
       alert('Erreur lors de la connexion');
@@ -95,7 +95,7 @@ function loginUser(userName, passwd) {
     }),
   }).then((res) => res.json());
   successLogin = true;
-  localStorage.setItem('isLoggedIn', 'true');
+  localStorage.setItem('connected', 'true');
   } catch (error) {
     // eslint-disable-next-line no-template-curly-in-string
     throw new Error('Erreur lors de la requête fetch : ${error}');

@@ -20,7 +20,6 @@ import Navigate from '../Router/Navigate';
 
 // TODO: A SUPPRIMER QUAND ON AURA LE LOGIN
 // Variable qu'on set à true si l'utilisateur est connecté  (pour le moment on le set à true pour tester). Mais c'est a faire dans le login
-localStorage.setItem('connected', "false");
 // Enlever le commentaire pour tester le quizz en étant connecté
 localStorage.setItem('userId', 'f51ddnvv6ts033w');
 
