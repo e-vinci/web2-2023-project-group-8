@@ -15,7 +15,12 @@ const DiagnosisPage = () => {
 };
 
 function diagnosis() {
-    main.innerHTML = `<h1>Voici votre diagnostique</h1>`;
+    main.innerHTML = `<h1>Voici votre diagnostique</h1>
+    <br>
+    <h5 class="container">Différentes étapes à suivre pour une bonne routine </h5><br>
+    <h6 class="container">1) <mark>Le démaquillage:</mark> Si vous portez du maquillage il faut bien évidemment commencer par vous démaquiller. </h6><br>
+    <h6 class="container">2) <mark>Le nettoyage:</mark> Il faut toujours commencer par se nettoyer le visage que ça soit pour retirer les impurtées du quotidien ou </h6>;
+    <h6 class="container">2) <mark>Les soins:</mark> Peu importe le nombre de produits que vous souhaitez appliquer, il faut toujours commencer du plus liquide au plus épais. </h6>`;
     // Build HTML content for all products
     const productsHTML = getProductsList().map((product) => `
         <div class="card mb-3">

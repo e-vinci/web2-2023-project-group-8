@@ -236,8 +236,8 @@ a.active, a:hover {
 
 /* Image */
 #productPage .productPage__image img {
-  max-width: 450px;
-  max-height: 100%;
+  max-width: 50%;
+  max-height: 50%;
   border: 0;
   border-radius: 50px;
 }
@@ -323,6 +323,12 @@ button[type="submit"] {
 
 .comment-form button:hover {
   background-color: #0056b3;
+}
+
+mark{
+  background-color: #f7b5df;
+  border-radius: 10px;
+  color: black;
 }
 
 /* -------------------Basics-------------------- */

@@ -98,6 +98,7 @@ async function quizz() {
                 </div>
                 <div class="d-flex justify-content-center quiz_responses">${response}</div>
                 ${currentQuestionIndex > 0 ? '<div class="back-section text-center">Previous question</div>' : ''}  
+                ${currentQuestionIndex < data.length - 1 ? '<div class="next-section text-center">Next question</div>' : ''}
               </div>
             </div>
             <div class="progress" style="width: 100%;">
@@ -146,7 +147,15 @@ async function quizz() {
       };
 
       // Ajoutez les écouteurs d'événements après avoir rendu la question
-      const buttons = document.querySelectorAll('.reponse');
+      if(currentQuestionIndex ===data.length - 1){
+        const buttons = document.querySelectorAll('.reponse');
+        buttons.forEach((btn => {
+          btn.addEventListener('click', async () => {
+            Navigate('/diagnosis');
+          });
+        }));
+      } else {
+        const buttons = document.querySelectorAll('.reponse');
       buttons.forEach((btn) => {
         const productID = btn.dataset.productId.split(",");
 
@@ -162,7 +171,8 @@ async function quizz() {
           }
         });
       });
-
+      }
+      
       // On ajoute un écouteur d'événement sur le bouton de retour qui permet de revenir à la question précédente
       if (currentQuestionIndex > 0) {
         const backButton = document.querySelector('.back-section');
@@ -170,6 +180,14 @@ async function quizz() {
           currentQuestionIndex -= 1;
           popProduct();
           renderQuestion();
+        });
+      }
+      
+      // On ajoute un écouteur d'événement sur le bouton suivant qui permet de passer à la question suivante
+      if (currentQuestionIndex<data.length - 1){
+        const nextButton = document.querySelector('.next-section');
+        nextButton.addEventListener('click', () => {
+          navigateToNextQuestion();
         });
       }
     };
