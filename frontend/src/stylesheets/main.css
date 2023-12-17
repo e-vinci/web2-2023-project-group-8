@@ -163,8 +163,9 @@ a.active, a:hover {
 
 /* Grid Item for Homepage */
 .grid-item-homepage {
-  width: 100%;
-  height: 100%;
+  width: 80%;
+  height: 80%;
+  margin-bottom: 150px;
 }
 
 /* Making images fit inside grids */
