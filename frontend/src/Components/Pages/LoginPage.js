@@ -5,6 +5,9 @@ const main = document.querySelector('main');
 const body = document.querySelector('body');
 let successLogin = false;
 
+/**
+ * Renders the login page.
+ */
 const LoginPage = () => {
   main.innerHTML = `
   
@@ -82,25 +85,38 @@ const LoginPage = () => {
     }
   });
 };
-function loginUser(userName, passwd) {
-  try{
-    fetch('http://localhost:3000/auths/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      username: userName,
-      password: passwd,
-    }),
-  }).then((res) => res.json());
-  successLogin = true;
-  sessionStorage.setItem('connected', 'true');
-  sessionStorage.setItem('userId',userName.id);
-  console.log(userName.id);
+/**
+ * Logs in a user with the provided username and password.
+ * @param {string} userName - The username of the user.
+ * @param {string} passwd - The password of the user.
+ * @returns {Promise<void>} - A promise that resolves when the login process is complete.
+ * @throws {Error} - If there is an error during the login process.
+ */
+async function loginUser(userName, passwd) {
+  try {
+    const response = await fetch('http://localhost:3000/auths/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: userName,
+        password: passwd,
+      }),
+    });
+
+    if (response.ok) {
+      successLogin = true;
+      sessionStorage.setItem('connected', 'true');
+      sessionStorage.setItem('userId', userName.id);
+      Navigate('/');
+    } else {
+      // eslint-disable-next-line no-alert
+      alert('Erreur lors de la connexion');
+    }
   } catch (error) {
     // eslint-disable-next-line no-template-curly-in-string
-    throw new Error('Erreur lors de la requête fetch : ${error}');
+    throw new Error(`Erreur lors de la requête fetch : ${error}`);
   }
 }
 

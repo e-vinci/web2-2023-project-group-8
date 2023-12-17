@@ -1,6 +1,7 @@
 /* eslint-disable no-alert */
 const express = require('express');
-const { loginUser, registerUser } = require('../models/User');
+const { registerUser } = require('../models/User');
+const { loginUser } = require('../models/User');
 
 const router = express.Router();
 
@@ -32,7 +33,7 @@ router.post('/register', async (req, res) => {
  */
 router.post('/login', async (req, res) => {
   try {
-    const log = await loginUser(req.body.username, req.body.password);
+    const log = await loginUser(req.body.username, req.body);
     return res.json(log);
   } catch (error) {
     // eslint-disable-next-line no-template-curly-in-string
