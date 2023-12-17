@@ -1,3 +1,5 @@
+import anime from "animejs";
+
 const clearPage = () => {
   const main = document.querySelector('main');
   main.innerHTML = '';
@@ -17,4 +19,20 @@ function formatDate(dateString) {
   return date.toLocaleDateString('fr-FR', options);
 }
 
-export { clearPage, renderPageTitle, formatDate };
+function showLoader() {
+  const main = document.querySelector('main');
+  main.innerHTML = `
+    <div class="loader-container">
+      <div class="custom-loader"></div>
+    </div>
+  `;
+  anime({
+    targets: '.custom-loader',
+    rotate: '1turn',
+    duration: 1000,
+    easing: 'linear',
+    loop: true
+  });
+}
+
+export { clearPage, renderPageTitle, formatDate, showLoader };

@@ -225,7 +225,6 @@ a.active, a:hover {
   border-radius: 4px;
 }
 
-
 /*------PRODUCT PAGE SECTION------*/
 
 .grid-container-Productpage {
@@ -237,22 +236,27 @@ a.active, a:hover {
   }
 
 /* Image */
-#productPage .productPage__image img{
+#productPage .productPage__image img {
   max-width: 450px;
   max-height: 100%;
   border: 0;
   border-radius: 50px;
 }
 
-#productPage .productPage__image{
-
+#productPage .productPage__image {
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
 }
 
-#similarSpan{
+.brand {
+  font-size: 20pt;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+#similarSpan {
   font-size:30px;
   position:relative;
   top:60px;
@@ -302,7 +306,6 @@ button[type="submit"] {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
-
 .comment-form textarea {
   width: 100%;
   padding: 10px;
@@ -326,8 +329,21 @@ button[type="submit"] {
 /* -------------------Basics-------------------- */
 .grid-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr; /* Example: 3 columns with equal widths */
+  grid-template-columns: 1fr 1fr 1fr; /* 3 columns with equal widths */
   grid-gap: 10px; /* Gap between grid items */
+}
+
+.grid-container-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 columns with equal widths */
+  grid-gap: 10px;
+}
+
+.grid-item-2col {
+  max-width: 100%;
+  max-height: 100%;
+  top: auto;
+  object-fit: cover;
 }
 
 /*------LOGIN PAGE SECTION------*/
@@ -345,7 +361,7 @@ button[type="submit"] {
   max-width: 70%; /* Ajustez cette valeur en fonction de vos besoins */
   max-height: 70%; /* Ajustez cette valeur en fonction de vos besoins */
 }
-/* ------RESULTS PAGE------ */
+/* ------RESULTS PAGE SECTION------ */
 #results {
   position: absolute;
   left: 50%;
@@ -399,4 +415,24 @@ h2 {
 /* ------ADD PRODUCT PAGE------ */
 .textarea {
   height: 200px;
+}
+
+.custom-loader {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 8px solid;
+  border-color: #E4E4ED;
+  border-right-color: #F47DC8;
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh; 
+}
+
+.custom-loader {
+  margin: auto;
 }
