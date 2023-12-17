@@ -13,7 +13,7 @@ pb.autoCancellation(false);
 async function getBrandsList() {
   const records = await pb.collection('marques').getFullList({
     fields: ['nom'],
-    order: 'asc',
+    sort: 'nom',
   });
   return records;
 }
