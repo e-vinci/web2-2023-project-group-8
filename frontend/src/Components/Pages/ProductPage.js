@@ -1,10 +1,10 @@
-import { clearPage } from '../../utils/render';
+import { showLoader } from '../../utils/render';
 
 const main = document.querySelector('main');
 document.querySelector('body').style.overflow = 'auto';
 
 const ProductPage = async () => {
-    clearPage();
+    showLoader();
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get('productId');
 
@@ -22,7 +22,7 @@ const ProductPage = async () => {
                     <img src="${data.photo}" alt="Product Image">
                 </div>
                 <div class="productPage__info">
-                <p class="">${brandData.nom}</p>
+                <p class="brand">${brandData.nom}</p>
                     <span> <p class="carac"> Contenance : ${data.contenance} ${data.unite_contenance}</p></span>
                     <br>
                     <span> <p class="carac"> Prix : ${data.prix} €</p></span>

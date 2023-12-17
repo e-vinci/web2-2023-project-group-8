@@ -1,7 +1,13 @@
+import { showLoader } from '../../utils/render';
+
+const main = document.querySelector('main');
+showLoader();
 const AddProductPage = async () => {
+    try {
     const brands = await fetch(`http://localhost:3000/brands`);
+    
     const brandsNames = await brands.json();
-    const brandsSelectOptions = selectBrands();
+    const brandsSelectOptions = selectBrands(brandsNames);
 
     const addProductPage = `
     <div class="container px-5 my-5">
@@ -95,19 +101,20 @@ const AddProductPage = async () => {
     </form>
     </div>
     `;
+        main.innerHTML = addProductPage;
+    } catch (error) {
+        main.innerHTML = `<p>Error fetching brands data</p>`;
+    }
+}
 
-    function selectBrands() {
-        let options = [];
-        brandsNames.forEach(brand => {
-            options += `
+function selectBrands(brands) {
+    let options = [];
+    brands.forEach(brand => {
+        options += `
         <option value="${brand.nom}">${brand.nom}</option>
         `
-        });
-        return options;
-    }
-
-    const main = document.querySelector('main');
-    main.innerHTML = addProductPage;
+    });
+    return options;
 }
 
 export default AddProductPage;

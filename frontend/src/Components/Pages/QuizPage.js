@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import anime from 'animejs';
-import { clearPage } from '../../utils/render';
+import { showLoader } from '../../utils/render';
 import {
   pushProduct,
   popProduct,
@@ -34,7 +34,8 @@ document.querySelector('body').style.overflow = 'auto';
  */
 const QuizPage = () => {
   cleanProductsList();
-  clearPage();
+  showLoader();
+  
   // Si l'utilisateur est connecté on lui demande le nom de sa routine
   if (localStorage.getItem('connected') === 'true') {
     AskUser();

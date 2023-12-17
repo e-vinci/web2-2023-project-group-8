@@ -1,9 +1,9 @@
 import Navigate from '../Router/Navigate';
-import { clearPage } from '../../utils/render';
+import { showLoader } from '../../utils/render';
 
 
 const SimilarProductsPage = async () => {
-    clearPage();
+    showLoader();
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get('productId');
 
@@ -25,7 +25,7 @@ const SimilarProductsPage = async () => {
                 </div>
             </div>
         `).join('');
-
+    
     const main = document.querySelector('main');
     main.innerHTML = productsHtml;
     const body = document.querySelector('body');

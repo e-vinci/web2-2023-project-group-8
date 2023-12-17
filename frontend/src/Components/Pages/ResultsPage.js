@@ -1,11 +1,11 @@
-import { clearPage } from '../../utils/render';
+import { showLoader } from '../../utils/render';
 
 const main = document.querySelector('main');
 const body = document.querySelector('body');
 body.style.overflow = 'auto';
 
 const ResultsPage = () => {
-    clearPage();
+    showLoader();
     results();
 };
 
