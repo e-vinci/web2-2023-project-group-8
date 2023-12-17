@@ -16,7 +16,7 @@ const ProductPage = async () => {
 
     const productPage = `
         <section id="productPage">
-            <h1>${data.nom}</h1>
+            <h1>${data.nom}</h1><br>
             <div class="grid-container-Productpage">
                 <div class="productPage__image">
                     <img src="${data.photo}" alt="Product Image">
