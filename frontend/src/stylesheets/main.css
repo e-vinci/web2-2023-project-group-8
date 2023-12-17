@@ -326,6 +326,12 @@ button[type="submit"] {
   background-color: #0056b3;
 }
 
+mark{
+  background-color: #f7b5df;
+  border-radius: 10px;
+  color: black;
+}
+
 /* -------------------Basics-------------------- */
 .grid-container {
   display: grid;
