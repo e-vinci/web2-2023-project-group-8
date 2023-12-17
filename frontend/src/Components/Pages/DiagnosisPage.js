@@ -5,11 +5,7 @@ import { getProductsList } from '../../models/quizzData';
 const main = document.querySelector('main');
 
 const DiagnosisPage = () => {
-    if (sessionStorage.getItem('connected') === 'true') {
-        Navigate('/results');
-    }else{
         diagnosis();
-    }
     const body = document.querySelector('body');
     body.style.overflow = 'auto';
 };

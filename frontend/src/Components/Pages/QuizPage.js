@@ -146,15 +146,6 @@ async function quizz() {
         }
       };
 
-      // Ajoutez les écouteurs d'événements après avoir rendu la question
-      if(currentQuestionIndex ===data.length - 1){
-        const buttons = document.querySelectorAll('.reponse');
-        buttons.forEach((btn => {
-          btn.addEventListener('click', async () => {
-            Navigate('/diagnosis');
-          });
-        }));
-      } else {
         const buttons = document.querySelectorAll('.reponse');
       buttons.forEach((btn) => {
         const productID = btn.dataset.productId.split(",");
@@ -171,7 +162,6 @@ async function quizz() {
           }
         });
       });
-      }
       
       // On ajoute un écouteur d'événement sur le bouton de retour qui permet de revenir à la question précédente
       if (currentQuestionIndex > 0) {
