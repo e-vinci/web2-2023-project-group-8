@@ -1,38 +1,43 @@
 @baseUrl = http://localhost:3000
 
-### Try to login an unknow user
-POST {{baseUrl}}/auths/login
-Content-Type: application/json
-
-{
-    "username":"unknown",
-    "password":"admin"
-}
-
-### Login the default admin
-POST {{baseUrl}}/auths/login
-Content-Type: application/json
-
-{
-    "username":"admin",
-    "password":"admin"
-}
-
-
-### Create the manager user
+###Register an existing user
 POST {{baseUrl}}/auths/register
 Content-Type: application/json
 
 {
-    "username":"manager",
-    "password":"manager"
+    "username": "asox",
+    "password":"Ylann", 
+    "email":"ylann@vinci.be", 
+    "nom":"Mommens", 
+    "prenom":"Ylann"
 }
 
-### Login the manager user
+###Register a new user
+POST {{baseUrl}}/auths/register
+Content-Type: application/json
+
+{
+    "username": "tester",
+    "password":"azerty123", 
+    "email":"tester@gmail.com", 
+    "nom":"tester", 
+    "prenom":"tester"
+}
+
+###Login existing user
 POST {{baseUrl}}/auths/login
 Content-Type: application/json
 
 {
-    "username":"manager",
-    "password":"manager"
+    "username":"asox",
+    "password":"OdWqQm8nKvFqni9"
+}
+
+###Login an non existing user
+POST {{baseUrl}}/auths/login
+Content-Type: application/json
+
+{
+    "username":"newff",
+    "password":"newnewnew"
 }

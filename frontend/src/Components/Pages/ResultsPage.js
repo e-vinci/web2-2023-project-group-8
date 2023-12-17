@@ -10,6 +10,7 @@ const ResultsPage = () => {
 };
 
 async function results() {
+    console.log(sessionStorage.getItem('userId'));
 
     const listSkinCareResponse = await fetch(`http://localhost:3000/admin/skinCares?userId=${sessionStorage.getItem('userId')}`);
     const data = await listSkinCareResponse.json();
@@ -22,13 +23,12 @@ async function results() {
     const userResponse = await fetch(`http://localhost:3000/admin/users?userId=${sessionStorage.getItem('userId')}`);
     const userData = await userResponse.json();
     const userFound = userData[0];
-    const prenom = (userFound.prenom).charAt(0).toUpperCase() + (userFound.prenom).slice(1);
 
     const resultsLayout = `
     <section>
     <div id="results">
     <span class="ms-auto"><span class="badge bg-secondary">Date</span></span>
-    <h2>Voici vos résultats, ${prenom}</h2>
+    <h2>Voici vos résultats, ${userFound.prenom}</h2>
         <div class="skin-info">
             <p><strong>Type de peau :</strong> grasse</p>
             <p><strong>Problèmes ciblés :</strong></p>

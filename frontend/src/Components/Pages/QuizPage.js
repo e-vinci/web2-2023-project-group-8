@@ -16,14 +16,8 @@ import {
 } from '../../models/quizz';
 
 import Navigate from '../Router/Navigate';
-// import arrowLeft from '../../img/arrow-left.svg';
 
-// TODO: A SUPPRIMER QUAND ON AURA LE LOGIN
-// Variable qu'on set à true si l'utilisateur est connecté  (pour le moment on le set à true pour tester). Mais c'est a faire dans le login
-// Enlever le commentaire pour tester le quizz en étant connecté
-localStorage.setItem('userId', 'f51ddnvv6ts033w');
-
-const userIdentification = localStorage.getItem('userId');
+const userIdentification = sessionStorage.getItem('userId');
 
 const main = document.querySelector('main');
 document.querySelector('body').style.overflow = 'auto';
@@ -37,7 +31,7 @@ const QuizPage = () => {
   showLoader();
   
   // Si l'utilisateur est connecté on lui demande le nom de sa routine
-  if (localStorage.getItem('connected') === 'true') {
+  if (sessionStorage.getItem('connected') === 'true') {
     AskUser();
   } else {
     quizz();
@@ -46,6 +40,7 @@ const QuizPage = () => {
 
 
 function AskUser() {
+  console.log(sessionStorage.getItem('userId'));
   main.innerHTML = `
     <section>
       <div class="container">
@@ -66,7 +61,7 @@ function AskUser() {
   const submitButton = document.getElementById('submitSkinCareName');
   submitButton.addEventListener('click', () => {
     const skinCareName = document.getElementById('skinCareName').value;
-    localStorage.setItem('skinCareName', skinCareName);
+    sessionStorage.setItem('skinCareName', skinCareName);
     quizz();
   });
 }
@@ -132,8 +127,9 @@ async function quizz() {
 
         // Si on est à la fin du quizz, on redirige vers la page adéquate sinon on affiche la question suivante
         if (currentQuestionIndex === data.length) {
-          if (localStorage.getItem('connected') === 'true') {
-            await addSkinCare(localStorage.getItem('skinCareName'), localStorage.getItem('userId'));
+          if (sessionStorage.getItem('connected') === 'true') {
+          
+            await addSkinCare(sessionStorage.getItem('skinCareName'), sessionStorage.getItem('userId'));
 
             const lastSkinCareId = await getLastSkinCareId(userIdentification);
             
@@ -143,7 +139,6 @@ async function quizz() {
             });
           }
 
-          localStorage.setItem('savdProducts', JSON.stringify(getProductsList())); // Stocker savedProducts dans localStorage
           Navigate('/diagnosis');
         } else {
           renderQuestion();

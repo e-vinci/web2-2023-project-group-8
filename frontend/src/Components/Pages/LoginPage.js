@@ -1,8 +1,11 @@
 import logoImage from '../../img/icon.png';
 import Navigate from '../Router/Navigate';
+import Navbar from '../Navbar/Navbar';
 
 const main = document.querySelector('main');
 const body = document.querySelector('body');
+body.style.overflow = 'auto';
+
 let successLogin = false;
 
 /**
@@ -71,17 +74,17 @@ const LoginPage = () => {
   </div>
 </section>
         `;
-  body.style.overflow = 'auto';
   const username = document.getElementById('formUsername');
   const password = document.getElementById('formPassword');
   const loginBtn = document.getElementById('loginBtn');
-  loginBtn.addEventListener('click', () => {
-    loginUser(username.value, password.value);
+  loginBtn.addEventListener('click', async () => {
+    
+    await loginUser(username.value, password.value);
     if (successLogin===true) {
+      sessionStorage.setItem('connected', 'true');
+
+      Navbar();
       Navigate('/');
-    } else {
-      // eslint-disable-next-line no-alert
-      alert('Erreur lors de la connexion');
     }
   });
 };
@@ -105,19 +108,40 @@ async function loginUser(userName, passwd) {
       }),
     });
 
-    if (response.ok) {
+    const data = await response.json();
+    console.log(data);
+
+    if (!data) {
+      // eslint-disable-next-line no-alert
+      alert('Aucune donnée reçue de l\'API');
+    }
+
+    if (data.length === 1){
       successLogin = true;
-      sessionStorage.setItem('connected', 'true');
-      sessionStorage.setItem('userId', userName.id);
+
+      const userId = data[0].id;
+      console.log(userId);
+
+      sessionStorage.setItem('userId', userId);
+      console.log(sessionStorage.getItem('userId'));
+      
+
+      if (data.verified === true) {
+        sessionStorage.setItem('admin', 'true');
+      }else{
+        sessionStorage.setItem('admin', 'false');
+      }
+
       Navigate('/');
     } else {
+      // Show the error message in an alert
       // eslint-disable-next-line no-alert
-      alert('Erreur lors de la connexion');
+      alert('Nom d\'utilisateur ou mot de passe incorrect');
     }
   } catch (error) {
-    // eslint-disable-next-line no-template-curly-in-string
-    throw new Error(`Erreur lors de la requête fetch : ${error}`);
+    throw new Error(`Erreur lors du fetch avec l'api ${error}`);
   }
 }
+
 
 export default LoginPage;

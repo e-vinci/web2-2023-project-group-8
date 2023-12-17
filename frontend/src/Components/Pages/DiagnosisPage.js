@@ -4,7 +4,7 @@ import { getProductsList } from '../../models/quizzData';
 
 const main = document.querySelector('main');
 
-const ResultsPage = () => {
+const DiagnosisPage = () => {
     if (sessionStorage.getItem('connected') === 'true') {
         Navigate('/results');
     }else{
@@ -59,4 +59,4 @@ function diagnosis() {
     });
 };
 
-export default ResultsPage;
+export default DiagnosisPage;

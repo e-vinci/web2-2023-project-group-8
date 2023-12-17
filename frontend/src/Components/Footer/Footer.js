@@ -11,8 +11,8 @@ const Footer = () => {
             </div>
         </div>
     `;
-    const navbarWrapper = document.querySelector('#footer');
-    navbarWrapper.innerHTML = footer;
+    const footerWrapper = document.querySelector('#footer');
+    footerWrapper.innerHTML = footer;
 
     document.querySelector('#terms-conditions').addEventListener('click', () => {
         Navigate('/t-and-c');

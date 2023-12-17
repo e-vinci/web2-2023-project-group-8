@@ -22,8 +22,7 @@ router.post('/register', async (req, res) => {
     const user = await registerUser(username, password, email, nom, prenom, photo);
     return res.json(user);
   } catch (error) {
-    // eslint-disable-next-line no-template-curly-in-string
-    throw new Error('Erreur lors de la requête fetch : ${error}');
+    throw new Error(`Erreur lors de l'appel de la fonction registerUser: ${error}`);
   }
 });
 
@@ -32,13 +31,15 @@ router.post('/register', async (req, res) => {
  * @returns {Promise<Object>} - A promise that resolves to the created record.
  */
 router.post('/login', async (req, res) => {
-  try {
-    const log = await loginUser(req.body.username, req.body);
-    return res.json(log);
-  } catch (error) {
-    // eslint-disable-next-line no-template-curly-in-string
-    throw new Error('Erreur lors de la requête fetch : ${error}');
-  }
+  const {
+    username, password,
+  } = req.body;
+  const authData = await loginUser(username, password);
+
+  // Send a success response or additional data if needed
+  return res.json(authData);
+
+  // Handle the specific error for user not found
 });
 
 module.exports = router;

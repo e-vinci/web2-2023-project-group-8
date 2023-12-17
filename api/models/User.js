@@ -10,13 +10,15 @@ const pb = new Pocketbase(url);
  * @param {*} password the password of the user
  * @returns {Promise<Object>} - A promise that resolves to the created record.
  */
-async function loginUser(username, mot_de_passe) {
+async function loginUser(username, password) {
   try {
-    const record = await pb.collection('utilisateurs').authWithPassword(username, mot_de_passe);
-    return record;
+    const authData = await pb.collection('utilisateurs').getFullList({
+      filter: `username = "${username}" && mot_de_passe = "${password}"`,
+    });
+
+    return authData;
   } catch (error) {
-    // eslint-disable-next-line no-template-curly-in-string
-    throw new Error('Erreur lors de la requête fetch : ${error}');
+    throw new Error(`Erreur lors de la requête d'authentification : ${error}`);
   }
 }
 
@@ -43,8 +45,7 @@ async function registerUser(user, passwd, mail, firstname, lastname) {
     });
     return record;
   } catch (error) {
-    // eslint-disable-next-line no-template-curly-in-string
-    throw new Error('Erreur lors de la requête fetch : ${error}');
+    throw new Error(`Erreur lors de la requête de création d'un user : ${error}`);
   }
 }
 
