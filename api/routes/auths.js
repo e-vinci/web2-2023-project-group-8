@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 const express = require('express');
 const { loginUser, registerUser } = require('../models/User');
 
@@ -29,7 +30,7 @@ router.post('/register', async (req, res) => {
  * @param {String} userId the id of the user
  * @returns {Promise<Object>} - A promise that resolves to the created record.
  */
-router.post('/login:username', async (req, res) => {
+router.post('/login', async (req, res) => {
   try {
     const log = await loginUser(req.body.username, req.body.password);
     return res.json(log);

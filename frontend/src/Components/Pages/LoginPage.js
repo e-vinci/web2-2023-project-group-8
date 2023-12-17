@@ -74,8 +74,8 @@ const LoginPage = () => {
   const loginBtn = document.getElementById('loginBtn');
   loginBtn.addEventListener('click', () => {
     loginUser(username.value, password.value);
-    if (successLogin) {
-      Navigate('/quiz');
+    if (successLogin===true) {
+      Navigate('/');
     } else {
       // eslint-disable-next-line no-alert
       alert('Erreur lors de la connexion');
@@ -95,7 +95,9 @@ function loginUser(userName, passwd) {
     }),
   }).then((res) => res.json());
   successLogin = true;
-  localStorage.setItem('connected', 'true');
+  sessionStorage.setItem('connected', 'true');
+  sessionStorage.setItem('userId',userName.id);
+  console.log(userName.id);
   } catch (error) {
     // eslint-disable-next-line no-template-curly-in-string
     throw new Error('Erreur lors de la requête fetch : ${error}');

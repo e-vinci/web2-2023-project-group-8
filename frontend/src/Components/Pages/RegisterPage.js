@@ -2,6 +2,7 @@ import Navigate from "../Router/Navigate";
 
 const main = document.querySelector('main');
 const body = document.querySelector('body');
+const mailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 let successRegister = false;
 
 const RegisterPage = () => {
@@ -49,6 +50,8 @@ const RegisterPage = () => {
                   <button type="button" id="registerBtn"
                     class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">S'inscrire</button>
                 </div>
+                <br>
+                <span id="error" class="text-danger"></span>
 
                 <p class="text-center text-muted mt-5 mb-0">Vous avez déjà un compte ? <a href="/login"
                     class="fw-bold text-body"><u>Connectez-vous ici</u></a></p>
@@ -70,7 +73,15 @@ const nom = document.getElementById('formNom');
 const prenom = document.getElementById('formPrenom');
 const photo = document.getElementById('formPicture');
 const registerBtn = document.getElementById('registerBtn');
+
 registerBtn.addEventListener('click', () => {
+  if (password.value.length < 8) {
+    sendErrorPassword();
+  } else if (username.value === '' || password.value === '' || email.value === '' || nom.value === '' || prenom.value === '') {
+    sendErrorEmptyField();
+  } else if (!email.value.match(mailPattern)) {
+    sendErrorEmail();
+  } else {
   registerUser(username.value, password.value, email.value, nom.value, prenom.value, photo.value);
   if(successRegister){
     Navigate('/login');
@@ -79,6 +90,7 @@ registerBtn.addEventListener('click', () => {
     // eslint-disable-next-line no-alert
     alert('Erreur lors de l\'inscription');
   }
+}
 });
 };
 
@@ -103,6 +115,21 @@ function registerUser(userName, passwd, userEmail, lastname, firstname, photo) {
     // eslint-disable-next-line no-template-curly-in-string
     throw new Error('Error in registerUser: ${error}');
   }
+}
+
+function sendErrorEmptyField() {
+  const error = document.getElementById('error');
+  error.innerHTML = 'Veuillez remplir tous les champs';
+}
+
+function sendErrorPassword() {
+  const error = document.getElementById('error');
+  error.innerHTML = 'Le mot de passe doit contenir au moins 8 caractères ';
+}
+
+function sendErrorEmail() {
+  const error = document.getElementById('error');
+  error.innerHTML = 'Veuillez entrer une adresse mail valide';
 }
 
 export default RegisterPage;

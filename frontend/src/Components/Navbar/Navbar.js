@@ -6,7 +6,7 @@ import Navigate from '../Router/Navigate';
 import logoImage from '../../img/icon.png';
 
 // eslint-disable-next-line no-unused-vars
-const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+const isLoggedIn = localStorage.getItem('connected') === 'true';
 
 const Navbar = () => {
   const navbar = `
@@ -15,11 +15,13 @@ const Navbar = () => {
           <span class="navbar-toggler-icon"></span>
           <span class="navbar-toggler-icon"></span>
           <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
         </div>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" id="dropdown-home">accueil</a>
           <a class="dropdown-item" id="dropdown-quiz">diagnostic de peau</a>
           <a class="dropdown-item" id="dropdown-login">connexion</a>
+          <a class="dropdown-item" id="dropdown-login">déconnexion</a>
         </div>
       </div>
   </div>

@@ -5,7 +5,7 @@ import { getProductsList } from '../../models/quizzData';
 const main = document.querySelector('main');
 
 const ResultsPage = () => {
-    if (localStorage.getItem('connected') === 'true') {
+    if (sessionStorage.getItem('connected') === 'true') {
         Navigate('/results');
     }else{
         diagnosis();
