@@ -17,7 +17,6 @@ import {
 
 import Navigate from '../Router/Navigate';
 
-const userIdentification = sessionStorage.getItem('userId');
 
 const main = document.querySelector('main');
 document.querySelector('body').style.overflow = 'auto';
@@ -132,7 +131,7 @@ async function quizz() {
           
             await addSkinCare(sessionStorage.getItem('skinCareName'), sessionStorage.getItem('userId'));
 
-            const lastSkinCareId = await getLastSkinCareId(userIdentification);
+            const lastSkinCareId = await getLastSkinCareId(sessionStorage.getItem('userId'));
             
             getProductsList().forEach(async (product) => {
               const productId = product.id;

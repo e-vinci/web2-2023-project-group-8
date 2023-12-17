@@ -2,6 +2,7 @@
 import { Navbar as BootstrapNavbar } from 'bootstrap';
 
 import logoImage from '../../img/icon.png';
+import Navigate from '../Router/Navigate';
 
 
 
@@ -26,6 +27,13 @@ const Navbar = () => {
   `;
 
   navbarWrapper.innerHTML = navbar;
+  const deco = document.getElementById('deco');
+  deco?.addEventListener('click', () => {
+    sessionStorage.clear();
+    Navbar();
+    Navigate('/');
+  });
 };
+
 
 export default Navbar;
