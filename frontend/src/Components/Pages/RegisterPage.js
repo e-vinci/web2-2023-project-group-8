@@ -20,22 +20,22 @@ const RegisterPage = () => {
 
                 <div class="form-outline mb-4">
                   <input type="text" id="formNom" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example1cg">Nom</label>
+                  <label class="form-label" for="formNom">Nom</label>
                 </div>
 
                 <div class="form-outline mb-4">
                   <input type="text" id="formPrenom" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example1cg">Prénom</label>
+                  <label class="form-label" for="formPrenom">Prénom</label>
                 </div>
 
                 <div class="form-outline mb-4">
                   <input type="text" id="formUsername" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example1cg">Nom d'utilisateur</label>
+                  <label class="form-label" for="formUsername">Nom d'utilisateur</label>
                 </div>
 
                 <div class="form-outline mb-4">
                   <input type="email" id="formEmail" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example3cg">Adresse mail</label>
+                  <label class="form-label" for="formEmail">Adresse mail</label>
                 </div>
 
                 <input class="form-control form-control-lg" id="formPicture" type="file" />
@@ -43,7 +43,7 @@ const RegisterPage = () => {
 
                 <div class="form-outline mb-4">
                   <input type="password" id="formPassword" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example4cg">Mot de passe</label>
+                  <label class="form-label" for="formPassword">Mot de passe</label>
                 </div>
 
                 <div class="d-flex justify-content-center">
