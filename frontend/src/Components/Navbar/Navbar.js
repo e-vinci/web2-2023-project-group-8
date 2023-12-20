@@ -1,47 +1,39 @@
 // eslint-disable-next-line no-unused-vars
 import { Navbar as BootstrapNavbar } from 'bootstrap';
 
-/**
- * Render the Navbar which is styled by using Bootstrap
- * Each item in the Navbar is tightly coupled with the Router configuration :
- * - the URI associated to a page shall be given in the attribute "data-uri" of the Navbar
- * - the router will show the Page associated to this URI when the user click on a nav-link
- */
+import logoImage from '../../img/icon.png';
+import Navigate from '../Router/Navigate';
+
+
+
+const navbarWrapper = document.querySelector('#navbarWrapper');
 
 const Navbar = () => {
-  const navbarWrapper = document.querySelector('#navbarWrapper');
   const navbar = `
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Add your brand here</a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#" data-uri="/">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#" data-uri="/game">Game</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#" data-uri="/new">New Page</a>
-              </li>                        
-            </ul>
-          </div>
-        </div>
-      </nav>
+  <div class="d-flex justify-content-between align-items-center mb-3 mb-md-0 px-4 py-3" id="nav">
+    <a href="/" data-uri="/" id="homepage-logo">
+      <img src="${logoImage}">
+    </a>
+  <ul id="nav_titles">
+    <li><a href="/" data-uri="/">Accueil</a></li>
+    <li><a href="/quiz" data-uri="/quiz">Diagnostic de peau</a></li>
+    ${sessionStorage.getItem('admin') === 'true'
+    ? '<li><a href="/admin" data-uri="/admin">Administration</a></li>' : '' }
+    ${ sessionStorage.getItem('connected') === 'true' 
+    ? '<li><a href="/">Historique</a></li><li><a>Se deconnecter</a></li>' 
+    : '<li><a href="/login" data-uri="/login">Connexion</a></li>'}
+    
+  </ul>
   `;
+
   navbarWrapper.innerHTML = navbar;
+  const deco = document.getElementById('deco');
+  deco?.addEventListener('click', () => {
+    sessionStorage.clear();
+    Navbar();
+    Navigate('/');
+  });
 };
+
 
 export default Navbar;

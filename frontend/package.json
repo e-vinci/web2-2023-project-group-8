@@ -1,12 +1,16 @@
 {
-  "name": "js-phaser-boilerplate",
+  "name": "iziskin",
   "version": "1.0.0",
   "description": "myJScourse's modern frontend boilerplate to build a phaser game",
   "scripts": {
     "deploy": "npm run build && gh-pages -d dist",
     "dev": "webpack --mode development --config webpack.config.base.js && cp dist/index.html dist/404.html",
     "build": "webpack --mode production --config webpack.config.prod.js && cp dist/index.html dist/404.html",
-    "start": "webpack serve --mode development --config webpack.config.base.js"
+    "start": "webpack serve --mode development --config webpack.config.base.js",
+    "prettier": "prettier ./src/**/* --check",
+    "prettier:fix": "prettier ./src/**/* --write",
+    "lint": "eslint ./src/**/*",
+    "lint:fix": "eslint --fix ./src/**/*"
   },
   "author": "e-baron",
   "license": "CC-BY-SA-4.0",
@@ -29,11 +33,13 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.9.2",
+    "animejs": "^3.2.2",
     "bootstrap": "^5.0.1",
     "clean-webpack-plugin": "^4.0.0",
-    "phaser": "^3.55.2",
     "gh-pages": "^4.0.0",
+    "phaser": "^3.55.2",
     "terser-webpack-plugin": "^5.3.6",
+    "underscore": "^1.13.6",
     "webpack-merge": "^5.8.0"
   }
 }

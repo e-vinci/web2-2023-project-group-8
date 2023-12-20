@@ -1,0 +1,13 @@
+@baseUrl = http://localhost:3000
+
+###get all questions
+GET {{baseUrl}}/quizz/questions
+
+### Post product to skinCare
+POST {{baseUrl}}/quizz/addProductToSkinCare
+Content-Type: application/json
+
+{
+    "productId": "95n2dlfylqrfp1g",
+    "skinCareId": "ijejkydg2859cnv"
+}

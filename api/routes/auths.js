@@ -1,34 +1,45 @@
+/* eslint-disable no-alert */
 const express = require('express');
-const { register, login } = require('../models/users');
+const { registerUser } = require('../models/User');
+const { loginUser } = require('../models/User');
 
 const router = express.Router();
 
-/* Register a user */
+/**
+ * @param {*} username the username of the user
+ * @param {*} password the password of the user
+ * @param {*} email the email of the user
+ * @param {*} nom the name of the user
+ * @param {*} prenom the firstname of the user
+ * @param {*} photo the photo of the user
+ * @returns {Promise<Object>} - A promise that resolves to the created record.
+ */
 router.post('/register', async (req, res) => {
-  const username = req?.body?.username?.length !== 0 ? req.body.username : undefined;
-  const password = req?.body?.password?.length !== 0 ? req.body.password : undefined;
-
-  if (!username || !password) return res.sendStatus(400); // 400 Bad Request
-
-  const authenticatedUser = await register(username, password);
-
-  if (!authenticatedUser) return res.sendStatus(409); // 409 Conflict
-
-  return res.json(authenticatedUser);
+  try {
+    const {
+      username, password, email, nom, prenom, photo,
+    } = req.body;
+    const user = await registerUser(username, password, email, nom, prenom, photo);
+    return res.json(user);
+  } catch (error) {
+    throw new Error(`Erreur lors de l'appel de la fonction registerUser: ${error}`);
+  }
 });
 
-/* Login a user */
+/**
+ * @param {String} userId the id of the user
+ * @returns {Promise<Object>} - A promise that resolves to the created record.
+ */
 router.post('/login', async (req, res) => {
-  const username = req?.body?.username?.length !== 0 ? req.body.username : undefined;
-  const password = req?.body?.password?.length !== 0 ? req.body.password : undefined;
+  const {
+    username, password,
+  } = req.body;
+  const authData = await loginUser(username, password);
 
-  if (!username || !password) return res.sendStatus(400); // 400 Bad Reques
+  // Send a success response or additional data if needed
+  return res.json(authData);
 
-  const authenticatedUser = await login(username, password);
-
-  if (!authenticatedUser) return res.sendStatus(401); // 401 Unauthorized
-
-  return res.json(authenticatedUser);
+  // Handle the specific error for user not found
 });
 
 module.exports = router;

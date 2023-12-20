@@ -1,0 +1,8 @@
+@baseUrl = http://localhost:3000
+
+###get all users
+GET {{baseUrl}}/admin/users
+### get SkinCare list of the user with userId = dn0opa0tt6ba3v9
+GET {{baseUrl}}/admin/skinCares?userId=dn0opa0tt6ba3v9
+### get Informations of the user with userId = dn0opa0tt6ba3v9
+GET {{baseUrl}}/admin/users?userId=dn0opa0tt6ba3v9
